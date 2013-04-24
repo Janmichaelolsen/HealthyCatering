@@ -16,7 +16,7 @@ public class GalleriaBean {
                                     "Italiensk spaghetti med kjøttsaus og masse digg.", 
                                     "Masse grønnsaker og biffstrimler dynket i sursøt saus."};
   
-      
+       
     public GalleriaBean(){  
         images = new ArrayList<GalleriaDish>();  
         for(int i=1;i<=3;i++) {  
