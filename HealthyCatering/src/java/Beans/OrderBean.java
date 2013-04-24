@@ -37,6 +37,7 @@ public class OrderBean implements Serializable {
     public OrderBean() {
         MenuItems menuitems = getMenuItems();
         total_price = menuitems.getTotal_price();
+        deliverydate.setHours(deliverydate.getHours()+1);
     }
 
     public void confirmOrder() throws IOException {

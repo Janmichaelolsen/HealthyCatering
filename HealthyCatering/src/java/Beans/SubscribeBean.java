@@ -21,7 +21,8 @@ public class SubscribeBean implements Serializable {
     private Database db = new Database();
     private String currentUser = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
     private ArrayList selectedDays = new ArrayList();
-    private ArrayList<String> weekdays = new ArrayList<String>(Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday"));
+    private ArrayList<String> weekdays_en = new ArrayList<String>(Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday"));
+    private ArrayList<String> weekdays_no = new ArrayList<String>(Arrays.asList("Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag"));
     private ArrayList<Time> times = new ArrayList<Time>(Arrays.asList(new Time(10, 10, 0), new Time(10, 10, 0),
             new Time(10, 10, 0), new Time(10, 10, 0), new Time(10, 10, 0)));
     private Date startdate = new Date();
@@ -37,9 +38,9 @@ public class SubscribeBean implements Serializable {
     public void submitPlan() throws IOException {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         for (int i = 0; i < selectedDays.size(); i++) {
-            for (int j = 0; j < weekdays.size(); j++) {
-                if (selectedDays.get(i).equals(weekdays.get(j))) {
-                    SubscriptionPlan subplan = new SubscriptionPlan(startdate, enddate, times.get(j), j+1, currentUser);
+            for (int j = 0; j < weekdays_no.size(); j++) {
+                if (selectedDays.get(i).equals(weekdays_no.get(j)) || selectedDays.get(i).equals(weekdays_en.get(j))) {
+                    SubscriptionPlan subplan = new SubscriptionPlan(startdate, enddate, times.get(j), j, currentUser);
                     FacesContext context = FacesContext.getCurrentInstance();
                     OrderBean orderbean = (OrderBean) context.getApplication().evaluateExpressionGet(context, "#{orderBean}", OrderBean.class);
                     Order order = orderbean.getSavedOrder();
@@ -50,18 +51,21 @@ public class SubscribeBean implements Serializable {
             }
         }
     }
+
+    public ArrayList<String> getWeekdays_no() {
+        return weekdays_no;
+    }
+
+    public void setWeekdays_no(ArrayList<String> weekdays) {
+        this.weekdays_no = weekdays;
+    }
     
-    public void updatePlans(){
-        db.removeExpiredSubs();
-        db.checkSubscription();   
+    public ArrayList<String> getWeekdays_en() {
+        return weekdays_en;
     }
 
-    public ArrayList<String> getWeekdays() {
-        return weekdays;
-    }
-
-    public void setWeekdays(ArrayList<String> weekdays) {
-        this.weekdays = weekdays;
+    public void setWeekdays_en(ArrayList<String> weekdays) {
+        this.weekdays_en = weekdays;
     }
 
     public ArrayList getSelectedDays() {
