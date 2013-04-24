@@ -333,9 +333,9 @@ public class Database {
             sqlRegNewuser.executeUpdate();
 
             sqlRegNewRole = connection.prepareStatement("INSERT INTO roles VALUES(?,?)");
-            if(user.getRole() == null || user.getRole().equals("")) {
+            if (user.getRole() == null || user.getRole().equals("")) {
                 sqlRegNewRole.setString(1, "customer");
-            } else{
+            } else {
                 sqlRegNewRole.setString(1, user.getRole());
             }
             sqlRegNewRole.setString(2, user.getUsername());
@@ -405,6 +405,7 @@ public class Database {
         return result;
     }
     //FOR MENU
+
     public ArrayList<Dish> getDishesOrdered() {
         PreparedStatement sentence = null;
         openConnection();
@@ -429,7 +430,7 @@ public class Database {
         closeConnection();
         return dishes;
     }
-    
+
     public ArrayList<Dish> getDishes() {
         PreparedStatement sentence = null;
         openConnection();
@@ -1001,7 +1002,8 @@ public class Database {
         currentUser = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
         return currentUser;
     }
-    public ArrayList<Order> getTrackOrder(){
+
+    public ArrayList<Order> getTrackOrder() {
         ArrayList<Order> result = new ArrayList<Order>();
         PreparedStatement sentence = null;
         openConnection();
@@ -1027,8 +1029,8 @@ public class Database {
         closeConnection();
         return result;
     }
-    
-    public ArrayList<Order> getTrackSub(){
+
+    public ArrayList<Order> getTrackSub() {
         ArrayList<Order> result = new ArrayList<Order>();
         PreparedStatement sentence = null;
         openConnection();
@@ -1059,5 +1061,50 @@ public class Database {
         }
         closeConnection();
         return result;
+    }
+    public ArrayList<SubscriptionPlan> getSubscriptions(){
+        PreparedStatement sentence = null;
+        openConnection();
+        ArrayList<SubscriptionPlan> subs = new ArrayList<SubscriptionPlan>();
+        try {
+            sentence = connection.prepareStatement("select * from subscriptionplan");
+            ResultSet res = sentence.executeQuery();
+            while (res.next()) {
+                int dishid = res.getInt("subscriptionId");
+                Date startDate = res.getDate("startDate");
+                Date endDate = res.getDate("endDate");
+                java.sql.Time timeofdelivery = res.getTime("timeofdelivery");
+                int weekday = res.getInt("weekday");
+                String companyusername = res.getString("companyusername");
+                SubscriptionPlan sub = new SubscriptionPlan(dishid,startDate,endDate,timeofdelivery,weekday,companyusername);
+                subs.add(sub);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            Cleaner.closeSentence(sentence);
+        }
+        closeConnection();
+        return subs;
+    
+    }
+    public boolean deleteSubscription(SubscriptionPlan sub){
+        boolean ok = false;
+        PreparedStatement sentence = null;
+        openConnection();
+        try {
+            sentence = connection.prepareStatement("DELETE from subscriptionplan WHERE subscriptionId = ?");
+            sentence.setInt(1, sub.getSubid());
+            sentence.executeUpdate();
+            ok = true;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+
+        } finally {
+            Cleaner.closeSentence(sentence);
+        }
+        closeConnection();
+        return ok;
     }
 }
