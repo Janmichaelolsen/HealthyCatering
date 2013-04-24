@@ -11,7 +11,7 @@
         </h:head>
         <ui:composition template="userTemplate.xhtml">
             <ui:define name="content">
-                <h:form rendered="#{!Frontpage.isLoggedIn()}">
+                <h:body rendered="#{!Frontpage.loggedIn}">
                     <div id="login" class="login">
                         <h:form id="login1" onsubmit="document.getElementById('login1').action = 'j_security_check';" prependId="false" >
                             <p><p:outputLabel value="#{lang_auth.Username}" style="color: white;"/></p>
@@ -23,7 +23,7 @@
                             <p><p:commandLink value="#{lang_auth.ForgottenPassword}" action="./forgotpassword.xhtml" style="color: white;"></p:commandLink></p>
                         </h:form>
                     </div>
-                </h:form>
+                </h:body>
                 <h1>HealthyCatering AS</h1> 
                 <h3>Hamang Terrasse 55</h3>
                 <h3>1336 Sandvika</h3>

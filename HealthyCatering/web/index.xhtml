@@ -9,7 +9,7 @@
         <ui:composition template="userTemplate.xhtml">
             <ui:define name="content">
                 #{Frontpage.redirect()}
-                <h:form rendered="#{!Frontpage.isLoggedIn()}">
+                <h:body rendered="#{!Frontpage.loggedIn}">
                     <div id="login" class="login">
                         <h:form id="login1" onsubmit="document.getElementById('login1').action = 'j_security_check';" prependId="false" >
                             <p><p:outputLabel value="#{lang_auth.Username}" style="color: white;"/></p>
@@ -21,7 +21,7 @@
                             <p><p:commandLink value="#{lang_auth.ForgottenPassword}" action="./forgotpassword.xhtml" style="color: white;"></p:commandLink></p>
                         </h:form>
                     </div>
-                </h:form>
+                </h:body>
                 <input type="hidden" id="refreshed" value="no"/>            
                 <script type="text/javascript">
                     onload=function(){
