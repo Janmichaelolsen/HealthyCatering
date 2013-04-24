@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <title>Healthy Catering</title>
+    <ui:composition template="../../userTemplate.xhtml"> 
+        <ui:define name="content">
+            #{Profile.updateUser()}
+            <h:form id="form">
+                <p:fieldset legend="Profile"> 
+                    <p:panelGrid id="grid" columns="3" >
+                        <f:facet name="header">
+                            #{lang_auth.information}
+                        </f:facet> 
+                        <p:outputLabel value="#{lang_auth.FirstName}" />
+                        <p:inputText id="firstName" value="#{Profile.user.firstName}"/> 
+                        <p:message for="firstName"/>
+                        <p:outputLabel value="#{lang_auth.Surname}" />
+                        <p:inputText id="surname" value="#{Profile.user.surname}"/> 
+                        <p:message for="surname"/>
+                        <p:outputLabel value="#{lang_auth.Password}"/>
+                        <p:password id="password" value="#{Profile.user.password}" match="repPassword" label="Password 1"/>
+                        <p:message for="password"/>
+                        <p:outputLabel value="#{lang_auth.RepeatPass}" />
+                        <p:password id="repPassword" value="#{Profile.user.repeatPass}" label="Password 2"/>
+                        <p:message for="repPassword"/>
+                        <p:outputLabel value="#{lang_auth.Address}" />
+                        <p:inputText id="address"  value="#{Profile.user.address}"/>
+                        <p:message for="address"/>
+                        <p:outputLabel value="#{lang_auth.Postnumber}"/>
+                        <p:inputText id="postnumber" value="#{Profile.user.postnumber}" label="Postnumber" validatorMessage="Postnumber must be between 4 and 5 digits long.">
+                            <f:validateLongRange minimum="1000" maximum="99999"/>
+                        </p:inputText>
+                        <p:message for="postnumber"/>
+                        <p:outputLabel value="#{lang_auth.City}"/>
+                        <p:inputText id="city" value="#{Profile.user.city}"/>
+                        <p:message for="city" />
+                        <p:outputLabel value="#{lang_auth.Email}" />
+                        <p:inputText id="email" value="#{Profile.user.email}" validator="#{Profile.validateEmail}" validatorMessage="Type a valid e-mail address!"/>
+                        <p:message for="email"/>
+                        <p:outputLabel value="#{lang_auth.Phone}" />
+                        <p:inputText id="phone" value="#{Profile.user.phone}" validatorMessage="Not a valid phone number!">
+                            <f:validateLength minimum="8" maximum="16"/>
+                        </p:inputText> 
+                        <p:message for="phone" />
+                    </p:panelGrid>
+                    <p:commandButton action="#{Profile.apply()}" type="submit" id="submitButton" value="#{lang_auth.Submit}" update="form"/>
+                    <p:outputLabel rendered="#{Profile.changed}"></p:outputLabel>
+                    <p:messages/>
+                </p:fieldset>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

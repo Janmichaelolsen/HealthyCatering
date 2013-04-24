@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:form prependId="false">
+
+        <p:dataTable value ="#{Admin.tabledata}" var ="list" styleClass ="orders" id="orderTable" 
+                     widgetVar="orderList" paginator="true" 
+                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                     rowsPerPageTemplate="5,10,15">  
+
+            <p:column sortBy="#{list.order.date}" headerText="#{lang_auth.Date}">
+
+                <h:outputText value ="#{list.order.date}"/>
+
+            </p:column>
+            <p:column sortBy="#{list.order.deliveryAddress}" headerText="#{lang_auth.DeliveryAddress}">
+                <h:outputText value ="#{list.order.deliveryAddress}"/>
+
+            </p:column>
+
+
+            <p:column sortBy="#{list.order.status}" headerText="#{lang_auth.Status}">
+                <h:outputText value ="#{list.order.status}"/>
+            </p:column>
+            <p:column sortBy ="#{list.order.totalprice}" headerText="#{lang_auth.TotalPrice}">
+                <h:outputText value ="#{list.order.totalprice}"/>
+            </p:column>
+
+        </p:dataTable>
+    </h:form>
+</html>

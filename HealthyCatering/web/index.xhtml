@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:body> 
+        <ui:composition template="userTemplate.xhtml">
+            <ui:define name="content">
+                #{Frontpage.redirect()}
+                <h:form rendered="#{!Frontpage.isLoggedIn()}">
+                    <div id="login" class="login">
+                        <h:form id="login1" onsubmit="document.getElementById('login1').action = 'j_security_check';" prependId="false" >
+                            <p><p:outputLabel value="#{lang_auth.Username}" style="color: white;"/></p>
+                            <p><p:inputText id="j_username"/></p>
+                            <p><p:outputLabel value="#{lang_auth.Password}" style="color: white;"/></p>
+                            <p><p:inputText id="j_password" type="password"/></p>
+                            <p><p:commandButton id="submit" value="#{lang_auth.LogIn}" ajax="false"/></p>
+                            <p><p:commandLink value="#{lang_auth.Register}" action="./register.xhtml" style="color: white;"></p:commandLink></p>
+                            <p><p:commandLink value="#{lang_auth.ForgottenPassword}" action="./forgotpassword.xhtml" style="color: white;"></p:commandLink></p>
+                        </h:form>
+                    </div>
+                </h:form>
+                <input type="hidden" id="refreshed" value="no"/>            
+                <script type="text/javascript">
+                    onload=function(){
+                        var e=document.getElementById("refreshed");
+                        if(e.value=="no")e.value="yes";
+                        else{e.value="no";location.reload();}
+                    }
+                </script>
+
+                <p:galleria value="#{galleria.images}" var="image" panelWidth="800" panelHeight="450" showCaption="true" autoPlay="true" transitionInterval="6000">  
+                    <p:graphicImage value="/faces/resources/pictures/#{image.picpath}" alt="#{image.description}" title="#{image.name}" style="width: 100%; height: 100%"/>  
+                </p:galleria>  
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

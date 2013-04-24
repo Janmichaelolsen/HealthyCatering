@@ -1,0 +1,134 @@
+
+#div.fullwidth{
+    width: 100%;
+}
+
+div#header {
+    position:fixed;
+    background-color: #1e1e1e;
+    top:0;
+    left:0;
+    right:0;
+    height:70px;
+    z-index:900;
+}
+
+div#background {
+    position: fixed;
+    background: #eeeeee;
+    z-index: 100;
+    background-size:cover;
+    top:70px;
+    bottom:0;
+    left:0;
+    right:0;
+}
+
+div#content {
+    background: URL('../pictures/contentbg.png');
+    background-repeat: repeat;
+    margin-left: 150px;
+    margin-right: 150px;
+    min-height: 100%;
+    z-index:200;
+    position: absolute;
+    top:70px;
+    right:0;
+    left:0;
+    padding: 10px;
+}
+div#lang {
+    position: fixed;
+    padding: 5px;
+    top:0;
+    right:0;
+    z-index:1000;
+}
+div#menu {
+    position: fixed;
+    top:0;
+    left: 350px;
+    background-repeat: no-repeat;
+    z-index:1000;
+}
+
+div#login {
+    position: fixed;
+    right: 0;
+    width: 200px;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    background: #717171;
+    z-index:1000;
+}
+
+.orders{
+    background-origin: border-box;
+    margin:0px;
+    padding:0px;
+}
+.ordersHeader{
+    height: 30px;
+    text-align: center;
+    font-style: italic; 
+    color: Snow; 
+    background: graytext;
+    margin:0px;
+}
+.footerRow{
+    height: 20px;
+    text-align: center;
+    font-style: italic; 
+    color: Snow; 
+    background: graytext;
+    margin:0px;
+}
+.oddRow{
+    height: 25px;
+    width: 151px;
+    text-align: center;
+    background: #DADADA;
+    margin:0px;
+    padding:0px;
+}
+.textFiel{
+    width: 160px;
+}
+.orderId{
+    width: 50px;
+}
+.evenRow{
+    text-align: center;
+    background: white;
+    margin:0px;
+    padding:0px;
+}
+.yellow{
+    background:yellow!important;
+}
+.green{
+    background:green!important;
+}
+.noBackground tr, .noBackground td {
+    background: none !important;
+    width: 100%;
+}
+.headerbutton{
+    height:70px;
+    width: 100px;
+    margin-right: 2px;
+    font-family: sans-serif;
+    color: white;
+    font-size: large;
+    border: none;
+    background: #2b2b2b;
+}
+.headerbutton:hover{
+    background: #565656;
+}
+.headerbutton:active{
+    background: #a9a9a9;
+    color: #565656
+}

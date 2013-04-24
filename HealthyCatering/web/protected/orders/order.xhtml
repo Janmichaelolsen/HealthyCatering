@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <title>Healthy Catering</title>
+    <ui:composition template="../../userTemplate.xhtml">
+        <ui:define name="content">
+            <h:form id="form"> 
+                <p:panelGrid id="panel2" columns="2" styleClass="noBackground">
+                    <p:panel style="background: none !important; border: none !important">
+                        <p:fieldset id="selectedDishes" legend="#{lang_auth.OrderList}">  
+                            <p:outputPanel id="dropArea">  
+                                <h:outputText value="#{lang_auth.NoDishesOrdered}"  
+                                              rendered="#{empty orderBean.dishes}"  
+                                              style="font-size:15px;" />  
+
+                                <p:dataTable var="item" value="#{orderBean.dishes}"   
+                                             rendered="#{not empty orderBean.dishes}">  
+
+                                    <p:column headerText="Count" style="width:18px" >  
+                                        <h:outputText value="#{item.count}" />  
+                                    </p:column>  
+
+                                    <p:column headerText="Name">  
+                                        <h:outputText value="#{item.dishName}" />  
+                                    </p:column>  
+
+                                    <p:column headerText="Unitprice" footerText="Total: #{menuitems.total_price}" style="width:25px">  
+                                        <h:outputText value="#{item.price}" />  
+                                    </p:column> 
+                                </p:dataTable>  
+                            </p:outputPanel>
+                        </p:fieldset> <br /><br />
+                        
+                        <p:panelGrid id="panel" columns="2" style="background: #f2f2f2">
+                            <f:facet name="header">  
+                                #{lang_auth.Details}
+                            </f:facet> 
+                            <p:outputLabel value="#{lang_auth.FirstName}:"/>
+                            <p:inputText value="#{orderBean.user.firstName}" required="true"></p:inputText>
+                            <p:outputLabel value="#{lang_auth.Surname}:"/>
+                            <p:inputText value="#{orderBean.user.surname}" required="true"></p:inputText>
+                            <p:outputLabel value="#{lang_auth.Address}:"/>
+                            <p:inputText value="#{orderBean.user.address}" required="true"></p:inputText>
+                            <p:outputLabel value="#{lang_auth.Postnumber}:"/>
+                            <p:inputText value="#{orderBean.user.postnumber}" required="true"></p:inputText>
+                            <p:outputLabel value="#{lang_auth.Phone}:"/>
+                            <p:inputText value="#{orderBean.user.phone}" required="true"></p:inputText>
+                            <p:outputLabel value="#{lang_auth.Email}:"/>
+                            <p:inputText value="#{orderBean.user.email}" required="true" requiredMessage="#{lang_auth.EmailIsReq}"></p:inputText>
+                        </p:panelGrid>
+                        <p:message for="panel"></p:message>
+                        
+                    </p:panel>
+
+                    <p:panel style="background: none !important; border: none !important">
+                        <p:outputLabel value="#{lang_auth.Date}"/><br />
+                        <p:calendar effect="drop" value="#{orderBean.deliverydate}" readonly="true" timeZone="#{orderBean.timeZone}" mindate="#{orderBean.deliverydate}"/><br /><br />
+                        <p:outputLabel value="#{lang_auth.Time}"/><br />
+                        <p:selectOneMenu value="#{orderBean.deliverydate.hours}" valueChangeListener="submit()">
+                            <f:selectItems value="#{orderBean.hourvalues}"></f:selectItems>
+                        </p:selectOneMenu>
+                        <p:selectOneMenu value="#{orderBean.deliverydate.minutes}" valueChangeListener="submit()">
+                            <f:selectItems value="#{orderBean.minutevalues}"></f:selectItems>    
+                        </p:selectOneMenu><br /><br />
+                        
+                        #{lang_auth.AddDescription}<br />
+                        <p:inputTextarea rows="5" cols="30" counter="counter" maxlength="100"       
+                                         counterTemplate="{0} #{lang_auth.CharactersRemaining}" value="#{orderBean.description}"/><br />
+                        <h:outputText id="counter"/><br /><br />
+                        
+                    </p:panel>
+                </p:panelGrid>
+                <p:commandButton value="#{lang_auth.send}" action="#{orderBean.confirmOrder()}"></p:commandButton>
+                <p:commandButton value="#{lang_auth.subscribe}" action ="#{orderBean.subscribe()}"></p:commandButton>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

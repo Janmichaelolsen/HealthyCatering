@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <f:view locale="#{Lang.locale}">
+        <h:head>
+            <title>Healthy Catering</title>
+        </h:head>
+        <ui:composition template="userTemplate.xhtml">
+            <ui:define name="content">
+                <h:form rendered="#{!Frontpage.isLoggedIn()}">
+                    <div id="login" class="login">
+                        <h:form id="login1" onsubmit="document.getElementById('login1').action = 'j_security_check';" prependId="false" >
+                            <p><p:outputLabel value="#{lang_auth.Username}" style="color: white;"/></p>
+                            <p><p:inputText id="j_username"/></p>
+                            <p><p:outputLabel value="#{lang_auth.Password}" style="color: white;"/></p>
+                            <p><p:inputText id="j_password" type="password"/></p>
+                            <p><p:commandButton id="submit" value="#{lang_auth.LogIn}" ajax="false"/></p>
+                            <p><p:commandLink value="#{lang_auth.Register}" action="./register.xhtml" style="color: white;"></p:commandLink></p>
+                            <p><p:commandLink value="#{lang_auth.ForgottenPassword}" action="./forgotpassword.xhtml" style="color: white;"></p:commandLink></p>
+                        </h:form>
+                    </div>
+                </h:form>
+                <h1>HealthyCatering AS</h1> 
+                <h3>Hamang Terrasse 55</h3>
+                <h3>1336 Sandvika</h3>
+                <h3>#{lang_auth.Mailbox}</h3>
+                <h3>healthycatering1@gmail.com</h3>
+                <h3>Tlf. 67555555</h3>
+            </ui:define>
+        </ui:composition>
+    </f:view>
+</html>
+

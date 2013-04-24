@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template ="../../serviceTemplate.xhtml">
+        <ui:define name ="content">
+            <p:tabView dynamic="true" activeIndex="#{AdminIndex.tabIndex}">
+                <p:ajax event="tabChange" listener="#{AdminIndex.onTabChange}" />
+                <p:tab id ="messages" title="#{lang_auth.Message}">
+                    <ui:include src="adminMessage.xhtml"></ui:include>
+                </p:tab>
+                <p:tab id ="orders" title="#{lang_auth.Orders}">
+                    <ui:include src="adminOrder.xhtml"></ui:include>
+                </p:tab>
+
+                <p:tab id="dishes" title="#{lang_auth.Dishes}">
+                    <ui:include src ="adminDish.xhtml"></ui:include>
+                </p:tab>
+                <p:tab id="analytics" title="#{lang_auth.Analytics}">
+                    <ui:include src ="adminAnalytics.xhtml"></ui:include>
+                </p:tab>
+                <p:tab id="register" title="User registration">
+                    <ui:include src = "adminRegister.xhtml"/>
+                </p:tab>
+            </p:tabView>
+        </ui:define>
+    </ui:composition>
+</html>
+

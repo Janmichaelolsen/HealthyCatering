@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template ="../../serviceTemplate.xhtml">
+        <ui:define name ="content">
+
+            <p:tabView dynamic="true" activeIndex="#{WorkerIndex.tabIndex}">
+                <p:ajax event="tabChange" listener="#{WorkerIndex.onTabChange}" />
+                <p:tab id ="messages" title="#{lang_auth.Message}">
+                    <ui:include src="Messages.xhtml"></ui:include>
+                </p:tab>
+                <p:tab id ="orders" title="#{lang_auth.Orders}">
+                    <ui:include src="salesmanOrder.xhtml"></ui:include>
+                </p:tab>
+
+
+                <p:tab id="analytics" title="#{lang_auth.Analytics}">
+                    <ui:include src ="salesmanAnalytics.xhtml"></ui:include>
+                </p:tab>
+            </p:tabView>
+        </ui:define>
+    </ui:composition>
+</html>
+
+
+

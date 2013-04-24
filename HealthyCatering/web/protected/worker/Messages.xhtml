@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:form id="message">
+
+        <p:dataTable value="#{WorkerMessage.tabledata}" var="list" styleClass="messages" id="messageTable" widgetVar="messagelist" 
+                     emptyMessage="#{lang_auth.NoMessages}">
+
+            <p:column id ="messageColumn" headerText="#{lang_auth.Message}" >
+                        <h:outputText value ="#{list.message.message}"/>
+            </p:column>
+        </p:dataTable>
+    </h:form>
+</html>
+

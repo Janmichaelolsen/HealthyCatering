@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+        <ui:composition template ="../../serviceTemplate.xhtml">
+            <ui:define name ="content">
+                
+                <p:tabView dynamic="true" activeIndex="#{WorkerIndex.tabIndex}">
+                           <p:ajax event="tabChange" listener="#{WorkerIndex.onTabChange}" />
+                           <p:tab id ="messages" title="#{lang_auth.Message}">
+                               <ui:include src="Messages.xhtml"></ui:include>
+                           </p:tab>
+                           <p:tab id ="orders" title="#{lang_auth.Orders}">
+                               <ui:include src="chefOrder.xhtml"></ui:include>
+                           </p:tab>
+                       </p:tabView>
+            </ui:define>
+        </ui:composition>
+</html>
+

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+
+<f:view renderKitId="PRIMEFACES_MOBILE"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:pm="http://primefaces.org/mobile">
+    <pm:page title="driverMobile">
+        <pm:view id="main">
+            <pm:header title="Order overview">
+                <f:facet name="left">
+                    <p:commandButton value="#{lang_auth.Update}" icon="refresh" action="#{Driver.update()}"/>
+                </f:facet>
+                <f:facet name="right">
+                    <p:commandLink value="#{lang_auth.LogOut}" action="#{Frontpage.logout()}"/>
+                </f:facet>
+            </pm:header>
+            <pm:content id="content">
+                <h:form id="form">
+                    <p:column>
+                        <p:dataList value="#{Driver.tabledata}"  var="List" id="list">
+                            <p:panelGrid style="width:100%">
+                                <p:row>
+                                    <p:column style="width:40%">
+                                        <p><p:outputLabel value="#{List.order.orderId}"/></p>
+                                        <p><p:outputLabel value="#{List.order.deliveryAddress}"/></p>
+                                        <p><p:outputLabel value="#{List.order.timeOfDelivery}"/></p>
+                                    </p:column>
+                                    <p:column>
+                                        <h:selectOneMenu  value="#{List.order.status}">
+                                            <f:selectItem itemValue="PENDING_DELIVERY" itemLabel="#{lang_auth.pendingDelivery}"/>
+                                            <f:selectItem itemValue="ON_THE_ROAD" itemLabel="#{lang_auth.onTheRoad}"/>
+                                            <f:selectItem itemValue="FINISHED" itemLabel="#{lang_auth.finished}"/>
+                                            <p:ajax listener="#{Driver.statusChanged}" update="list" />
+                                        </h:selectOneMenu>
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
+                        </p:dataList>
+                    </p:column>
+                </h:form>
+                <p:messages/>
+
+            </pm:content>
+        </pm:view>
+    </pm:page>
+
+</f:view>

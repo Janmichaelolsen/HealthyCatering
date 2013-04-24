@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:form id="message">
+        <p:contextMenu for="messageTable" widgetVar="cMenu">     
+                    <p:menuitem value="Edit Cell" icon="ui-icon-search" onclick="messagelist.showCellEditor();
+                            return false;"/>    
+            <p:menuitem value="Hide Menu" icon="ui-icon-close" onclick="cMenu.hide()"/>    
+        </p:contextMenu>
+
+        <p:dataTable value="#{AdminStart.tabledata}" var="list" styleClass="messages" editable="true" editMode="cell" id="messageTable" widgetVar="messagelist" 
+                     emptyMessage="#{lang_auth.NoMessages}">
+
+            <p:ajax event ="cellEdit" listener="#{AdminStart.onCellEdit}"/>
+
+            <p:column id ="messageColumn" headerText="#{lang_auth.Message}" >
+                <p:cellEditor>
+                    <f:facet name ="output">
+                        <h:outputText value ="#{list.message.message}"/>
+
+                    </f:facet>
+                    <f:facet name ="input">
+                        <p:inputText value ="#{list.message.message}"/>
+                    </f:facet>
+                </p:cellEditor>
+
+            </p:column>
+            <p:column >
+                <h:selectBooleanCheckbox value="#{list.delete}"/>
+                <f:facet name ="footer">
+                    <p:commandButton value="#{lang_auth.DeleteMessage}" update="messageTable" action="#{AdminStart.delete()}" ajax ="false"/>  
+                </f:facet>
+            </p:column>
+        </p:dataTable>
+        <p:dialog header="#{lang_auth.AddMessage}" widgetVar="dlg" position="center">
+            <p:editor id="editor" value="#{AdminStart.message}" width="600"/>  
+            <br></br>
+            <p:commandButton id="addButton" value="#{lang_auth.AddMessage}" update="message:messageTable" action ="#{AdminStart.add()}" ajax="false"
+                             onclick="dlg.hide()"/>
+
+        </p:dialog>
+        <p:commandButton value="#{lang_auth.AddMessage}" type="button" onclick="dlg.show()"/>
+
+
+    </h:form>
+</html>
+

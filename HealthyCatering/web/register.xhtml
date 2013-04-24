@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <body>
+        <ui:composition template="userTemplate.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <p:fieldset legend="#{lang_auth.Register}"> 
+                    <p:panelGrid id="grid" columns="3" >
+                        <f:facet name="header">
+                            #{lang_auth.information} 
+                        </f:facet> 
+                        <p:outputLabel value="#{lang_auth.Username}" />
+                        <p:inputText  id="username" value="#{Register.user.username}" validator="#{Register.validateUsername}" required="true" requiredMessage="#{lang_auth.CannotBeBlank}"/>
+                        <p:message for="username" showSummary="true" showDetail="false"/>
+                        <p:outputLabel value="#{lang_auth.Password}"/>
+                        <p:password id="password" value="#{Register.user.password}" match="repPassword" required="true" requiredMessage="#{lang_auth.CannotBeBlank}" label="Password 1" feedback="true"/>
+                        <p:message for="password" showSummary="true" showDetail="false"/>
+                        <p:outputLabel value="#{lang_auth.RepeatPass}" />
+                        <p:password id="repPassword" value="#{Register.user.repeatPass}" required="true" requiredMessage="#{lang_auth.CannotBeBlank}" label="Password 2"/>
+                        <p:message for="repPassword" showSummary="true" showDetail="false"/>
+                        <p:outputLabel value="#{lang_auth.FirstName}" />
+                        <p:inputText id="firstName" value="#{Register.user.firstName}" required="true" requiredMessage="#{lang_auth.CannotBeBlank}"/> 
+                        <p:message for="firstName" showSummary="true" showDetail="false"/>
+                        <p:outputLabel value="#{lang_auth.Surname}" />
+                        <p:inputText id="surname" value="#{Register.user.surname}" required="true" requiredMessage="#{lang_auth.CannotBeBlank}"/> 
+                        <p:message for="surname" showSummary="true" showDetail="false"/>
+                        <p:outputLabel value="#{lang_auth.Address}" />
+                        <p:inputText id="address"  value="#{Register.user.address}" required="true" requiredMessage="#{lang_auth.CannotBeBlank}"/>
+                        <p:message for="address" showSummary="true" showDetail="false"/>
+                        <p:outputLabel value="#{lang_auth.Postnumber}"/>
+                        <p:inputText id="postnumber" value="#{Register.user.postnumber}" label="Postnumber" validatorMessage="#{lang_auth.PostnumberMust}">
+                            <f:validateLongRange minimum="1000" maximum="99999"/>
+                        </p:inputText>
+                        <p:message for="postnumber" showSummary="true" showDetail="false"/>
+                        <p:outputLabel value="#{lang_auth.City}"/>
+                        <p:inputText id="city" value="#{Register.user.city}" required="true" requiredMessage="#{lang_auth.CannotBeBlank}"/>
+                        <p:message for="city" showSummary="true" showDetail="false"/>
+                        <p:outputLabel value="#{lang_auth.Email}" />
+                        <p:inputText id="email" value="#{Register.user.email}" validator="#{Register.validateEmail}" validatorMessage=""/>
+                        <p:message for="email" showSummary="true" showDetail="false"/>
+                        <p:outputLabel value="#{lang_auth.Phone}" />
+                        <p:inputText id="phone" value="#{Register.user.phone}" required="true" requiredMessage="#{lang_auth.CannotBeBlank}" validatorMessage="#{lang_auth.NotValid}">
+                            <f:validateLength minimum="8" maximum="16"/>
+                        </p:inputText> 
+                        <p:message for="phone" showDetail="false" showSummary="true"/>
+                    </p:panelGrid>
+                        <p:commandButton action="#{Register.apply()}" type="submit" id="submitButton" value="#{lang_auth.Submit}" update="grid" />
+                </p:fieldset>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

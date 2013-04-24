@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <title>Subscription plan</title>
+    <ui:composition template="../../userTemplate.xhtml">
+        <ui:define name="content">
+            <h:form> 
+                <h2>#{lang_auth.SetupSubscriptionPlan}</h2>
+                <table>
+                    <tr>
+                        <td>
+                            <h3>#{lang_auth.start}</h3>
+                        </td>
+                        <td>
+                            <p:calendar effect="drop" value="#{subBean.startdate}" readonly="true" timeZone="#{orderBean.timeZone}" mindate="#{orderBean.deliverydate}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3>#{lang_auth.End}</h3>
+                        </td>
+                        <td>
+                            <p:calendar effect="drop" value="#{subBean.enddate}" readonly="true" timeZone="#{orderBean.timeZone}" mindate="#{orderBean.deliverydate}"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><h3>#{lang_auth.Days}:</h3></td>
+                        <td><h3>#{lang_auth.Time}:</h3></td>
+                    </tr>
+                    <tr>
+                        <td>  
+                            <p:selectManyCheckbox id="days" value="#{subBean.selectedDays}"  
+                                                  layout="pageDirection" required="true" requiredMessage="#{lang_auth.dayChoose}">  
+                                <f:selectItems value="#{subBean.weekdays}" />  
+                            </p:selectManyCheckbox>
+
+                        </td>
+                        <td>
+                            <p:panel style="background: none !important; border: none !important; width: 200px;">
+                                <ui:repeat value="#{subBean.times}" var="time">
+                                    <p:selectOneMenu value="#{time.hours}" valueChangeListener="submit()">
+                                        <f:selectItems value="#{orderBean.hourvalues}"></f:selectItems>
+                                    </p:selectOneMenu>
+                                    <p:selectOneMenu value="#{time.minutes}" valueChangeListener="submit()">
+                                        <f:selectItems value="#{orderBean.minutevalues}"></f:selectItems>    
+                                    </p:selectOneMenu><br />
+                                </ui:repeat>
+                            </p:panel>
+                        </td>
+                    </tr>
+                    <tr>
+                        <p:message for="days"></p:message>
+                    </tr>
+                    <tr>
+                    </tr>
+                </table>
+
+                <p:commandButton value="#{lang_auth.send}" action="#{subBean.submitPlan()}" ajax="false"></p:commandButton>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

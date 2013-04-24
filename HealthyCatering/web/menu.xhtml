@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <title>Healthy Catering</title>
+    <f:view locale="#{Lang.locale}">
+        <ui:composition template="userTemplate.xhtml">
+            <ui:define name="content">
+                <h:form rendered="#{!Frontpage.isLoggedIn()}">
+                    <div id="login" class="login">
+                        <h:form id="login1" onsubmit="document.getElementById('login1').action = 'j_security_check';" prependId="false" >
+                            <p><p:outputLabel value="#{lang_auth.Username}" style="color: white;"/></p>
+                            <p><p:inputText id="j_username"/></p>
+                            <p><p:outputLabel value="#{lang_auth.Password}" style="color: white;"/></p>
+                            <p><p:inputText id="j_password" type="password"/></p>
+                            <p><p:commandButton id="submit" value="#{lang_auth.LogIn}" ajax="false"/></p>
+                            <p><p:commandLink value="#{lang_auth.Register}" action="./register.xhtml" style="color: white;"></p:commandLink></p>
+                            <p><p:commandLink value="#{lang_auth.ForgottenPassword}" action="./forgotpassword.xhtml" style="color: white;"></p:commandLink></p>
+                        </h:form>
+                    </div>
+                </h:form>
+                <h:form id="dishForm" style="width: 90%">  
+                    <h2>#{lang_auth.Menu}</h2>
+                    <p:outputLabel rendered="#{!loginBean.loggedIn}" value="#{lang_auth.Logintoorder}"></p:outputLabel> 
+                    <p:fieldset> 
+                        <p:dataTable var="item" value="#{menuitems.orderList}" emptyMessage="#{lang_auth.NoDishesOrdered}" rendered="#{loginBean.loggedIn}">  
+                            <p:column headerText="Count" style="width:18px" >  
+                                <h:outputText value="#{item.count}" />  
+                            </p:column>  
+
+                            <p:column headerText="#{lang_auth.Name}">  
+                                <h:outputText value="#{item.dishName}" />  
+                            </p:column>  
+
+                            <p:column headerText="#{lang_auth.UnitPrice}" footerText="Total: #{menuitems.total_price}" style="width:25px">  
+                                <h:outputText value="#{item.price}" />  
+                            </p:column> 
+
+                            <p:column headerText="#{lang_auth.Remove}" style="width:18px">  
+                                <p:commandButton value="#{lang_auth.Remove}" oncomplete="submit()" actionListener="#{menuitems.removeDish(item)}">
+                                </p:commandButton>
+                            </p:column> 
+                        </p:dataTable>
+                        <h:form>
+                            <div align="right">
+                                <p:commandButton value="#{lang_auth.order}" action="#{menuitems.order()}" rendered="#{menuitems.loggedIn}"></p:commandButton>                
+                            </div>
+                        </h:form><br />
+                        <p:dataTable id="availableDishes" var="items" value="#{menuitems.items}">   
+                            <p:column headerText="#{lang_auth.DishName}"> 
+                                <h:graphicImage height="75" width="75" value="#{items.imagePath}" />
+                            </p:column>
+
+                            <p:column headerText="#{lang_auth.DishName}">  
+                                <h:outputText value="#{items.dishName}" />  
+
+                            </p:column>  
+
+                            <p:column headerText="#{lang_auth.Price}">  
+                                <h:outputText value="#{items.price}" />  
+                            </p:column>
+
+                            <p:column headerText="#{lang_auth.Count}" style="width:18px" rendered="#{menuitems.loggedIn}">  
+                                <p:spinner id="spinnerBasic" value="#{items.count}" required="true" size="5"
+                                           min="1" />  
+                            </p:column>
+
+                            <p:column headerText="#{lang_auth.Add}" style="width:18px" rendered="#{menuitems.loggedIn}">
+                                <p:commandButton value="#{lang_auth.Add}" oncomplete="submit()" action="#{menuitems.addDish()}">
+                                    <f:setPropertyActionListener value="#{items}" target="#{menuitems.selectedDish}" />  
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>  
+                    </p:fieldset>  
+                </h:form>  
+            </ui:define>
+        </ui:composition>
+    </f:view>
+</html>
+

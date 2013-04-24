@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <title>Healthy Catering</title>
+    <ui:composition template="../../userTemplate.xhtml">
+        <ui:define name="content">
+            <h2>#{lang_auth.Yourorders}</h2>
+            <p:dataTable value="#{trackOrderBean.dishes}" var="dish" emptyMessage="#{lang_auth.NoDishesOrdered}">
+                <p:column headerText="#{lang_auth.DishName}" style="width:18px" >  
+                    <h:outputText value="#{dish.dishName}" />  
+                </p:column>  
+                <p:column headerText="#{lang_auth.Status}" style="width:18px" >  
+                    <h:outputText value="#{dish.status}" />  
+                </p:column>  
+            </p:dataTable>
+            <h2>#{lang_auth.Yoursubs}</h2>
+            <p:dataTable value="#{trackOrderBean.subs}" var="sub" emptyMessage="#{lang_auth.NoDishesOrdered}" >
+                <p:column headerText="#{lang_auth.DishName}" style="width:18px" >  
+                    <h:outputText value="#{sub.dishName}" />  
+                </p:column>  
+                <p:column headerText="#{lang_auth.Count}" style="width:18px" >  
+                    <h:outputText value="#{sub.count}" />  
+                </p:column>  
+                <p:column headerText="#{lang_auth.Time}" style="width:18px" >  
+                    <h:outputText value="#{sub.timeOfDelivery}" />  
+                </p:column>
+                <p:column headerText="#{lang_auth.Weekday}" style="width:18px" >  
+                    <h:outputText value="#{sub.weekday}" />  
+                </p:column>  
+                <p:column headerText="#{lang_auth.Startdate}" style="width:18px" >  
+                    <h:outputText value="#{sub.startdate}" />  
+                </p:column>  
+                <p:column headerText="#{lang_auth.Enddate}" style="width:18px" >  
+                    <h:outputText value="#{sub.enddate}" />  
+                </p:column> 
+                <p:column headerText="#{lang_auth.Description}" style="width:18px" >  
+                    <h:outputText value="#{sub.description}" />  
+                </p:column>  
+                
+                
+            </p:dataTable>
+        </ui:define>
+    </ui:composition>
+</html>
+
