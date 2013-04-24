@@ -3,25 +3,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:body> 
         <ui:composition template="userTemplate.xhtml">
             <ui:define name="content">
                 #{Frontpage.redirect()}
-                <h:form rendered="#{!Frontpage.isLoggedIn()}">
-                    <div id="login" class="login">
-                        <h:form id="login1" onsubmit="document.getElementById('login1').action = 'j_security_check';" prependId="false" >
-                            <p><p:outputLabel value="#{lang_auth.Username}" style="color: white;"/></p>
-                            <p><p:inputText id="j_username"/></p>
-                            <p><p:outputLabel value="#{lang_auth.Password}" style="color: white;"/></p>
-                            <p><p:inputText id="j_password" type="password"/></p>
-                            <p><p:commandButton id="submit" value="#{lang_auth.LogIn}" ajax="false"/></p>
-                            <p><p:commandLink value="#{lang_auth.Register}" action="./register.xhtml" style="color: white;"></p:commandLink></p>
-                            <p><p:commandLink value="#{lang_auth.ForgottenPassword}" action="./forgotpassword.xhtml" style="color: white;"></p:commandLink></p>
-                        </h:form>
-                    </div>
-                </h:form>
+                <div id="login" class="login">
+                    <h:form id="login1" onsubmit="document.getElementById('login1').action = 'j_security_check';" prependId="false" rendered="#{!Frontpage.isLoggedIn()}">
+                        <p><p:outputLabel value="#{lang_auth.Username}" style="color: white;"/></p>
+                        <p><p:inputText id="j_username"/></p>
+                        <p><p:outputLabel value="#{lang_auth.Password}" style="color: white;"/></p>
+                        <p><p:inputText id="j_password" type="password"/></p>
+                        <p><p:commandButton id="submit" value="#{lang_auth.LogIn}" ajax="false"/></p>
+                        <p><p:commandLink value="#{lang_auth.Register}" action="./register.xhtml" style="color: white;"></p:commandLink></p>
+                        <p><p:commandLink value="#{lang_auth.ForgottenPassword}" action="./forgotpassword.xhtml" style="color: white;"></p:commandLink></p>
+                    </h:form>
+                </div>
                 <input type="hidden" id="refreshed" value="no"/>            
                 <script type="text/javascript">
                     onload=function(){
