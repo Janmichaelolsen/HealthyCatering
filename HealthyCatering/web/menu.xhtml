@@ -28,7 +28,7 @@
                     <p:outputLabel rendered="#{!loginBean.loggedIn}" value="#{lang_auth.Logintoorder}"></p:outputLabel> 
                     <p:fieldset> 
                         <p:dataTable var="item" value="#{menuitems.orderList}" emptyMessage="#{lang_auth.NoDishesOrdered}" rendered="#{loginBean.loggedIn}">  
-                            <p:column headerText="Count" style="width:18px" >  
+                            <p:column headerText="#{lang_auth.Count}" style="width:18px" >  
                                 <h:outputText value="#{item.count}" />  
                             </p:column>  
 

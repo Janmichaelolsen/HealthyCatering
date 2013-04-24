@@ -37,9 +37,6 @@
                             <f:validateLongRange minimum="1000" maximum="99999"/>
                         </p:inputText>
                         <p:message for="postnumber" showSummary="true" showDetail="false"/>
-                        <p:outputLabel value="#{lang_auth.City}"/>
-                        <p:inputText id="city" value="#{Register.user.city}" required="true" requiredMessage="#{lang_auth.CannotBeBlank}"/>
-                        <p:message for="city" showSummary="true" showDetail="false"/>
                         <p:outputLabel value="#{lang_auth.Email}" />
                         <p:inputText id="email" value="#{Register.user.email}" validator="#{Register.validateEmail}" validatorMessage=""/>
                         <p:message for="email" showSummary="true" showDetail="false"/>
