@@ -36,4 +36,8 @@ public class LangChange implements Serializable{
     public void setNo() {
         setLang("no");
     }
+    
+    public boolean isNo(){
+        return locale.getLanguage().equals("no");
+    }
 }
