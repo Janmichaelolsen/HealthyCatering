@@ -167,7 +167,6 @@ public class Database {
         } finally {
             Cleaner.closeSentence(ps);
         }
-        closeConnection();
     }
 
     private void deleteFromDishesOrdered(Order s) {
@@ -181,7 +180,6 @@ public class Database {
         } finally {
             Cleaner.closeSentence(ps);
         }
-        closeConnection();
     }
 
     private void insertDishesOrdered(StoredOrders s) {
@@ -202,7 +200,6 @@ public class Database {
         } finally {
             Cleaner.closeSentence(ps);
         }
-        closeConnection();
     }
 
     public ArrayList<Order> getOrderOverview() {
