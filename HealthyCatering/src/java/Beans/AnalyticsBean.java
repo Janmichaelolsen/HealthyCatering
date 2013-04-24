@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.bean.ManagedBean; 
+import javax.faces.bean.ManagedBean;
 import javax.inject.Named;
 import logikk.Dish;
 import logikk.Order;

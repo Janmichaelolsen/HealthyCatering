@@ -10,7 +10,7 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
         <h:form>
-            <p:fieldset legend="#{lang_auth.Register}">  
+            <p:fieldset legend="#{lang_auth.Register}"> 
                 <p:panelGrid id="grid" columns="3" >
                     <f:facet name="header">
                         Please fill in the required information  
@@ -38,9 +38,6 @@ and open the template in the editor.
                         <f:validateLongRange minimum="1000" maximum="99999"/>
                     </p:inputText>
                     <p:message for="postnumber" showSummary="true" showDetail="false"/>
-                    <p:outputLabel value="#{lang_auth.City}"/>
-                    <p:inputText id="city" value="#{Register.user.city}" required="true" requiredMessage="#{lang_auth.CannotBeBlank}"/>
-                    <p:message for="city" showSummary="true" showDetail="false"/>
                     <p:outputLabel value="#{lang_auth.Email}" />
                     <p:inputText id="email" value="#{Register.user.email}" validator="#{Register.validateEmail}" validatorMessage=""/>
                     <p:message for="email" showSummary="true" showDetail="false"/>

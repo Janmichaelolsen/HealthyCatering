@@ -1049,7 +1049,7 @@ public class Database {
                 Date enddate = res.getDate("ENDDATE");
                 String desc = res.getString("DESCRIPTION");
                 SubscribeBean sb = new SubscribeBean();
-                Order neworder = new Order(dishname, timeofdelivery, count, sb.getWeekdays().get(weekday), startdate, enddate, desc);
+                Order neworder = new Order(dishname, timeofdelivery, count, sb.getWeekdays_en().get(weekday), startdate, enddate, desc);
                 result.add(neworder);
             }
         } catch (SQLException e) {

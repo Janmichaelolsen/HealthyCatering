@@ -8,9 +8,9 @@ and open the template in the editor.
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"> 
-    <h:form> 
-        <p:fieldset id="frame" legend="Analytics">
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:form>
+        <p:fieldset id="frame" legend="Analytics2">
             <p:panelGrid id="dateGrid" columns="2">
                 <p:outputLabel value="From"/>
                 <p:calendar value="#{Analytics.fromDate}" mindate="#{Analytics.fromDateOriginal}" maxdate="#{Analytics.toDateOriginal}" id="from" showOn="button" effect="drop" required="true"/>
@@ -33,44 +33,23 @@ and open the template in the editor.
                     <p:column>#{Analytics.turnoverNow}</p:column>
                     <p:column>#{Analytics.turnoverLastYear}</p:column>
                 </p:row>
-                <p:row>
-                    <p:column>Revenue</p:column>
-                    <p:column>Revenue</p:column>
-                    <p:column>alalal</p:column>
-                </p:row>
-                <p:row>
-                    <p:column>lolo</p:column>
-                    <p:column>trolo</p:column>
-                    <p:column>alalal</p:column>
-                </p:row>
-                <p:row>
-                    <p:column>lolo</p:column>
-                    <p:column>trolo</p:column>
-                    <p:column>alalal</p:column>
-                </p:row>
-                <p:row>
-                    <p:column>lolo</p:column>
-                    <p:column>trolo</p:column>
-                    <p:column>alalal</p:column>
-                </p:row>
-            </p:panelGrid> 
+            </p:panelGrid>
             <br/>
             <p:panelGrid columns="1">
-                <p:lineChart id="linechart" value="#{Analytics.linearModel}" legendPosition="e" zoom="true" animate="true"  
+                <p:lineChart id="linechart" value="#{Analytics.linearModel}" legendPosition="e" zoom="true" animate="true"
                              title="Linear Chart" minY="0" minX="0" style="width:970px;" widgetVar="chart"
-                             legendCols="12" xaxisLabel="Month" fill="true" seriesColors="1ABDF8, 9111C7"/> 
-            </p:panelGrid> 
-            <p:commandButton type="Button" value="Export" icon="ui-icon-extlink" onclick="exportChart()"/>
-            <p:dialog widgetVar="dlg" showEffect="fade" modal="true" header="Chart as an Image">  
-                <p:outputPanel id="output" layout="block" style="width:1200px;height:300px"/>  
-            </p:dialog> 
-            <script type="text/javascript">
-                function exportChart() {  
-                    $('#output').empty().append(chart.exportAsImage());  
-                    dlg.show();  
-                }  
-            </script>
-
+                             legendCols="12" xaxisLabel="Month" fill="true" seriesColors="1ABDF8, 9111C7"/>
+            </p:panelGrid>
+            <p:panelGrid columns="2">
+                <p:barChart id="basic" value="#{Analytics.categoryModel}" legendPosition="ne"
+                            title="Ordered dishes" min="0" max="200" style="width:450px"/>
+                <p:barChart id="basic2" value="#{Analytics.categoryModel2}" legendPosition="ne"
+                            title="Income generated" min="0" max="200" style="width:450px"/>
+            </p:panelGrid>
+            <p:panelGrid columns="1">
+                <p:barChart id="basic3" value="#{Analytics.categoryModelSales}" legendPosition="ne"
+                            title="Salesmen sales statistics" min="0" max="200" style="width:900px"/>
+            </p:panelGrid>
         </p:fieldset>
     </h:form>
 </html>
