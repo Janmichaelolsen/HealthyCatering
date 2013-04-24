@@ -9,7 +9,7 @@
                 <p:tabView id="tabView" dynamic="true" activeIndex="#{Sales.tabIndex}">
                     <p:ajax event="tabChange" listener="#{Sales.onTabChange}" /> 
                     <p:tab id="tab1" title="All orders">  
-                        <p:panelGrid columns="2" cellpadding="10"> 
+                        <h:panelGrid columns="2" cellpadding="10"> 
                             <h:form >
                                 #{Sales.update()}
                                 <p:dataTable value="#{Sales.tabledata}" var="OrderStatus" styleClass="orders" id="dataTable_id">    
@@ -70,10 +70,10 @@
                     </p:tab>  
 
                     <p:tab id="tab2" title="Orders for user">
-                        <p:panelGrid columns="2" cellpadding="10">  
+                        <h:panelGrid columns="2" cellpadding="10">  
                             <h:form>
                                 <p:outputLabel value="ID"/>
-                                <p><p:inputText value="#{Sales.id}"/></p>
+                                <p><h:inputText value="#{Sales.id}"/></p>
                                 <p:dataTable value="#{Sales.userTabledata}" var="OrderStatus" styleClass="orders" id="userDataTable_id">    
                                     <p:column>
                                         <f:facet name="header">
