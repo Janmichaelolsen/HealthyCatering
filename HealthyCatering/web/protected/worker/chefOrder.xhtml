@@ -30,13 +30,13 @@
                             </f:facet>
                             #{OrderList.order.timeOfDelivery}
                         </p:column>
-                        <p:column>
+                        <p:column >
                             <f:facet name="header">
                                 <p:outputLabel value="#{lang_auth.DeliveryAddress}"/>
                             </f:facet>
                             #{OrderList.order.deliveryAddress}
                         </p:column>
-                        <p:column>
+                        <p:column style="table-layout:fixed;width:200px">
                             <f:facet name="header">
                                 <p:outputLabel value="#{lang_auth.OrderedDish}"/>
                             </f:facet>
@@ -58,7 +58,7 @@
                             <f:facet name="header">
                                 <p:outputLabel value="#{lang_auth.Price}"/>
                             </f:facet>
-                            #{OrderList.order.orderPrice}
+                            #{OrderList.order.totalprice}
                         </p:column>
                         <f:facet name="footer">
                         </f:facet>

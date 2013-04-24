@@ -76,7 +76,9 @@ public class Database {
                 String deliveryAddress = res.getString("DELIVERYADDRESS");
                 int status = res.getInt("STATUS");
                 int orderId = res.getInt("ORDERID");
+                double price = res.getDouble("TOTALPRICE");
                 Order orderToBeAdded = new Order(date, timeOfDelivery, deliveryAddress, status);
+                orderToBeAdded.setTotalPrice(price);
                 orderToBeAdded.setOrderId(orderId);
                 orderToBeAdded.setPostalcode(res.getInt("postalcode"));
                 orders.add(orderToBeAdded);
