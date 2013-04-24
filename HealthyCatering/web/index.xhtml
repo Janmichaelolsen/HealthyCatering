@@ -8,17 +8,19 @@
         <ui:composition template="userTemplate.xhtml">
             <ui:define name="content">
                 #{Frontpage.redirect()}
-                <div id="login" class="login">
-                    <h:form id="login1" onsubmit="document.getElementById('login1').action = 'j_security_check';" prependId="false" rendered="#{!Frontpage.isLoggedIn()}">
-                        <p><p:outputLabel value="#{lang_auth.Username}" style="color: white;"/></p>
-                        <p><p:inputText id="j_username"/></p>
-                        <p><p:outputLabel value="#{lang_auth.Password}" style="color: white;"/></p>
-                        <p><p:inputText id="j_password" type="password"/></p>
-                        <p><p:commandButton id="submit" value="#{lang_auth.LogIn}" ajax="false"/></p>
-                        <p><p:commandLink value="#{lang_auth.Register}" action="./register.xhtml" style="color: white;"></p:commandLink></p>
-                        <p><p:commandLink value="#{lang_auth.ForgottenPassword}" action="./forgotpassword.xhtml" style="color: white;"></p:commandLink></p>
-                    </h:form>
-                </div>
+                <h:body rendered="#{!Frontpage.loggedIn}">
+                    <div id="login" class="login">
+                        <h:form id="login1" onsubmit="document.getElementById('login1').action = 'j_security_check';" prependId="false" >
+                            <p><p:outputLabel value="#{lang_auth.Username}" style="color: white;"/></p>
+                            <p><p:inputText id="j_username"/></p>
+                            <p><p:outputLabel value="#{lang_auth.Password}" style="color: white;"/></p>
+                            <p><p:inputText id="j_password" type="password"/></p>
+                            <p><p:commandButton id="submit" value="#{lang_auth.LogIn}" ajax="false"/></p>
+                            <p><p:commandLink value="#{lang_auth.Register}" action="./register.xhtml" style="color: white;"></p:commandLink></p>
+                            <p><p:commandLink value="#{lang_auth.ForgottenPassword}" action="./forgotpassword.xhtml" style="color: white;"></p:commandLink></p>
+                        </h:form>
+                    </div>
+                </h:body>
                 <input type="hidden" id="refreshed" value="no"/>            
                 <script type="text/javascript">
                     onload=function(){
