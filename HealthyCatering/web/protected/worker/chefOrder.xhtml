@@ -13,7 +13,7 @@
                                  rowStyleClass="#{OrderList.order.status eq 1 ? 'yellow' : OrderList.order.status eq '3' ? 'green':null}">
                         
                         <p:column>
-                            <f:facet name="header">
+                            <f:facet name="header"> 
                                 <p:outputLabel value="ID"/>
                             </f:facet>
                             #{OrderList.order.orderId}
@@ -47,12 +47,12 @@
                                 <p:outputLabel value="Status"/>
                             </f:facet>
                             <p:outputLabel value="#{OrderList.order.status}" rendered="#{!OrderList.toBeChanged}"/>
-                            <h:selectOneMenu value="#{OrderList.order.status}" rendered="true">
+                            <p:selectOneMenu value="#{OrderList.order.status}" rendered="true">
                                 <f:selectItem itemValue="PENDING" itemLabel="PENDING"/>
                                 <f:selectItem itemValue="UNDER_PREPARATION" itemLabel="UNDER_PREPARATION"/>
                                 <f:selectItem itemValue="PENDING_DELIVERY" itemLabel="PENDING_DELIVERY"/>                               
                                 <p:ajax listener="#{Worker.statusChanged}" update="dataTable_id"/>
-                            </h:selectOneMenu>                            
+                            </p:selectOneMenu>                            
                         </p:column>
                         <p:column>
                             <f:facet name="header">

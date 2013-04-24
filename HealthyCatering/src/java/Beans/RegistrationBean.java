@@ -52,10 +52,9 @@ public class RegistrationBean implements Serializable {
     
     public void apply() throws IOException {
         String role = db.newUser(user);
-        System.out.println(role);
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        if(externalContext != null && role == null) {
-            externalContext.redirect("faces/index.xhtml");
-        }
+ //       if(externalContext != null && role == null) {
+        externalContext.redirect("faces/regSuccess.xhtml");
+  //      }
     }
 }

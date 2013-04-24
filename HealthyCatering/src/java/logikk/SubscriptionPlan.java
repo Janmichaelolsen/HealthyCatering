@@ -28,6 +28,10 @@ public class SubscriptionPlan {
         this.companyusername = companyusername;
     }
 
+    public SubscriptionPlan() {
+    }
+    
+
     public void setSubid(int subid) {
         this.subid = subid;
     }
@@ -35,4 +39,25 @@ public class SubscriptionPlan {
     public int getSubid() {
         return subid;
     }
+
+    public String getCompanyusername() {
+        return companyusername;
+    }
+
+    public Date getEnddate() {
+        return enddate;
+    }
+
+    public Date getStartdate() {
+        return startdate;
+    }
+
+    public Time getTimeofdelivery() {
+        return timeofdelivery;
+    }
+
+    public int getWeekday() {
+        return weekday;
+    }
+    
 }
