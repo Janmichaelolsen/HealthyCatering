@@ -10,19 +10,19 @@
     <f:view locale="#{Lang.locale}">
         <ui:composition template="userTemplate.xhtml">
             <ui:define name="content">
-                <h:form rendered="#{!Frontpage.isLoggedIn()}">
-                    <div id="login" class="login">
-                        <h:form id="login1" onsubmit="document.getElementById('login1').action = 'j_security_check';" prependId="false" >
-                            <p><p:outputLabel value="#{lang_auth.Username}" style="color: white;"/></p>
-                            <p><p:inputText id="j_username"/></p>
-                            <p><p:outputLabel value="#{lang_auth.Password}" style="color: white;"/></p>
-                            <p><p:inputText id="j_password" type="password"/></p>
-                            <p><p:commandButton id="submit" value="#{lang_auth.LogIn}" ajax="false"/></p>
-                            <p><p:commandLink value="#{lang_auth.Register}" action="./register.xhtml" style="color: white;"></p:commandLink></p>
-                            <p><p:commandLink value="#{lang_auth.ForgottenPassword}" action="./forgotpassword.xhtml" style="color: white;"></p:commandLink></p>
-                        </h:form>
-                    </div>
-                </h:form>
+                    <h:body rendered="#{!Frontpage.loggedIn}">
+                        <div id="login" class="login">
+                            <h:form id="login1" onsubmit="document.getElementById('login1').action = 'j_security_check';" prependId="false" >
+                                <p><p:outputLabel value="#{lang_auth.Username}" style="color: white;"/></p>
+                                <p><p:inputText id="j_username"/></p>
+                                <p><p:outputLabel value="#{lang_auth.Password}" style="color: white;"/></p>
+                                <p><p:inputText id="j_password" type="password"/></p>
+                                <p><p:commandButton id="submit" value="#{lang_auth.LogIn}" ajax="false"/></p>
+                                <p><p:commandLink value="#{lang_auth.Register}" action="./register.xhtml" style="color: white;"></p:commandLink></p>
+                                <p><p:commandLink value="#{lang_auth.ForgottenPassword}" action="./forgotpassword.xhtml" style="color: white;"></p:commandLink></p>
+                            </h:form>
+                        </div>
+                    </h:body>
                 <h:form id="dishForm" style="width: 90%">  
                     <h2>#{lang_auth.Menu}</h2>
                     <p:outputLabel rendered="#{!loginBean.loggedIn}" value="#{lang_auth.Logintoorder}"></p:outputLabel> 
@@ -52,7 +52,7 @@
                         </h:form><br />
                         <p:dataTable id="availableDishes" var="items" value="#{menuitems.items}">   
                             <p:column headerText="#{lang_auth.DishName}"> 
-                                <h:graphicImage height="75" width="75" value="#{items.imagePath}" />
+                                <h:graphicImage height="100" width="160" value="#{items.imagePath}" />
                             </p:column>
 
                             <p:column headerText="#{lang_auth.DishName}">  

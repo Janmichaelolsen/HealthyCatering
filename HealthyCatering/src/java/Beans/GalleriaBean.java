@@ -10,20 +10,35 @@ import logikk.GalleriaDish;
 @SessionScoped
 @Named("galleria")
 public class GalleriaBean {  
-    private List<GalleriaDish> images;
-    private String[] dishnames = {null, "Grillspyd med stekt potet", "Spaghetti Bolognese", "Sweet and Sour"};
-    private String[] descriptions = {null, "Grillspyd av storfe med stekte poteter og salat.", 
-                                    "Italiensk spaghetti med kjÃ¸ttsaus og masse digg.", 
-                                    "Masse grÃ¸nnsaker og biffstrimler dynket i sursÃ¸t saus."};
+    private List<GalleriaDish> images_no;
+    private List<GalleriaDish> images_en;
+    private String[] dishnames_no = {null, "Grillspyd med stekt potet", "Spaghetti Bolognese", "Sweet and Sour", 
+                                    "Kyllingburger", "Gulrotsuppe"};
+    private String[] dishnames_en = {null, "Skewers with fried potatoes", "Spaghetti Bolognese", "Sweet and Sour",
+                                    "Chicken burger", "Carrot soup"};
+    private String[] descriptions_en = {null, "Cattle skewers with fried potatoes and salad.", "Italian spaghetti with meatsauce.", 
+                                    "Wok vegetables with beef strips", "Chicken burger with fresh salad and aioli",
+                                    "Carrot soup with beef strips"};
+    private String[] descriptions_no = {null, "Grillspyd av storfe med stekte poteter og salat.", "Italiensk spaghetti med kjøttsaus.", 
+                                    "Wok grønnsaker og biffstrimler i sursøt saus.", "Kyllingburger med frisk salat og aioli",
+                                    "Gulrotsuppe med biffstrimler"};
   
-       
+      
     public GalleriaBean(){  
-        images = new ArrayList<GalleriaDish>();  
-        for(int i=1;i<=3;i++) {  
-            images.add(new GalleriaDish(dishnames[i], descriptions[i], "galleria" + i + ".jpg"));  
+        images_no = new ArrayList<GalleriaDish>();  
+        for(int i=1;i<=5;i++) {  
+            images_no.add(new GalleriaDish(dishnames_no[i], descriptions_no[i], "galleria" + i + ".jpg"));  
+        }  
+        images_en = new ArrayList<GalleriaDish>();  
+        for(int i=1;i<=5;i++) {  
+            images_en.add(new GalleriaDish(dishnames_en[i], descriptions_en[i], "galleria" + i + ".jpg"));  
         }  
     }  
-    public List<GalleriaDish> getImages() {  
-        return images;  
+    public List<GalleriaDish> getImages_no() {  
+        return images_no;  
     }  
+
+    public List<GalleriaDish> getImages_en() {
+        return images_en;
+    }
 }  

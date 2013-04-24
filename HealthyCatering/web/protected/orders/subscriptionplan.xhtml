@@ -35,8 +35,12 @@
                     <tr>
                         <td>  
                             <p:selectManyCheckbox id="days" value="#{subBean.selectedDays}"  
-                                                  layout="pageDirection" required="true" requiredMessage="#{lang_auth.dayChoose}">  
-                                <f:selectItems value="#{subBean.weekdays}" />  
+                                                  layout="pageDirection" required="true" requiredMessage="#{lang_auth.dayChoose}" rendered="#{Lang.no}">  
+                                <f:selectItems value="#{subBean.weekdays_no}"  />  
+                            </p:selectManyCheckbox>
+                            <p:selectManyCheckbox id="days2" value="#{subBean.selectedDays}"  
+                                                  layout="pageDirection" required="true" requiredMessage="#{lang_auth.dayChoose}" rendered="#{!Lang.no}">   
+                                <f:selectItems value="#{subBean.weekdays_en}"  />  
                             </p:selectManyCheckbox>
 
                         </td>
