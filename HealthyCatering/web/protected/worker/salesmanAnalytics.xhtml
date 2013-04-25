@@ -11,13 +11,13 @@ and open the template in the editor.
         <p:fieldset id="frame2" legend="Analytics2">
             <p:panelGrid columns="2">
                 <p:barChart id="basic" value="#{Analytics.categoryModel}" legendPosition="ne"
-                            title="Ordered dishes" min="0" max="200" style="width:450px"/>
+                            title="Ordered dishes" min="0" style="width:450px"/>
                 <p:barChart id="basic2" value="#{Analytics.categoryModel2}" legendPosition="ne"
-                            title="Income generated" min="0" max="200" style="width:450px"/>
+                            title="Income generated" min="0" style="width:450px"/>
             </p:panelGrid>
             <p:panelGrid columns="1">
                 <p:barChart id="basic3" value="#{Analytics.categoryModelSales}" legendPosition="ne"
-                            title="Salesmen sales statistics" min="0" max="200" style="width:900px"/>
+                            title="Salesmen sales statistics" min="0" style="width:900px"/>
             </p:panelGrid>
         </p:fieldset>
     </h:form>

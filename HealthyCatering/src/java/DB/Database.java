@@ -500,7 +500,11 @@ public class Database {
                 statement2.setInt(1, getDishId(order.getOrderedDish().get(i).getDishName()));
                 statement2.setInt(2, key);
                 statement2.setInt(3, order.getOrderedDish().get(i).getCount());
-                statement2.setString(4, "");
+                if(customer){
+                    statement2.setString(4, "");
+                }else {
+                    statement2.setString(4, getCurrentUser());
+                }
                 statement2.executeUpdate();
             }
             result = true;

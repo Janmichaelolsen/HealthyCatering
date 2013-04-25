@@ -27,6 +27,7 @@ public class Order {
     private String weekday;
     private java.sql.Date startdate;
     private java.sql.Date enddate;
+    private String salesmanUsername;
     
 
     public Order() {
@@ -217,4 +218,12 @@ public class Order {
     public String getWeekday() {
         return weekday;
     } 
+
+    public String getSalesmanUsername() {
+        return salesmanUsername;
+    }
+
+    public void setSalesmanUsername(String salesmanUsername) {
+        this.salesmanUsername = salesmanUsername;
+    }
 }
