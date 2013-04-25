@@ -36,10 +36,7 @@ class AnalyticsBean implements Serializable {
         "October", "November", "Descember"};
 
     public AnalyticsBean() {
-        createLinearModel();
-        createCategoryModel();
-        createCategoryModel2();
-        createCategoryModelSales();
+        update();
     }
 
     public ArrayList<Order> calculateTurnover(Date fromDate, Date toDate) {
