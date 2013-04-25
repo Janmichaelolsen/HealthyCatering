@@ -9,7 +9,7 @@
     <title>Healthy Catering</title>
     <ui:composition template="../../userTemplate.xhtml">
         <ui:define name="content">
-            <h:form id="form"> 
+            <h:form id="form">  
                 <p:panelGrid id="panel2" columns="2" styleClass="noBackground">
                     <p:panel style="background: none !important; border: none !important">
                         <p:fieldset id="selectedDishes" legend="#{lang_auth.OrderList}">  
@@ -75,7 +75,7 @@
                         
                     </p:panel>
                 </p:panelGrid>
-                <p:commandButton value="#{lang_auth.send}" action="#{orderBean.confirmOrder()}"></p:commandButton>
+                <p:commandButton value="#{lang_auth.order}" action="#{orderBean.confirmOrder()}"></p:commandButton>
                 <p:commandButton value="#{lang_auth.subscribe}" action ="#{orderBean.subscribe()}"></p:commandButton>
             </h:form>
         </ui:define>

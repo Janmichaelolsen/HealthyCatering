@@ -24,11 +24,11 @@ public class WorkerIndexBean implements Serializable{
             tabIndex = 0;
         } else if (event.getTab().getId().equals("orders")) {
             tabIndex = 1;
-        } else if (event.getTab().getId().equals("dishes")) {
+        }else if (event.getTab().getId().equals("subscriptions")){
             tabIndex = 2;
-        } else if (event.getTab().getId().equals("analytics")) {
+        }else if (event.getTab().getId().equals("analytics")) {
             tabIndex = 3;
-        }
+        } 
         return tabIndex;
     }
 }

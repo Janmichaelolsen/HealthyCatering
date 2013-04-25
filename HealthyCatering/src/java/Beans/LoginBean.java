@@ -63,10 +63,4 @@ public class LoginBean implements Serializable {
         }
         return false;
     }
-
-    public void locale() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        Locale locale = context.getViewRoot().getLocale();
-        System.out.println(context.getViewRoot().getLocale());
-    }
 }

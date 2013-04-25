@@ -10,7 +10,7 @@
                     <p:menuitem value="Edit Cell" icon="ui-icon-search" onclick="messagelist.showCellEditor();
                             return false;"/>    
             <p:menuitem value="Hide Menu" icon="ui-icon-close" onclick="cMenu.hide()"/>    
-        </p:contextMenu>
+        </p:contextMenu> 
 
         <p:dataTable value="#{AdminStart.tabledata}" var="list" styleClass="messages" editable="true" editMode="cell" id="messageTable" widgetVar="messagelist" 
                      emptyMessage="#{lang_auth.NoMessages}">

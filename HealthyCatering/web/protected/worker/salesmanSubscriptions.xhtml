@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:form id="subs" >
+        <p:dataTable value ="#{salesSub.tabledata}" var ="list" styleClass ="dishes"  id="subTable" widgetVar="sublist" >
+            <p:column id="company" style="width:50%" 
+                      headerText ="#{lang_auth.Company}">
+                <h:outputText value ="#{list.subscriptionPlan.companyusername}"/>
+            </p:column>
+            <p:column id="startDate" style="width:50%" 
+                      headerText ="#{lang_auth.Startdate}">
+                <h:outputText value ="#{list.subscriptionPlan.startdate}"/>
+            </p:column>
+            <p:column id="endDate" style="width:50%" 
+                      headerText ="#{lang_auth.Enddate}">
+                <h:outputText value ="#{list.subscriptionPlan.enddate}"/>
+            </p:column>
+            <p:column id="timeofdelivery" style="width:50%" 
+                      headerText ="#{lang_auth.TimeOfDelivery}">
+                <h:outputText value ="#{list.subscriptionPlan.timeofdelivery}"/>
+            </p:column>
+            <p:column id="weekday" style="width:50%" 
+                      headerText ="#{lang_auth.Weekday}">
+                <h:outputText value ="#{list.subscriptionPlan.weekday}"/>
+            </p:column>
+
+
+            <p:column  headerText ="#{lang_auth.Delete}">
+                <h:selectBooleanCheckbox value="#{list.delete}"/>
+                <f:facet name ="footer">
+                    <p:commandButton value ="#{lang_auth.Delete}" action ="#{salesSub.delete()}"  update="subTable" ajax="false" />
+                </f:facet>
+            </p:column>
+
+
+        </p:dataTable>
+    </h:form>
+</html>

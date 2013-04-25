@@ -11,6 +11,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import logikk.Order;
 import logikk.OrderStatus;
@@ -113,13 +115,19 @@ public class SalesmanBean implements Serializable {
     }
 
     public void updateUser() {
-        ArrayList<Order> temp = overView.getOrdersUser(Integer.parseInt(id));
-        userTabledata.clear(); 
-        for (int i = 0; i < temp.size(); i++) {
-            userTabledata.add(new OrderStatus(temp.get(i)));
-        }
-        if (!userTabledata.isEmpty()) {
-            quickSortDate(0, userTabledata.size() - 1, userTabledata);
+        try {
+            ArrayList<Order> temp = overView.getOrdersUser(Integer.parseInt(id));
+            userTabledata.clear();
+            for (int i = 0; i < temp.size(); i++) {
+                userTabledata.add(new OrderStatus(temp.get(i)));
+            }
+            if (!userTabledata.isEmpty()) {
+                quickSortDate(0, userTabledata.size() - 1, userTabledata);
+            }
+        } catch (NumberFormatException nfe) {
+            FacesMessage fm = new FacesMessage("Please type a number");
+            fm.setSeverity(FacesMessage.SEVERITY_ERROR);
+            FacesContext.getCurrentInstance().addMessage(null, fm);
         }
     }
 

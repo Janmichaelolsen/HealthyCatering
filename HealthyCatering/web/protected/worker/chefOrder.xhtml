@@ -4,66 +4,61 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
-
-    
-                #{Worker.update()}
-                <h:form>
-                    <p:dataTable value="#{Worker.tabledata}" var="OrderList" styleClass="orders" id="dataTable_id"
-                                 rowStyleClass="#{OrderList.order.status eq 1 ? 'yellow' : OrderList.order.status eq '3' ? 'green':null}">
-                        
-                        <p:column>
-                            <f:facet name="header">
-                                <p:outputLabel value="ID"/>
-                            </f:facet>
-                            #{OrderList.order.orderId}
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <p:outputLabel value="#{lang_auth.Date}"/>
-                            </f:facet>
-                            #{OrderList.order.date}
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <p:outputLabel value="#{lang_auth.TimeOfDelivery}"/>
-                            </f:facet>
-                            #{OrderList.order.timeOfDelivery}
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <p:outputLabel value="#{lang_auth.DeliveryAddress}"/>
-                            </f:facet>
-                            #{OrderList.order.deliveryAddress}
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <p:outputLabel value="#{lang_auth.OrderedDish}"/>
-                            </f:facet>
-                            #{OrderList.order.orderedDish}
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <p:outputLabel value="Status"/>
-                            </f:facet>
-                            <p:outputLabel value="#{OrderList.order.status}" rendered="#{!OrderList.toBeChanged}"/>
-                            <h:selectOneMenu value="#{OrderList.order.status}" rendered="true">
-                                <f:selectItem itemValue="PENDING" itemLabel="PENDING"/>
-                                <f:selectItem itemValue="UNDER_PREPARATION" itemLabel="UNDER_PREPARATION"/>
-                                <f:selectItem itemValue="PENDING_DELIVERY" itemLabel="PENDING_DELIVERY"/>                               
-                                <p:ajax listener="#{Worker.statusChanged}" update="dataTable_id"/>
-                            </h:selectOneMenu>                            
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <p:outputLabel value="#{lang_auth.Price}"/>
-                            </f:facet>
-                            #{OrderList.order.orderPrice}
-                        </p:column>
-                        <f:facet name="footer">
-                        </f:facet>
-                    </p:dataTable>
-                </h:form>
+      xmlns:ui="http://java.sun.com/jsf/facelets">   
+    #{Worker.update()}
+    <h:form>
+        <p:dataTable value="#{Worker.tabledata}" var="OrderList" styleClass="orders" id="dataTable_id">
+            <p:column>
+                <f:facet name="header"> 
+                    <p:outputLabel value="ID"/>
+                </f:facet>
+                #{OrderList.order.orderId}
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <p:outputLabel value="#{lang_auth.Date}"/>
+                </f:facet>
+                #{OrderList.order.date}
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <p:outputLabel value="#{lang_auth.TimeOfDelivery}"/>
+                </f:facet>
+                #{OrderList.order.timeOfDelivery}
+            </p:column>
+            <p:column >
+                <f:facet name="header">
+                    <p:outputLabel value="#{lang_auth.DeliveryAddress}"/>
+                </f:facet>
+                #{OrderList.order.deliveryAddress}
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <p:outputLabel value="#{lang_auth.OrderedDish}"/>
+                </f:facet>
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <p:outputLabel value="Status"/>
+                </f:facet>
+                <p:outputLabel value="#{OrderList.order.status}" rendered="#{!OrderList.toBeChanged}"/>
+                <p:selectOneMenu value="#{OrderList.order.status}" rendered="true">
+                    <f:selectItem itemValue="PENDING" itemLabel="PENDING"/>
+                    <f:selectItem itemValue="UNDER_PREPARATION" itemLabel="UNDER_PREPARATION"/>
+                    <f:selectItem itemValue="PENDING_DELIVERY" itemLabel="PENDING_DELIVERY"/>                               
+                    <p:ajax listener="#{Worker.statusChanged}" update="dataTable_id"/>
+                </p:selectOneMenu>                            
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <p:outputLabel value="#{lang_auth.Price}"/>
+                </f:facet>
+                #{OrderList.order.totalprice}
+            </p:column>
+            <f:facet name="footer">
+            </f:facet>
+        </p:dataTable>
+    </h:form>
 
 </html>
 
