@@ -20,7 +20,7 @@ public class AdminIndexBean implements Serializable{
     }
 
     public int onTabChange(TabChangeEvent event) {
-        if (event.getTab().getId().equals("messages")) {
+        if (event.getTab().getId().equals("messages")) { 
             tabIndex = 0;
         } else if (event.getTab().getId().equals("orders")) {
             tabIndex = 1;
