@@ -15,6 +15,8 @@ import logikk.OrderStatus;
 import logikk.PendingOrders;
 import java.io.Serializable;
 import java.sql.SQLException;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import logikk.SubscriptionPlan;
 
 /**
@@ -27,7 +29,6 @@ public class AdminBean implements Serializable {
     private PendingOrders orders = new PendingOrders();
     private Database db = new Database();
     private List<OrderStatus> tabledata = Collections.synchronizedList(new ArrayList<OrderStatus>());
-    private ArrayList<SubscriptionPlan> deletedplans = new ArrayList<SubscriptionPlan>();
 
      public AdminBean(){
          orders.readFromDb();
@@ -36,8 +37,6 @@ public class AdminBean implements Serializable {
                  tabledata.add(new OrderStatus(orders.getOrders().get(i)));
              }
          }
-        
-        
     }
 
     public synchronized List<OrderStatus> getTabledata() {
@@ -49,21 +48,11 @@ public class AdminBean implements Serializable {
     }
     
     public void deletePlans(){
-        ArrayList<SubscriptionPlan> temp = db.removeExpiredSubs();
-        System.out.println("size: " + temp.size());
-        for(int i=0; i<temp.size(); i++){
-            deletedplans.add(temp.get(i));
-        }
+        int removedplans = db.removeExpiredSubs();
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"", removedplans+" subscriptionplans deleted."));  
     }
     public void updatePlans(){
-            db.checkSubscription();
-    }
-
-    public ArrayList<SubscriptionPlan> getDeletedplans() {
-        return deletedplans;
-    }
-    
-    public boolean deletedExists(){
-        return deletedplans.size() > 0;
+        int addedorders = db.checkSubscription();
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"", addedorders+" orders added"));  
     }
 }

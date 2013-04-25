@@ -23,30 +23,12 @@
             30
         </session-timeout>
     </session-config>
-    <!--    <filter>
-        <filter-name>NoCacheFilter</filter-name>
-        <filter-class>Filter.NoCacheFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>NoCacheFilter</filter-name>
-        <servlet-name>Faces Servlet</servlet-name>
-        <dispatcher>REQUEST</dispatcher>
-        <dispatcher>FORWARD</dispatcher>
-    </filter-mapping> -->
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
-    </context-param>
-    <context-param>
-        <param-name>primefaces.PUBLIC_CAPTCHA_KEY</param-name>
-        <param-value>6LfwZwoAAAAAAI-oUHpdvRnkMfu9fXQHxc0P7IBu</param-value>
-    </context-param>
-    <context-param>
-        <param-name>primefaces.PRIVATE_CAPTCHA_KEY</param-name>
-        <param-value>6LfwZwoAAAAAAEhRyntKF1PBzysAJLzqp2v-GMRR</param-value>
     </context-param>
     <security-constraint>
         <web-resource-collection>
@@ -61,6 +43,18 @@
         <auth-constraint>
             <role-name>salesman</role-name>
             <role-name>chef</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Worker pages</web-resource-name>
+            <url-pattern>/faces/protected/driver/*</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>Allowed resources</web-resource-name>
+            <url-pattern>/javax.faces.resources/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
             <role-name>driver</role-name>
         </auth-constraint>
     </security-constraint>

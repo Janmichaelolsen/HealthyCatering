@@ -18,7 +18,6 @@ public class Order {
     private String status;
     private int status_numeric;
     private ArrayList<Dish> orderedDishes = new ArrayList();
-    private double orderPrice = 0.0;
     private String description;
     private int postalcode; 
     private double totalprice = 0.0;
@@ -28,6 +27,8 @@ public class Order {
     private java.sql.Date startdate;
     private java.sql.Date enddate;
     private boolean changed = false;
+    private String salesmanUsername;
+    private String customerUsername;
     
 
     public Order() {
@@ -122,7 +123,7 @@ public class Order {
         } else if (status.equals(Status.NEEDS_APPROVAL.toString())) {
             this.status_numeric = 7;
         }
-        System.out.println(status_numeric);
+        setChanged();
     }
 
     public boolean addDish(Dish dish) {
@@ -131,7 +132,7 @@ public class Order {
         }
         for (int i = 0; i < dish.getCount(); i++) {
             orderedDishes.add(dish);
-            orderPrice += dish.getPrice();
+            totalprice += dish.getPrice();
         }
         return true;
     }
@@ -147,11 +148,7 @@ public class Order {
     public Date getDate() {
         return date;
     }
-
-    public double getOrderPrice() {
-        return orderPrice;
-    }
-
+    
     public String getDeliveryAddress() {
         return deliveryAddress;
     }
@@ -225,5 +222,21 @@ public class Order {
     }
     public void setChanged(){
         changed = !changed;
+    }
+
+    public String getSalesmanUsername() {
+        return salesmanUsername;
+    }
+
+    public void setSalesmanUsername(String salesmanUsername) {
+        this.salesmanUsername = salesmanUsername;
+    }
+
+    public String getCustomerUsername() {
+        return customerUsername;
+    }
+
+    public void setCustomerUsername(String customerUsername) {
+        this.customerUsername = customerUsername;
     }
 }

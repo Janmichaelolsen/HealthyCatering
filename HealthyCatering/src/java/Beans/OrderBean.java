@@ -26,6 +26,7 @@ public class OrderBean implements Serializable {
     private Database db = new Database();
     private ArrayList<Dish> dishes = fillDishes();
     private User user = db.getUser();
+    private User blankuser = new User();
     private Date deliverydate = new Date();
     private Date currentDate = new Date();
     private String[] hourvalues = {"10", "11", "12", "13", "14", "15", "16"};
@@ -113,7 +114,10 @@ public class OrderBean implements Serializable {
     }
 
     public User getUser() {
-        return user;
+        if(db.getRole().equals("customer")){
+            return user;
+        }
+        return blankuser;
     }
 
     public void setUser(User user) {

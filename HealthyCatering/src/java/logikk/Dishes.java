@@ -16,15 +16,16 @@ public class Dishes {
     private Database database = new Database();
     
     public Dishes(){
-        this.list = database.getAdminDishes();
+        this.list = database.getDishes();
     }
 
     public ArrayList<Dish> getList() {
         return list;
     }
     public boolean regDish(Dish dish){
+        String sql = "insert into dish(dishname,dishprice) values(?, ?)";
         if(dish !=null){
-            if(database.regDish(dish)){
+            if(database.changeDish(dish, sql, "reg")){
                 list.add(dish);
                 return true;
             }
@@ -32,8 +33,9 @@ public class Dishes {
         return false;
     }
     public boolean deleteDish(Dish dish){
+        String sql = "DELETE FROM dish WHERE dishid = ?";
         if(dish!=null){
-            if(database.deleteDish(dish)){
+            if(database.changeDish(dish, sql, "delete")){
                 list.remove(dish);
                 return true;
             }
@@ -41,8 +43,9 @@ public class Dishes {
         return false;
     }
     public void changeData(Dish dish){
+        String sql = "update dish set dishname = ?,dishprice = ? where dishid = ?";
         for(int i = 0;i<list.size();i++){
-            if(dish.getDishId() == list.get(i).getDishId() && database.changeDishData(dish)){
+            if(dish.getDishId() == list.get(i).getDishId() && database.changeDish(dish, sql, "change")){
                 list.set(i, dish);
             }
         }

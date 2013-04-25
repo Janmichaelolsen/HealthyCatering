@@ -59,7 +59,7 @@
 
                     <p:panel style="background: none !important; border: none !important">
                         <p:outputLabel value="#{lang_auth.Date}"/><br />
-                        <p:calendar effect="drop" value="#{orderBean.deliverydate}" readonly="true" timeZone="#{orderBean.timeZone}" mindate="#{orderBean.deliverydate}"/><br /><br />
+                        <p:calendar effect="drop" value="#{orderBean.deliverydate}" timeZone="#{orderBean.timeZone}" /><br /><br />
                         <p:outputLabel value="#{lang_auth.Time}"/><br />
                         <p:selectOneMenu value="#{orderBean.deliverydate.hours}" valueChangeListener="submit()">
                             <f:selectItems value="#{orderBean.hourvalues}"></f:selectItems>

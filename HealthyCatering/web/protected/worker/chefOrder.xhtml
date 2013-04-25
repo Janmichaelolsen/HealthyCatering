@@ -42,6 +42,12 @@
             </p:column>
             <p:column>
                 <f:facet name="header">
+                    <p:outputLabel value="#{lang_auth.Description}"/>
+                </f:facet>
+                <p:outputLabel value="#{OrderList.order.description}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">
                     <p:outputLabel value="Status"/>
                 </f:facet>
                 <p:selectOneMenu value="#{OrderList.order.status}" rendered="true">

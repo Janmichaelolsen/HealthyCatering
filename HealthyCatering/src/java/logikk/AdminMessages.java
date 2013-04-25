@@ -23,8 +23,9 @@ public class AdminMessages {
         return list;
     }
     public boolean regMessage(AdminMessage message){
+        String sql = "INSERT into message(message)VALUES(?)";
         if(message !=null){
-            if(database.addMessage(message)){
+            if(database.changeMessage(message, sql, "add")){
                 list.add(message);
                 return true;
             }
@@ -32,8 +33,9 @@ public class AdminMessages {
         return false;
     }
      public boolean deleteMessage(AdminMessage message){
+         String sql = "DELETE from message WHERE messageid = ?";
         if(message!=null){
-            if(database.deleteMessage(message)){
+            if(database.changeMessage(message, sql, "delete")){
                 list.remove(message);
                 return true;
             }
@@ -41,8 +43,9 @@ public class AdminMessages {
         return false;
     }
     public void changeData(AdminMessage message){
+        String sql = "update message set message = ? where messageid = ?";
         for(int i = 0;i<list.size();i++){
-            if(message.getID() == list.get(i).getID()&& database.changeMessage(message)){
+            if(message.getID() == list.get(i).getID()&& database.changeMessage(message, sql, "change")){
                 list.set(i, message);
             }
         }
