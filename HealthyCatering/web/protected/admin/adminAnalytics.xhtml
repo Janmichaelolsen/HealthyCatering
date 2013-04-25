@@ -37,18 +37,18 @@ and open the template in the editor.
             <br/>
             <p:panelGrid columns="1">
                 <p:lineChart id="linechart" value="#{Analytics.linearModel}" legendPosition="e" zoom="true" animate="true"
-                             title="Linear Chart" minY="0" minX="0" style="width:970px;" widgetVar="chart"
+                             title="Linear Chart" minY="0" minX="0" style="width:930px;" widgetVar="chart"
                              legendCols="12" xaxisLabel="Month" fill="true" seriesColors="1ABDF8, 9111C7"/>
             </p:panelGrid>
             <p:panelGrid columns="2">
                 <p:barChart id="basic" value="#{Analytics.categoryModel}" legendPosition="ne"
-                            title="Ordered dishes" min="0" max="200" style="width:450px"/>
+                            title="Ordered dishes" min="0" style="width:450px"/>
                 <p:barChart id="basic2" value="#{Analytics.categoryModel2}" legendPosition="ne"
-                            title="Income generated" min="0" max="200" style="width:450px"/>
+                            title="Income generated" min="0" style="width:450px"/>
             </p:panelGrid>
             <p:panelGrid columns="1">
                 <p:barChart id="basic3" value="#{Analytics.categoryModelSales}" legendPosition="ne"
-                            title="Salesmen sales statistics" min="0" max="200" style="width:900px"/>
+                            title="Salesmen sales statistics" min="0" style="width:900px"/>
             </p:panelGrid>
         </p:fieldset>
     </h:form>
