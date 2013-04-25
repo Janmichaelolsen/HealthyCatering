@@ -27,6 +27,7 @@ public class Order {
     private String weekday;
     private java.sql.Date startdate;
     private java.sql.Date enddate;
+    private boolean changed = false;
     
 
     public Order() {
@@ -85,8 +86,9 @@ public class Order {
         this.description = description;
     }
     
-    public Order(String dishName, String status) {
+    public Order(String dishName, int count, String status) {
         this.dishName = dishName;
+        this.count = count;
         this.status = status;
     }
     
@@ -217,4 +219,11 @@ public class Order {
     public String getWeekday() {
         return weekday;
     } 
+
+    public boolean getChanged() {
+        return changed;
+    }
+    public void setChanged(){
+        changed = !changed;
+    }
 }

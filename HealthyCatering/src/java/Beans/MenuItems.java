@@ -112,4 +112,7 @@ public class MenuItems implements Serializable {
         }
         return false;
     }
+    public boolean selectedIsEmpty(){
+        return orderList.isEmpty();
+    }
 }

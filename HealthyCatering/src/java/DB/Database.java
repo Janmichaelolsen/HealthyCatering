@@ -1,6 +1,7 @@
 package DB;
 
 import Beans.SubscribeBean;
+import Language.LangChange;
 import java.sql.*;
 import java.util.ArrayList;
 import javax.annotation.Resource;
@@ -532,7 +533,6 @@ public class Database {
             Cleaner.rollback(connection);
 
         } finally {
-            Cleaner.setAutoCommit(connection);
             Cleaner.closeSentence(statement);
         }
         return result;
@@ -566,15 +566,12 @@ public class Database {
             if (res.next()) {
                 key = res.getInt(1);
             }
-            closeConnection();
             for (int i = 0; i < order.getOrderedDish().size(); i++) {
-                openConnection();
                 statement2 = connection.prepareStatement("insert into sub_dish(dishid, subid, dishcount) values(?, ?, ?)");
                 statement2.setInt(1, getDishId(order.getOrderedDish().get(i).getDishName()));
                 statement2.setInt(2, key);
                 statement2.setInt(3, order.getOrderedDish().get(i).getCount());
                 statement2.executeUpdate();
-                closeConnection();
             }
             result = true;
         } catch (SQLException e) {
@@ -604,7 +601,9 @@ public class Database {
             while (res.next()) {
                 if (res.getInt("weekday") == current.getDay()) {
                     int subid = res.getInt("subscriptionid");
-                    statement2 = connection.prepareStatement("SELECT * FROM subscriptionplan WHERE subscriptionid =" + subid + " AND subscriptionid NOT IN (SELECT s.subscriptionid FROM subscriptionplan s, orders o WHERE s.subscriptionid = o.subscriptionid AND now()=o.dates)");
+                    statement2 = connection.prepareStatement("SELECT * FROM subscriptionplan WHERE subscriptionid =" + subid 
+                            + " AND subscriptionid NOT IN (SELECT s.subscriptionid FROM subscriptionplan s, orders o "
+                            + "WHERE s.subscriptionid = o.subscriptionid AND now()=o.dates)");
                     ResultSet res2 = statement2.executeQuery();
                     while (res2.next()) {
                         ArrayList<Dish> dishes = new ArrayList<Dish>();
@@ -1007,15 +1006,16 @@ public class Database {
         PreparedStatement sentence = null;
         openConnection();
         try {
-            sentence = connection.prepareStatement("select d.dishname, o.status from orders o, dishes_ordered dd, dish d "
+            sentence = connection.prepareStatement("select d.dishname, dd.dishcount, o.status from orders o, dishes_ordered dd, dish d "
                     + "where o.orderid = dd.orderid and dd.dishid = d.dishid and o.USERNAMECUSTOMER = ?");
             sentence.setString(1, getCurrentUser());
             ResultSet res = sentence.executeQuery();
             while (res.next()) {
                 String dishname = res.getString("DISHNAME");
+                int count = res.getInt("DISHCOUNT");
                 int statusnumeric = res.getInt("STATUS");
                 String status = Status.getDescription(statusnumeric);
-                Order newdish = new Order(dishname, status);
+                Order newdish = new Order(dishname, count, status);
                 result.add(newdish);
             }
         } catch (SQLException e) {
@@ -1048,8 +1048,14 @@ public class Database {
                 Date enddate = res.getDate("ENDDATE");
                 String desc = res.getString("DESCRIPTION");
                 SubscribeBean sb = new SubscribeBean();
-                Order neworder = new Order(dishname, timeofdelivery, count, sb.getWeekdays_en().get(weekday), startdate, enddate, desc);
-                result.add(neworder);
+                LangChange lang = new LangChange();
+                if(lang.isNo()){
+                    Order neworder = new Order(dishname, timeofdelivery, count, sb.getWeekdays_no().get(weekday), startdate, enddate, desc);
+                    result.add(neworder);
+                }else{
+                    Order neworder = new Order(dishname, timeofdelivery, count, sb.getWeekdays_en().get(weekday), startdate, enddate, desc);
+                    result.add(neworder);
+                }
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

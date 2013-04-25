@@ -36,16 +36,18 @@
                 <f:facet name="header">
                     <p:outputLabel value="#{lang_auth.OrderedDish}"/>
                 </f:facet>
+                <p:dataList value="#{OrderList.order.orderedDish}" var="dishes">
+                    <p:outputLabel value="#{dishes}"/>
+                </p:dataList>
             </p:column>
             <p:column>
                 <f:facet name="header">
                     <p:outputLabel value="Status"/>
                 </f:facet>
-                <p:outputLabel value="#{OrderList.order.status}" rendered="#{!OrderList.toBeChanged}"/>
                 <p:selectOneMenu value="#{OrderList.order.status}" rendered="true">
-                    <f:selectItem itemValue="PENDING" itemLabel="PENDING"/>
-                    <f:selectItem itemValue="UNDER_PREPARATION" itemLabel="UNDER_PREPARATION"/>
-                    <f:selectItem itemValue="PENDING_DELIVERY" itemLabel="PENDING_DELIVERY"/>                               
+                    <f:selectItem itemValue="PENDING" itemLabel="#{lang_auth.pending}"/>
+                    <f:selectItem itemValue="UNDER_PREPARATION" itemLabel="#{lang_auth.underPreparation}"/>
+                    <f:selectItem itemValue="PENDING_DELIVERY" itemLabel="#{lang_auth.pendingDelivery}"/>                              
                     <p:ajax listener="#{Worker.statusChanged}" update="dataTable_id"/>
                 </p:selectOneMenu>                            
             </p:column>

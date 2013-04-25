@@ -68,10 +68,8 @@ public class AdminMessageBean implements Serializable {
     }
 
     public synchronized void add() {
-        System.out.println("HEI");
         AdminMessage newMessage = new AdminMessage(tempMessage.getMessage());
         if (messages.regMessage(newMessage)) {
-            System.out.println("OKK");
             tabledata.add(new MessageStatus(newMessage));
             tempMessage.reset();
         }

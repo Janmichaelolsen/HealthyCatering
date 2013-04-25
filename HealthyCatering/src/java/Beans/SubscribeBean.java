@@ -27,8 +27,8 @@ public class SubscribeBean implements Serializable {
             new Time(10, 10, 0), new Time(10, 10, 0), new Time(10, 10, 0)));
     private Date startdate = new Date();
     private Date enddate = new Date();
-    
-    public SubscribeBean(){
+
+    public SubscribeBean() {
         startdate.setHours(10);
         startdate.setMinutes(00);
         enddate.setHours(10);
@@ -36,7 +36,6 @@ public class SubscribeBean implements Serializable {
     }
 
     public void submitPlan() throws IOException {
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         for (int i = 0; i < selectedDays.size(); i++) {
             for (int j = 0; j < weekdays_no.size(); j++) {
                 if (selectedDays.get(i).equals(weekdays_no.get(j)) || selectedDays.get(i).equals(weekdays_en.get(j))) {
@@ -44,14 +43,14 @@ public class SubscribeBean implements Serializable {
                     FacesContext context = FacesContext.getCurrentInstance();
                     OrderBean orderbean = (OrderBean) context.getApplication().evaluateExpressionGet(context, "#{orderBean}", OrderBean.class);
                     Order order = orderbean.getSavedOrder();
-                    if(db.subscription(subplan, order)){
-                        externalContext.redirect(externalContext.getRequestContextPath() + "/faces/protected/orders/orderSuccess.xhtml");
-                    }
+                    db.subscription(subplan, order);
                 }
             }
         }
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        externalContext.redirect(externalContext.getRequestContextPath() + "/faces/protected/orders/orderSuccess.xhtml");
     }
-
+    
     public ArrayList<String> getWeekdays_no() {
         return weekdays_no;
     }
@@ -59,7 +58,7 @@ public class SubscribeBean implements Serializable {
     public void setWeekdays_no(ArrayList<String> weekdays) {
         this.weekdays_no = weekdays;
     }
-    
+
     public ArrayList<String> getWeekdays_en() {
         return weekdays_en;
     }
@@ -99,6 +98,4 @@ public class SubscribeBean implements Serializable {
     public void setStartdate(Date startdate) {
         this.startdate = startdate;
     }
-    
-    
 }

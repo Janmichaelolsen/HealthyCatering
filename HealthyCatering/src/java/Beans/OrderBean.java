@@ -28,8 +28,8 @@ public class OrderBean implements Serializable {
     private User user = db.getUser();
     private Date deliverydate = new Date();
     private Date currentDate = new Date();
-    private int[] hourvalues = {10, 11, 12, 13, 14, 15, 16, 17};
-    private int[] minutevalues = {00, 10, 20, 30, 40, 50};
+    private String[] hourvalues = {"10", "11", "12", "13", "14", "15", "16"};
+    private String[] minutevalues = {"00", "10", "20", "30", "40", "50"};
     private String description;
     private double total_price;
     private Order savedOrder;
@@ -128,19 +128,19 @@ public class OrderBean implements Serializable {
         this.description = description;
     }
 
-    public int[] getMinutevalues() {
+    public String[] getMinutevalues() {
         return minutevalues;
     }
 
-    public void setMinutevalues(int[] minutevalues) {
+    public void setMinutevalues(String[] minutevalues) {
         this.minutevalues = minutevalues;
     }
 
-    public int[] getHourvalues() {
+    public String[] getHourvalues() {
         return hourvalues;
     }
 
-    public void setHourvalues(int[] hourvalues) {
+    public void setHourvalues(String[] hourvalues) {
         this.hourvalues = hourvalues;
     }
 

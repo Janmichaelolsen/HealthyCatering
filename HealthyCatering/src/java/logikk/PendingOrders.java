@@ -25,7 +25,7 @@ public class PendingOrders {
      * 7=awaitingapproval 5 = FINISHED 4= on the road 6 = missing
      */
     public ArrayList<Order> getFirstOrdersChef() {
-        ArrayList<Order> result = database.getPendingOrders("Select * from orders where STATUS !=5 and STATUS!=4 and STATUS != 6 and STATUS !=7");
+        ArrayList<Order> result = database.getPendingOrders("Select * from orders where STATUS=1 OR STATUS=2");
         ArrayList<Dish> dishesOrdered = database.getDishesOrdered();
         //Adding the correct dishes to the orders. 
         if(!result.isEmpty() && !dishesOrdered.isEmpty()){

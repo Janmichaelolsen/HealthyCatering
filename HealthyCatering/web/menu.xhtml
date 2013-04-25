@@ -47,7 +47,7 @@
                         </p:dataTable>
                         <h:form>
                             <div align="right">
-                                <p:commandButton value="#{lang_auth.order}" action="#{menuitems.order()}" rendered="#{menuitems.loggedIn}"></p:commandButton>                
+                                <p:commandButton value="#{lang_auth.order}" action="#{menuitems.order()}" rendered="#{!menuitems.selectedIsEmpty()}"></p:commandButton>                
                             </div>
                         </h:form><br />
                         <p:dataTable id="availableDishes" var="items" value="#{menuitems.items}">   
