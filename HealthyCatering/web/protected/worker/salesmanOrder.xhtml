@@ -4,10 +4,6 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
-
-    <p:tabView id="tabView" dynamic="true" activeIndex="#{Sales.tabIndex}">
-        <p:ajax event="tabChange" listener="#{Sales.onTabChange}" /> 
-        <p:tab id="tab1" title="All orders">  
             <h:panelGrid columns="2" cellpadding="10"> 
                 <h:form > 
                     #{Sales.update()}
@@ -67,65 +63,6 @@
                     </p:dataTable>
                 </h:form>
             </h:panelGrid>
-            <a href="../../menu.xhtml">#{lang_auth.OrderDish}</a>
-        </p:tab>  
-
-        <p:tab id="tab2" title="Orders for user">
-            <h:panelGrid columns="2" cellpadding="10">  
-                <h:form>
-                    <p:outputLabel value="ID"/>
-                    <p><h:inputText value="#{Sales.id}"/></p>
-                    <p:dataTable value="#{Sales.userTabledata}" var="OrderStatus" styleClass="orders" id="userDataTable_id">    
-                        <p:column>
-                            <f:facet name="header">
-                                <p:outputLabel value="ID"/>
-                            </f:facet>
-                            #{OrderStatus.order.orderId}
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <p:outputLabel value="#{lang_auth.Date}"/>
-                            </f:facet>
-                            #{OrderStatus.order.date}
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <p:outputLabel value="#{lang_auth.TimeOfDelivery}"/>
-                            </f:facet>
-                            #{OrderStatus.order.timeOfDelivery}
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <p:outputLabel value="#{lang_auth.DeliveryAddress}"/>
-                            </f:facet>
-                            #{OrderStatus.order.deliveryAddress}
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <p:outputLabel value="#{lang_auth.OrderedDish}"/>
-                            </f:facet>
-                            #{OrderStatus.order.orderedDish}
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <p:outputLabel value="Status"/>
-                            </f:facet>
-                            <p:outputLabel value="#{OrderStatus.order.status}"/>                           
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <p:outputLabel value="#{lang_auth.Price}"/>
-                            </f:facet>
-                            #{OrderStatus.order.totalprice}
-                        </p:column>
-                        <f:facet name="footer">
-                        </f:facet>
-                    </p:dataTable>
-                    <p:commandButton id="submit" value="Search" ajax="false" update="userDataTable_id" action="#{Sales.updateUser()}"/>
-                </h:form>
-            </h:panelGrid>  
-        </p:tab>   
-    </p:tabView>  
-
+            <a href="../../menu.xhtml">#{lang_auth.OrderDish}</a> 
 </html>
 
