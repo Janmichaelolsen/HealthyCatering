@@ -1,11 +1,16 @@
 package Beans;
 
-import java.util.ArrayList;
+import java.util.ArrayList;  
 import java.util.List;  
 import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
 import logikk.GalleriaDish;
-  
+/**
+ * 
+ * Backing bean for viewing
+ * a galleria of several dishes.
+ * Used in index-page and customer-page.
+ */
 @SessionScoped
 @Named("galleria")
 public class GalleriaBean {  
@@ -22,7 +27,11 @@ public class GalleriaBean {
                                     "Wok grønnsaker og biffstrimler i sursøt saus.", "Kyllingburger med frisk salat og aioli",
                                     "Gulrotsuppe med biffstrimler"};
   
-      
+    /**
+     * Fills an ArrayList with GalleriaDish-objects, containing 
+     * name of dish, description and image path of dish.
+     * Available in both norwegian and english.
+     */
     public GalleriaBean(){  
         images_no = new ArrayList<GalleriaDish>();  
         for(int i=1;i<=5;i++) {  

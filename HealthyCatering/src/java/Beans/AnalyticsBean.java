@@ -14,7 +14,12 @@ import logikk.StoredOrders;
 import org.primefaces.model.chart.CartesianChartModel;
 import org.primefaces.model.chart.ChartSeries;
 import org.primefaces.model.chart.LineChartSeries;
-
+/**
+ * 
+ * Backing bean for both adminAnalytics-page and salesmanAnalytics.
+ * Generates charts based on dishes ordered, income, turnover
+ * and income.
+ */
 @ManagedBean
 @RequestScoped
 @Named("Analytics")
@@ -35,6 +40,10 @@ class AnalyticsBean implements Serializable {
     private String[] months = {"January", "February", "March", "April", "Mai", "June", "July", "August", "September",
         "October", "November", "Descember"};
 
+    /**
+     * Calls the method constructing the different charts, which is used in the
+     * various pages.
+     */
     public AnalyticsBean() {
         update();
     }
@@ -87,6 +96,9 @@ class AnalyticsBean implements Serializable {
         return linearModel;
     }
 
+    /**
+     * Creates a bar chart representing the income generated in a period.
+     */
     public void createCategoryModel2() {
         categoryModel2 = new CartesianChartModel();
 
@@ -112,14 +124,18 @@ class AnalyticsBean implements Serializable {
         categoryModel2.addSeries(moneyGenerated);
     }
 
+    /**
+     * Creates a bar chart representing the commission for every salesmen.
+     *
+     */
     public void createCategoryModelSales() {
         ArrayList<StoredOrders> sOrders = getStoredInfo(this.fromDate);
         if (sOrders.isEmpty() || sOrders == null) {
             return;
         }
         for (int i = 0; i < sOrders.size(); i++) {
-            if (sOrders.get(i).getSalesmanUsername() == null ||sOrders.get(i).getSalesmanUsername().equals("null")
-                    ||sOrders.get(i).getSalesmanUsername().equals("")) {
+            if (sOrders.get(i).getSalesmanUsername() == null || sOrders.get(i).getSalesmanUsername().equals("null")
+                    || sOrders.get(i).getSalesmanUsername().equals("")) {
                 sOrders.remove(sOrders.get(i));
                 i--;
             }
@@ -155,6 +171,10 @@ class AnalyticsBean implements Serializable {
 
     }
 
+    /**
+     * Creates a bar chart representing the ordered dishes and count.
+     *
+     */
     public void createCategoryModel() {
         categoryModel = new CartesianChartModel();
         ChartSeries dishesCount = new ChartSeries();
@@ -164,7 +184,7 @@ class AnalyticsBean implements Serializable {
         ArrayList<StoredOrders> sOrders = getStoredInfo();
         ArrayList<Dish> dishesDb = db.getDishes();
         if (sOrders.isEmpty() || sOrders == null) {
-            return; 
+            return;
         }
         int numberOfSales = 0;
 
@@ -174,24 +194,36 @@ class AnalyticsBean implements Serializable {
                     numberOfSales += sOrders.get(u).getDishCount();
                 }
             }
-            dishesCount.set(""+dishesDb.get(i).getDishId(), numberOfSales);
+            dishesCount.set("" + dishesDb.get(i).getDishId(), numberOfSales);
             numberOfSales = 0;
         }
         categoryModel.addSeries(dishesCount);
     }
 
+    /**
+     * Reads all the data from the dishes_stored-table from database and places
+     * the data in an ArrayList containing StoredOrders-objects.
+     *
+     * @return An ArrayList of StoredOrders-objects.
+     */
     public ArrayList<StoredOrders> getStoredInfo() {
         String query = "SELECT * FROM dishes_stored";
         return db.getStoredOrders(query);
     }
-    
-    public ArrayList<StoredOrders> getStoredInfo(Date fromDate,Date toDate){
+
+    /**
+     * Reads all the data from the dishes_stored-table from database based on
+     * date, and places the data in an ArrayList containing StoredOrders-objects
+     *
+     * @param fromDate Date
+     * @return An ArrayList of StoredOrders-objects.
+     */
+    public ArrayList<StoredOrders> getStoredInfo(Date fromDate, Date toDate) {
         java.sql.Date fromDateSql = new java.sql.Date(fromDate.getTime());
         java.sql.Date toDateSql = new java.sql.Date(toDate.getTime());
         String query = "SELECT * FROM dishes_stored WHERE dates <='" + toDateSql.toString() + "' and dates>='" + fromDateSql.toString() + "'";
-        return db.getStoredOrders(query); 
+        return db.getStoredOrders(query);
     }
-    
 
     public ArrayList<StoredOrders> getStoredInfo(Date fromDate) {
         java.sql.Date fromDateSql = new java.sql.Date(fromDate.getTime());
@@ -199,6 +231,9 @@ class AnalyticsBean implements Serializable {
         return db.getStoredOrders(query);
     }
 
+    /**
+     * Updates all the charts.
+     */
     public void update() {
         createLinearModel();
         createCategoryModel();
@@ -206,10 +241,14 @@ class AnalyticsBean implements Serializable {
         createCategoryModelSales();
     }
 
+    /**
+     * Creates a linear chart showing the monthly turnover this year. Includes
+     * the possibility of comparing to previous year.
+     */
     public void createLinearModel() {
         turnoverNow = 0;
         turnoverLastYear = 0;
-        ArrayList<StoredOrders> orders = getStoredInfo(this.fromDate,this.toDate);
+        ArrayList<StoredOrders> orders = getStoredInfo(this.fromDate, this.toDate);
         linearModel = new CartesianChartModel();
         LineChartSeries series1 = new LineChartSeries();
         series1.setLabel("Turnover this year");
@@ -266,6 +305,15 @@ class AnalyticsBean implements Serializable {
 
     }
 
+    /**
+     * Calculates the turnover in given month. Used for displaying the linear
+     * chart showing monthly turnover.
+     *
+     * @param month Month to calculate turnover from
+     * @param series Type of chart
+     * @param orders ArrayList containing Order-objects in a period.
+     * @param now
+     */
     private void calculateMonthlyTurnover(int month, LineChartSeries series, ArrayList<StoredOrders> orders, boolean now) {
         Calendar calendar = Calendar.getInstance();
         int turnover = 0;

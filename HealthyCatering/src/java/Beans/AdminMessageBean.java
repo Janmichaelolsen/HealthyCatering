@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Beans;
 
 import java.io.Serializable;
@@ -17,7 +14,8 @@ import org.primefaces.event.CellEditEvent;
 
 /**
  *
- * @author Frode
+ * Backing bean for admin page handling messages, 
+ * which will be available for every employee.
  */
 @SessionScoped
 @Named("AdminStart")
@@ -25,8 +23,11 @@ public class AdminMessageBean implements Serializable {
 
     private AdminMessages messages = new AdminMessages();
     private List<MessageStatus> tabledata = Collections.synchronizedList(new ArrayList<MessageStatus>());
-    private AdminMessage tempMessage = new AdminMessage();
-
+    private AdminMessage tempMessage = new AdminMessage();// temporary storage for the new AdminMessage
+    /**
+     * The AdminMessage-objects from the ArrayList-object in AdminMessages
+     * are copied to a List, which is used for actual displaying of the messages.
+     */
     public AdminMessageBean() {
         if (messages.getList() != null) {
             for (int i = 0; i < messages.getList().size(); i++) {
@@ -66,7 +67,11 @@ public class AdminMessageBean implements Serializable {
     public synchronized void setMessage(String message) {
         tempMessage.setMessage(message);
     }
-
+    /**
+     * Adds a new message to the List-object
+     * if the message was successfully added in 
+     * the logic(ArrayList and Database).
+     */
     public synchronized void add() {
         AdminMessage newMessage = new AdminMessage(tempMessage.getMessage());
         if (messages.regMessage(newMessage)) {
@@ -74,6 +79,12 @@ public class AdminMessageBean implements Serializable {
             tempMessage.reset();
         }
     }
+     /**
+     * Deletes a message from the List-object
+     * if the given message is selected(boolean checkbox), 
+     * and if it was successfully deleted from 
+     * the logic(ArrayList and Database).
+     */
 
     public synchronized void delete() {
         int index = tabledata.size() - 1;
@@ -85,7 +96,12 @@ public class AdminMessageBean implements Serializable {
             index--;
         }
     }
-
+   /**
+     * Changes data about the selected AdminMessage in the list, 
+     * if the message in successfully changed
+     * in logic(ArrayList and database).
+     * Used in onCellEdit()
+     */
     private synchronized void change() {
         int index = tabledata.size() - 1;
         while (index >= 0) {
@@ -94,7 +110,11 @@ public class AdminMessageBean implements Serializable {
             index--;
         }
     }
-
+     /**
+     * Makes the datatable editable,
+     * and saves the canges in logic(ArrayList and database).
+     * @param event Event which holds the changed values.
+     */
     public void onCellEdit(CellEditEvent event) {
         Object oldValue = event.getOldValue();
         Object newValue = event.getNewValue();

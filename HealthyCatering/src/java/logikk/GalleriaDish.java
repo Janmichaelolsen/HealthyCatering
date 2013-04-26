@@ -1,10 +1,18 @@
 package logikk;
-
+/**
+ * 
+ * Class for visual presentation of a dish.
+ */
 public class GalleriaDish {
     public String name;
     public String description;
     public String picpath;
-
+    /**
+     * 
+     * @param name Name of dish
+     * @param desc Description of dish
+     * @param picpath Image path
+     */
     public GalleriaDish(String name, String desc, String picpath){
         this.name=name;
         this.description=desc;

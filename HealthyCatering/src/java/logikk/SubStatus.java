@@ -1,5 +1,14 @@
+
 package logikk;
 
+/**
+ *
+ * Status-class for SubscriptionPlan, which is used
+ * in a synchronized list displayed in salesmanSubscriptions-page.
+ * Used for greater seperation between business logic and view.
+ * Holds a member variable for determining wether
+ * this SubscriptionPlan-object is selected to be removed from list.
+ */
 public class SubStatus {
     private SubscriptionPlan SubscriptionPlan;
     private boolean delete;

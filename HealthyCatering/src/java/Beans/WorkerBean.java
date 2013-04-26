@@ -16,7 +16,7 @@ import logikk.PendingOrders;
 
 /**
  *
- * @author Rino
+ * Backing bean for chefOrder-page. Includes operations for order-management.
  */
 @SessionScoped
 @Named("Worker")
@@ -33,6 +33,11 @@ public class WorkerBean implements Serializable {
         return !(tabledata.size() > 0);
     }
 
+    /**
+     * Updates the List-object by reading from the database. Calls
+     * getFirstOrdersChef() from PendingOrders-class.
+     *
+     */
     public synchronized void update() {
         ArrayList<Order> temp = overView.getFirstOrdersChef();
         if (tabledata.size() < temp.size()) {
@@ -44,6 +49,13 @@ public class WorkerBean implements Serializable {
         }
     }
 
+    /**
+     * Sorts the orders by date.
+     *
+     * @param low
+     * @param high
+     * @param table
+     */
     private void quickSortDate(int low, int high) {
         int i = low;
         int j = high;
@@ -69,15 +81,26 @@ public class WorkerBean implements Serializable {
         }
     }
 
+    /**
+     * Two orders switch places in the List.
+     *
+     * @param i index of order
+     * @param j index of order
+     * @param table List of OrderStatus-objects.
+     */
     private void exchange(int i, int j) {
         OrderStatus temp = tabledata.get(i);
         tabledata.set(i, tabledata.get(j));
         tabledata.set(j, temp);
     }
 
+    /**
+     * Loops through the list-objects, changing the status of orders set to
+     * changed and saving the changes in datbase.
+     */
     public void statusChanged() {
         for (int i = 0; i < tabledata.size(); i++) {
-            if(tabledata.get(i).getOrder().getChanged()){
+            if (tabledata.get(i).getOrder().getChanged()) {
                 overView.updateDb(tabledata.get(i).getOrder());
                 tabledata.get(i).getOrder().setChanged();
             }

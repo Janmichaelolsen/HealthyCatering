@@ -14,6 +14,10 @@ import javax.inject.Named;
 import logikk.Order;
 import logikk.SubscriptionPlan;
 
+/**
+ * 
+ * Backing bean for subscriptionplan-page in orders.
+ */
 @Named(value = "subBean")
 @SessionScoped
 public class SubscribeBean implements Serializable {
@@ -27,14 +31,20 @@ public class SubscribeBean implements Serializable {
             new Time(10, 10, 0), new Time(10, 10, 0), new Time(10, 10, 0)));
     private Date startdate = new Date();
     private Date enddate = new Date();
-
+/**
+     * Sets the Date-objects to default values.
+     */
     public SubscribeBean() {
         startdate.setHours(10);
         startdate.setMinutes(00);
         enddate.setHours(10);
         enddate.setMinutes(00);
     }
-
+ /**
+     * Creates a SubscriptionPlan-object,
+     * and adds the data in database.
+     * @throws IOException 
+     */
     public void submitPlan() throws IOException {
         for (int i = 0; i < selectedDays.size(); i++) {
             for (int j = 0; j < weekdays_no.size(); j++) {

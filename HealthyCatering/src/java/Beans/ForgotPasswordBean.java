@@ -1,21 +1,26 @@
 package Beans;
 
 import DB.Database;
-import Support.SessionIdentifierGenerator;
 import java.io.Serializable;
 import java.util.Properties;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import Support.SessionIdentifierGenerator;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import logikk.User;
-
+/**
+ * 
+ * Backing bean for the forgotpassword-page,
+ * which allows users to get their new password
+ * sent by e-mail.
+ */
 @SessionScoped
 @ManagedBean(name = "ForgotPassword")
 public class ForgotPasswordBean implements Serializable {
@@ -24,6 +29,11 @@ public class ForgotPasswordBean implements Serializable {
     private String email;
     private Database db = new Database();
 
+    /**
+     * Sends a generated password to
+     * the user's email. 
+     * Given that the user is a customer.
+     */
     public void apply() {
         User user = db.emailExist(email);
         if (user.getEmail() != null) {

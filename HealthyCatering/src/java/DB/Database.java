@@ -18,6 +18,10 @@ import logikk.StoredOrders;
 import logikk.SubscriptionPlan;
 import logikk.User;
 
+/**
+ * Includes all methods with database-management
+ *
+ */
 public class Database {
 
     @Resource(name = "jdbc/hc_realm")
@@ -25,6 +29,10 @@ public class Database {
     private Connection connection;
     private String currentUser;
 
+    /**
+     * Sets the datasource-variable, which will be used in opening connection
+     * with the database
+     */
     public Database() {
         try {
             Context con = new InitialContext();
@@ -34,6 +42,9 @@ public class Database {
         }
     }
 
+    /**
+     * Opens connection to the database via DataSource
+     */
     private void openConnection() {
         try {
             if (ds == null) {
@@ -55,7 +66,13 @@ public class Database {
     }
 
     //FOR ADMINISTRATOR
-    //Changes a dish depending on the given action
+    /**
+     * Changes the current dish's data in the database. Includes changing data,
+     * adding and deleting Dish.
+     *
+     * @param dish The dish to be changed.
+     * @return A variable telling the dish was changed successfully
+     */
     public boolean changeDish(Dish dish, String sql, String action) {
         PreparedStatement statement = null;
         boolean result = false;
@@ -84,7 +101,12 @@ public class Database {
         return result;
     }
 
-    //Returns turnover statistics
+    /**
+     * Reads from the Order-table in database, given the query.
+     *
+     * @param query The query to be executed
+     * @return An ArrayList containing Order-objects
+     */
     public ArrayList<Order> getTurnoverstatistics(String query) {
         ArrayList<Order> orders = new ArrayList();
         ResultSet res = null;
@@ -113,8 +135,13 @@ public class Database {
         closeConnection();
         return orders;
     }
-    //Returns orders that are not finished
 
+    /**
+     * Reads from the order-table in database, given the query.
+     *
+     * @param query The query to be executed
+     * @return An ArrayList containing Order-objects
+     */
     public ArrayList<Order> getPendingOrders(String query) {
         ArrayList<Order> orders = new ArrayList();
         ResultSet res = null;
@@ -147,8 +174,13 @@ public class Database {
         closeConnection();
         return orders;
     }
-    //Updates an order
+    //FOR ADMIN
 
+    /**
+     * Updates the given order
+     *
+     * @param s Order to be updated
+     */
     public void updateOrder(Order s) {
         PreparedStatement sqlGet = null;
         PreparedStatement sqlUpdate = null;
@@ -192,6 +224,11 @@ public class Database {
     }
     //Deletes an order
 
+    /**
+     * Deleted the given order from database.
+     *
+     * @param s Order to be deleted from database.
+     */
     private void deleteOrder(Order s) {
         PreparedStatement ps = null;
         try {
@@ -205,8 +242,12 @@ public class Database {
             Cleaner.closeSentence(ps);
         }
     }
-    //Deletes an ordered dish
 
+    /**
+     * Deletes an order from the dishes_ordered table in database.
+     *
+     * @param s Order to be deleted from table.
+     */
     private void deleteFromDishesOrdered(Order s) {
         PreparedStatement ps = null;
         try {
@@ -221,6 +262,11 @@ public class Database {
     }
     //Archives finished orders
 
+    /**
+     * Adds a finished order in dishes_stored-table in database.
+     *
+     * @param s StoredOrder-object to be stored.
+     */
     private void insertDishesOrdered(StoredOrders s) {
         PreparedStatement ps = null;
         try {
@@ -242,6 +288,11 @@ public class Database {
     }
     //Returns an Arraylist of all orders
 
+    /**
+     * Method which reads all the orders from the database
+     *
+     * @return A list with the current orders in the database
+     */
     public ArrayList<Order> getOrderOverview() {
         ArrayList<Order> orders = new ArrayList();
         PreparedStatement sqlRead = null;
@@ -274,6 +325,13 @@ public class Database {
     }
     //Removes expired subscriptions
 
+    /**
+     * Deletes subscriptions in database which have expired(date). Deletes first
+     * data in dishes_ordered, secondly orders and finally in the subscription
+     * table
+     *
+     * @return A list with the deleted subscriptions
+     */
     public int removeExpiredSubs() {
         int result = 0;
         ArrayList<Integer> subremove = new ArrayList<Integer>();
@@ -308,6 +366,10 @@ public class Database {
     }
     //Checks if any subscriptions begin today and adds them to the database
 
+    /**
+     * Method which checks if the subscriptions have a delivery this day If so,
+     * orders will be placed in the database
+     */
     public int checkSubscription() {
         PreparedStatement statement = null;
         PreparedStatement statement2 = null;
@@ -389,6 +451,12 @@ public class Database {
 
     //FOR CUSTOMER
     //Changes user password
+    /**
+     * Changes the password to the user
+     *
+     * @param user The current user logged in
+     * @return A value telling if the password changed successfully
+     */
     public boolean changePassword(User user) {
         PreparedStatement sqlLogIn = null;
         openConnection();
@@ -414,6 +482,12 @@ public class Database {
     }
 
     //Registers a new user
+    /**
+     * Adds a new user to the database. Sets the proper role to the new user.
+     *
+     * @param user User to be added
+     * @return A string containing which role the new user is given
+     */
     public String newUser(User user) {
         PreparedStatement sqlRegNewuser = null;
         PreparedStatement sqlRegNewRole = null;
@@ -454,6 +528,11 @@ public class Database {
     }
 
     //Returns how many salesmen there are
+    /**
+     * Counts the number of salesmen
+     *
+     * @return The number of salesmen
+     */
     public int getNumberOfSalesmen() {
         int result = 0;
         PreparedStatement statement = null;
@@ -475,6 +554,12 @@ public class Database {
     }
 
     //Returns archived orders
+    /**
+     * Reads the orders finished orders from database.
+     *
+     * @param query The query to be executed
+     * @return
+     */
     public ArrayList<StoredOrders> getStoredOrders(String query) {
         ArrayList<StoredOrders> result = new ArrayList();
         PreparedStatement statement = null;
@@ -506,6 +591,11 @@ public class Database {
         return result;
     }
 
+    /**
+     *
+     * @param query The query to be executed
+     * @return
+     */
     public ArrayList<Order> getTrackOrder() {
         ArrayList<Order> result = new ArrayList<Order>();
         PreparedStatement sentence = null;
@@ -534,6 +624,11 @@ public class Database {
         return result;
     }
 
+    /**
+     * Reads the subscriptions stored in the database
+     *
+     * @return A list of subscriptions
+     */
     public ArrayList<Order> getTrackSub() {
         ArrayList<Order> result = new ArrayList<Order>();
         PreparedStatement sentence = null;
@@ -573,7 +668,11 @@ public class Database {
         return result;
     }
 
-    //Returns all ordered dishes
+    /**
+     * Reads all the dishes the customers has ordered
+     *
+     * @return A list of dishes
+     */
     public ArrayList<Dish> getDishesOrdered() {
         PreparedStatement sentence = null;
         openConnection();
@@ -600,6 +699,11 @@ public class Database {
     }
 
     //Returns all dishes
+    /**
+     * Reads all the dishes stored in the database.
+     *
+     * @return An ArrayList of Dish-objects.
+     */
     public ArrayList<Dish> getDishes() {
         PreparedStatement sentence = null;
         openConnection();
@@ -630,6 +734,12 @@ public class Database {
     }
     //Places an order
 
+    /**
+     * Places an order in the database.
+     *
+     * @param order Order to be registered
+     * @return A boolean telling wether the order was stored successfully.
+     */
     public boolean order(Order order) {
         PreparedStatement statement = null;
         PreparedStatement statement2 = null;
@@ -691,6 +801,12 @@ public class Database {
     }
     //Returns the id of a dish
 
+    /**
+     * Method which returns the ID of a dish given the name.
+     *
+     * @param dishname Name of dish.
+     * @return ID of dish.
+     */
     public int getDishId(String dishname) {
         PreparedStatement statement = null;
         int result = 0;
@@ -714,6 +830,13 @@ public class Database {
     }
 
     //Place a subscription
+    /**
+     * Placed a subscription plan in the database. Places orders as well.
+     *
+     * @param plan Subscription to be added.
+     * @param order Order to be added.
+     * @return Variable telling if the subscription was placed.
+     */
     public boolean subscription(SubscriptionPlan plan, Order order) {
         PreparedStatement statement = null;
         PreparedStatement statement2 = null;
@@ -763,6 +886,12 @@ public class Database {
     }
     //Returns if a user exists
 
+    /**
+     * Checks if the user exist in database based on username.
+     *
+     * @param username Username
+     * @return A value telling if the user exist.
+     */
     public boolean userExist(String username) {
         PreparedStatement sqlLogIn = null;
         openConnection();
@@ -784,6 +913,12 @@ public class Database {
     }
     //Returns user information
 
+    /**
+     *
+     * Returns the current user.
+     *
+     * @return A User-object.
+     */
     public User getUser() {
         PreparedStatement statement = null;
         openConnection();
@@ -830,6 +965,12 @@ public class Database {
     }
     //Changes user information
 
+    /**
+     * Changes the current user's data in the database
+     *
+     * @param user The user
+     * @return A value telling if the changes was successful
+     */
     public boolean changeData(User user) {
         PreparedStatement sqlUpdProfile = null;
         currentUser = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
@@ -856,6 +997,14 @@ public class Database {
         return ok;
     }
     //Changes a message depending on the given action
+
+    /**
+     * Changes the give message in database. Includes action for changing data,
+     * adding and deleting message.
+     *
+     * @param message The message.
+     * @return A value telling if the message was changed
+     */
     public boolean changeMessage(AdminMessage message, String sql, String action) {
         boolean result = false;
         PreparedStatement sentence = null;
@@ -883,6 +1032,12 @@ public class Database {
         return result;
     }
     //Returns all messages
+
+    /**
+     * Reads the messages stored in the database
+     *
+     * @return A list of messages
+     */
     public ArrayList<AdminMessage> getMessages() {
         PreparedStatement sentence = null;
         openConnection();
@@ -906,6 +1061,11 @@ public class Database {
     }
 
     //COMMUNAL
+    /**
+     * Finds the role of the current user.
+     *
+     * @return A variable with name of role.
+     */
     public String getRole() {
         PreparedStatement statement = null;
         openConnection();
@@ -929,6 +1089,12 @@ public class Database {
         return role;
     }
 
+    /**
+     * Checks if the email exist in database.
+     *
+     * @param username Email.
+     * @return A value telling if the email is in database.
+     */
     public User emailExist(String inputEmail) {
         PreparedStatement sqlLogIn = null;
         openConnection();
@@ -958,6 +1124,12 @@ public class Database {
         return newUser;
     }
     //Returns all subscriptions
+
+    /**
+     * Reads the subscriptions stored in the database
+     *
+     * @return A list of subscriptions
+     */
     public ArrayList<SubscriptionPlan> getSubscriptions() {
         PreparedStatement sentence = null;
         openConnection();
@@ -985,6 +1157,13 @@ public class Database {
 
     }
     //Deletes subscriptions
+
+    /**
+     * Deletes the given subscription from the database
+     *
+     * @param sub The subscription to be deleted
+     * @return A value telling if the subscription was successfully deleted
+     */
     public boolean deleteSubscription(SubscriptionPlan sub) {
         boolean ok = false;
         PreparedStatement sentence = null;

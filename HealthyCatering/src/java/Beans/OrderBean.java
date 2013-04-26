@@ -17,7 +17,7 @@ import logikk.User;
 
 /**
  *
- * @author Michael
+ * Backing bean for order-page. Includes operations like confirming order.
  */
 @Named(value = "orderBean")
 @SessionScoped
@@ -35,12 +35,21 @@ public class OrderBean implements Serializable {
     private double total_price;
     private Order savedOrder;
 
+    /**
+     * Finds the total price of the order, as well as setting the delivery date.
+     */
     public OrderBean() {
         MenuItems menuitems = getMenuItems();
         total_price = menuitems.getTotal_price();
-        deliverydate.setHours(deliverydate.getHours()+1);
+        deliverydate.setHours(deliverydate.getHours() + 1);
     }
 
+    /**
+     * Confirming the order by adding order in the database, and redirecting the
+     * user to a new page. Uses order(Order) from Database-class.
+     *
+     * @throws IOException
+     */
     public void confirmOrder() throws IOException {
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correct", "Correct");
         FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -62,10 +71,15 @@ public class OrderBean implements Serializable {
         } else {
             msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Error, try again later.", "Error, try again later.");
             FacesContext.getCurrentInstance().addMessage(null, msg);
-            ec.redirect(ec.getRequestContextPath()+ "/faces/protected/orders/order.xhtml");
+            ec.redirect(ec.getRequestContextPath() + "/faces/protected/orders/order.xhtml");
         }
     }
 
+    /**
+     * Redirects the user to the subscription-page.
+     *
+     * @throws IOException
+     */
     public void subscribe() throws IOException {
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         savedOrder = new Order(deliverydate, user.getAddress(), 7, dishes, description, user.getPostnumber(), total_price);
@@ -82,7 +96,7 @@ public class OrderBean implements Serializable {
         TimeZone tz = TimeZone.getDefault();
         return tz;
     }
-    
+
     public MenuItems getMenuItems() {
         FacesContext context = FacesContext.getCurrentInstance();
         MenuItems menuitems = (MenuItems) context.getApplication().evaluateExpressionGet(context, "#{menuitems}", MenuItems.class);
@@ -114,7 +128,7 @@ public class OrderBean implements Serializable {
     }
 
     public User getUser() {
-        if(db.getRole().equals("customer")){
+        if (db.getRole().equals("customer")) {
             return user;
         }
         return blankuser;

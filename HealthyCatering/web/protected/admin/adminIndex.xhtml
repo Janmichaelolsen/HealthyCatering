@@ -4,7 +4,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-    <ui:composition template ="../../serviceTemplate.xhtml">
+    <ui:composition template ="../../serviceTemplate.xhtml"> 
         <ui:define name ="content">
             <p:tabView dynamic="true" activeIndex="#{AdminIndex.tabIndex}">
                 <p:ajax event="tabChange" listener="#{AdminIndex.onTabChange}" />

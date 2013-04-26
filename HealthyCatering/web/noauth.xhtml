@@ -7,7 +7,7 @@
         <title>Healthy Catering</title>
         <ui:composition template="userTemplate.xhtml">
             <ui:define name="content">
-                <div id="login" class="login">
+                <div id="login" class="login"> 
                     <h:form id="login1" onsubmit="document.getElementById('login1').action = 'j_security_check';" prependId="false" rendered="#{!Frontpage.isLoggedIn()}">
                         <p><p:outputLabel value="#{lang_auth.Username}" style="color: white;"/></p>
                         <p><p:inputText id="j_username"/></p>

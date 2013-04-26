@@ -1,5 +1,13 @@
-package logikk;
 
+package logikk;
+/**
+ *
+ * Status-class for Order, which is used
+ * in a synchronized list displayed in AdminOrder-page.
+ * Used for greater seperation between business logic and view.
+ * Holds a member variable for determining wether
+ * this Order-object is selected to be removed from list.
+ */
 public class OrderStatus{
     
     private Order order;

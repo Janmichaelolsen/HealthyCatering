@@ -5,8 +5,9 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
 
-    <h:form id="subs" >
-        <p:dataTable value ="#{salesSub.tabledata}" var ="list" styleClass ="dishes"  id="subTable" widgetVar="sublist" >
+    <h:form id="subs" > 
+        <p:dataTable value ="#{salesSub.tabledata}" var ="list" styleClass ="dishes"  id="subTable" widgetVar="sublist"
+                     emptyMessage="#{lang_auth.Nosub}">
             <p:column id="company" style="width:50%" 
                       headerText ="#{lang_auth.Company}">
                 <h:outputText value ="#{list.subscriptionPlan.companyusername}"/>

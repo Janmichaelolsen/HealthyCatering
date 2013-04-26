@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Beans;
 
 import java.io.Serializable;
@@ -15,7 +12,9 @@ import logikk.MessageStatus;
 
 /**
  *
- * @author Frode
+ * Backing bean for Messages-page, 
+ * displaying the recent
+ * messages from admin.
  */
 @SessionScoped
 @Named("WorkerMessage")
@@ -23,7 +22,11 @@ public class WorkerMessageBean implements Serializable {
 
     private AdminMessages messages = new AdminMessages();
     private List<MessageStatus> tabledata = Collections.synchronizedList(new ArrayList<MessageStatus>());
-
+    
+    /**
+     * The AdminMessage-objects from the ArrayList-object in AdminMessages
+     * are copied to a List, which is used for actual displaying of the messages.
+     */
     public WorkerMessageBean() {
         if (messages.getList() != null) {
             for (int i = 0; i < messages.getList().size(); i++) {

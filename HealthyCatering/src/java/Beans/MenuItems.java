@@ -11,8 +11,9 @@ import javax.inject.Named;
 import logikk.Dish; 
 
 /**
- *
- * @author Michael
+ *Backing bean used to display menu
+ * and placing order.
+ * 
  */
 @Named("menuitems")
 @SessionScoped
@@ -25,10 +26,18 @@ public class MenuItems implements Serializable {
     private Dish selectedDish;
     private double total_price;
 
+    /**
+     * Calling updateList()
+     */
     public MenuItems(){
         updateList(); 
     }
-    
+    /**
+     * Reads from the Dish-table in database, 
+     * returning an ArrayList of Dish-objects.
+     * Uses getDishes() from Database-class.
+     * @return An ArrayList containing Dish-objects.
+     */
     public ArrayList<Dish> fillTable() {
         try {
             return db.getDishes();
@@ -45,12 +54,22 @@ public class MenuItems implements Serializable {
     public void setSelectedDish(Dish dish) {
         this.selectedDish = dish;
     }
+    /**
+     * Updates the ArrayList-object
+     * by setting the image path.
+     */
     public void updateList(){
         FacesContext fc = FacesContext.getCurrentInstance();
         for(int i = 0; i < items.size(); i++){
             items.get(i).setImagePath("/faces/" + items.get(i).getImagePath());
         }
     }
+    /**
+     * Adds a dish to the 
+     * ArrayList representing the order.
+     * Given that the dish isn't
+     * already placed in order.
+     */
     public void addDish() {
         boolean newdish = true;
         for (int i = 0; i < orderList.size(); i++) {
@@ -65,7 +84,11 @@ public class MenuItems implements Serializable {
             orderList.add(newDish);
         }
     }
-
+    /**
+     * Removes the Dish from the ArrayList
+     * representing the order.
+     * @param dish Dish to be removed
+     */
     public void removeDish(Dish dish) {
         orderList.remove(dish);
     }
@@ -85,7 +108,11 @@ public class MenuItems implements Serializable {
     public void setCount(int count) {
         this.count = count;
     }
-
+    /**
+     * Calculates the total price
+     * of the order.
+     * @return The total price.
+     */
     public double getTotal_price() {
         total_price = 0.0;
         for (int i = 0; i < orderList.size(); i++) {
@@ -97,14 +124,22 @@ public class MenuItems implements Serializable {
     public void setTotal_price(double total_price) {
         this.total_price = total_price;
     }
-
+    /**
+     * Redirects the user to the order-page.
+     * Given that the user is either a customer
+     * or salesman.
+     * @throws IOException 
+     */
     public void order() throws IOException {
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         if (db.getRole().equals("customer") || db.getRole().equals("salesman")) {
             ec.redirect(ec.getRequestContextPath()+ "/faces/protected/orders/order.xhtml");
         }
     }
-
+     /**
+     * Tells if this user is logged in.
+     * @return A value telling if the user is logged in.
+     */
     public boolean isLoggedIn() {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         if (externalContext.getRemoteUser() != null) {
@@ -112,7 +147,7 @@ public class MenuItems implements Serializable {
         }
         return false;
     }
-    public boolean selectedIsEmpty(){
+     public boolean selectedIsEmpty(){
         return orderList.isEmpty();
     }
 }
