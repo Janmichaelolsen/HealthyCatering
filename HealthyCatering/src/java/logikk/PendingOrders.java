@@ -4,10 +4,6 @@ import DB.Database;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- *
- * @author Rino
- */
 public class PendingOrders {
 
     private Database database = new Database();

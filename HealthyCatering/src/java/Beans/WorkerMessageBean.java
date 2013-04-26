@@ -10,10 +10,8 @@ import java.util.Collections;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import logikk.AdminMessage;
 import logikk.AdminMessages;
 import logikk.MessageStatus;
-import org.primefaces.event.CellEditEvent;
 
 /**
  *

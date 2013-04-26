@@ -5,19 +5,16 @@
 package Beans;
 
 import DB.Database;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
-import logikk.Order;
-import logikk.OrderStatus;
-import logikk.PendingOrders;
-import java.io.Serializable;
-import java.sql.SQLException;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import logikk.SubscriptionPlan;
+import javax.inject.Named;
+import logikk.OrderStatus;
+import logikk.PendingOrders;
 
 /**
  *

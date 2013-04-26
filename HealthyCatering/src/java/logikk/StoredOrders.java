@@ -1,15 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package logikk;
 
 import java.util.Date;
 
-/**
- *
- * @author Rino
- */
 public class StoredOrders {
     private int dishId;
     private int orderId;

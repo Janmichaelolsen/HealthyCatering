@@ -1,16 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package logikk;
 
 import DB.Database;
 import java.util.ArrayList;
 
-/**
- *
- * @author Frode
- */
 public class AdminMessages {
     ArrayList<AdminMessage> list;
     Database database = new Database();

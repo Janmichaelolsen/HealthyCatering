@@ -1,13 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package logikk;
 
-/**
- *
- * @author Rino
- */
 public enum Status {
 
     PENDING(1, "The order is waiting to be made"),

@@ -1,15 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package logikk;
 
 import java.io.Serializable;
 
-/**
- *
- * @author Frode
- */
 public class DishStatus implements Serializable {
     private Dish dish;
     private boolean delete;

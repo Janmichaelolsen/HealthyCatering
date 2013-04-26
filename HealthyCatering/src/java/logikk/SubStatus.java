@@ -1,13 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package logikk;
 
-/**
- *
- * @author Frode
- */
 public class SubStatus {
     private SubscriptionPlan SubscriptionPlan;
     private boolean delete;

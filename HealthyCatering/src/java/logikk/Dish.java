@@ -1,9 +1,5 @@
 package logikk;
 
-/**
- *
- * @author Rino
- */
 public class Dish {
 
     private int dishId;

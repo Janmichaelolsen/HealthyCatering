@@ -3,7 +3,6 @@ package logikk;
  * Class for generating orders from customerinput.
  */
 
-import DB.Database;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
