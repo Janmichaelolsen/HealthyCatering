@@ -13,7 +13,7 @@ and open the template in the editor.
             <p:fieldset legend="#{lang_auth.Register}"> 
                 <p:panelGrid id="grid" columns="3" >
                     <f:facet name="header">
-                        Please fill in the required information  
+                        #{lang_auth.information}
                     </f:facet> 
                     <p:outputLabel value="#{lang_auth.Username}" />
                     <p:inputText  id="username" value="#{Register.user.username}" validator="#{Register.validateUsername}" required="true" requiredMessage="#{lang_auth.CannotBeBlank}"/>

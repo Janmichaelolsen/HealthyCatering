@@ -16,7 +16,7 @@ public class OrderStatus{
     
     public OrderStatus(){   
         order = new Order();
-        toBeChanged=false;
+        toBeChanged = false;
         toBeDeleted = false;
     }
     public OrderStatus(Order order){

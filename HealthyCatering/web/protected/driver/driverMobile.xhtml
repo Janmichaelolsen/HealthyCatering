@@ -11,7 +11,7 @@ and open the template in the editor.
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:p="http://primefaces.org/ui"
         xmlns:pm="http://primefaces.org/mobile">
-    <pm:page title="driverMobile">
+    <pm:page title="Healthy Catering">
         <pm:view id="main">
             <pm:header title="Order overview">
                 <f:facet name="left">
@@ -30,8 +30,10 @@ and open the template in the editor.
                                     <p:column style="width:40%">
                                         <p><p:outputLabel value="#{List.order.orderId}"/></p>
                                         <p><p:outputLabel value="#{List.order.deliveryAddress}"/></p>
+                                        <p><p:outputLabel value="#{List.order.postalcode}"/></p>
                                         <p><p:outputLabel value="#{List.order.timeOfDelivery}"/></p>
                                         <p><p:outputLabel value="#{List.order.description}"/></p>
+                                        <p><p:outputLabel value="#{lang_auth.Price} #{List.order.totalprice}"/></p>
                                     </p:column>
                                     <p:column>
                                         <h:selectOneMenu  value="#{List.order.status}">
