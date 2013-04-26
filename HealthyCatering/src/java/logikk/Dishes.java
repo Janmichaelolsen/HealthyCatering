@@ -15,7 +15,7 @@ public class Dishes {
         return list;
     }
     public boolean regDish(Dish dish){
-        String sql = "insert into dish(dishname,dishprice) values(?, ?)";
+        String sql = "insert into dish(dishname,dishprice, dishImagePath) values(?, ?, ?)";
         if(dish !=null){
             if(database.changeDish(dish, sql, "reg")){
                 list.add(dish);

@@ -10,7 +10,7 @@
 
         <p:contextMenu for="dishTable" widgetVar="cMenu">     
             <p:menuitem value="Edit Cell" icon="ui-icon-search" onclick="dishlist.showCellEditor();
-                    return false;"/>    
+                return false;"/>    
             <p:menuitem value="Hide Menu" icon="ui-icon-close" onclick="cMenu.hide()"/>    
         </p:contextMenu>
 
@@ -65,11 +65,19 @@
             <h:outputText value="#{lang_auth.Price}"/>
             <p/>
             <p:inputText value ="#{Dish.price}" />  
-            <p:commandButton id="addButton" value="#{lang_auth.AddMessage}" update="dish:dishTable" action ="#{Dish.add()}" ajax="false"
+            <h:outputText value="#{lang_auth.Upload}"></h:outputText>
+            <h:form enctype="multipart/form-data">
+                <p:fileUpload fileUploadListener="#{fileUploadController.upload}"  
+                              mode="simple"   
+                              sizeLimit="100000"   
+                              allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>  
+            </h:form>
+
+            <p:commandButton id="addButton" value="#{lang_auth.AddDish}" update="dish:dishTable" action ="#{Dish.add()}" ajax="false"
                              onclick="dlg1.hide()"/>
         </p:dialog>
 
-        <p:commandButton value="#{lang_auth.AddDish}"  onclick="dlg1.show()" />
+        <p:commandButton value="#{lang_auth.AddDish}" onclick="dlg1.show()" />
 
     </h:form>
 

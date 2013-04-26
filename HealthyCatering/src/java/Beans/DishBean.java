@@ -25,6 +25,7 @@ public class DishBean implements Serializable {
 
     private Dishes dishes = new Dishes();
     private List<DishStatus> tabledata = Collections.synchronizedList(new ArrayList<DishStatus>());
+    private String picpath = "";
     private Dish tempDish = new Dish(); // midlertidig lager for ny transaksjon
 
     public DishBean() {
@@ -89,6 +90,7 @@ public class DishBean implements Serializable {
 
     public synchronized void add() {
         Dish newDish = new Dish(tempDish.getDishId(), tempDish.getDishName(), tempDish.getPrice());
+        newDish.setImagePath(picpath);
         if (dishes.regDish(newDish)) {
             tabledata.add(new DishStatus(newDish));
             tempDish.reset();
@@ -123,4 +125,13 @@ public class DishBean implements Serializable {
             change();
         }
     }
+
+    public String getPicpath() {
+        return picpath;
+    }
+
+    public void setPicpath(String picpath) {
+        this.picpath = picpath;
+    }
+     
 }

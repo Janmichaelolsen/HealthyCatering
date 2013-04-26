@@ -71,6 +71,7 @@ public class Database {
             } else if (action.equals("reg")) {
                 statement.setString(1, dish.getDishName());
                 statement.setDouble(2, dish.getPrice());
+                statement.setString(3, dish.getImagePath());
             }
             result = true;
             statement.executeUpdate();
