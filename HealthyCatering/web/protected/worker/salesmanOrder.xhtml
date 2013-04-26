@@ -9,7 +9,7 @@
         <p:ajax event="tabChange" listener="#{Sales.onTabChange}" /> 
         <p:tab id="tab1" title="All orders">  
             <h:panelGrid columns="2" cellpadding="10"> 
-                <h:form >
+                <h:form > 
                     #{Sales.update()}
                     <p:dataTable value="#{Sales.tabledata}" var="OrderStatus" styleClass="orders" id="dataTable_id">    
                         <p:column>

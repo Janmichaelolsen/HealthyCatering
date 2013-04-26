@@ -16,6 +16,10 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import logikk.User;
 
+/**
+ * Backing bean for registering a new user.
+ *
+ */
 @SessionScoped
 @ManagedBean(name = "Register")
 public class RegistrationBean implements Serializable {
@@ -23,6 +27,14 @@ public class RegistrationBean implements Serializable {
     private User user = new User();
     private Database db = new Database();
 
+    /**
+     * Checks if the username is valid. Have to consist of minimum 5 characters,
+     * no special characters and can't already exist in database.
+     *
+     * @param context
+     * @param component
+     * @param value
+     */
     public void validateUsername(FacesContext context, UIComponent component, Object value) {
         String message = "";
         String username = (String) value;
@@ -43,6 +55,14 @@ public class RegistrationBean implements Serializable {
         }
     }
 
+    /**
+     * Checks if the email typed is valid. If not, appropiate response will be
+     * displayed.
+     *
+     * @param context
+     * @param component
+     * @param value
+     */
     public void validateEmail(FacesContext context, UIComponent component, Object value) {
         String message = "";
         try {
@@ -61,6 +81,11 @@ public class RegistrationBean implements Serializable {
         return user;
     }
 
+    /**
+     * Creates a new user, and stores the data in the database.
+     *
+     * @throws IOException
+     */
     public void apply() throws IOException {
         String role = db.newUser(user);
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();

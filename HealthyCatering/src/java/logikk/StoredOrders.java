@@ -1,7 +1,19 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package logikk;
 
 import java.util.Date;
 
+/**
+ * 
+ * Class for stored order,
+ * consists of similiar attributes 
+ * as in the database.
+ * Used to save finished orders.
+ * 
+ */
 public class StoredOrders {
     private int dishId;
     private int orderId;
@@ -9,7 +21,18 @@ public class StoredOrders {
     private double totalPrice;
     private Date date;
     private int postalcode;
-    private String salesmanUsername =""; 
+    private String salesmanUsername ="";
+    
+    /**
+     * Sets value to given attributes
+     * @param dishId ID of dish ordered
+     * @param orderId ID of order
+     * @param dishCount Number of dishes ordered
+     * @param totalPrice Total price
+     * @param postalCode Postal code
+     * @param date Date
+     * @param salesmanUsername Username of the salesman
+     */
     
     public StoredOrders(int dishId,int orderId,int dishCount,int totalPrice,int postalCode,Date date, String salesmanUsername){
         this.date = date;
@@ -20,6 +43,9 @@ public class StoredOrders {
         this.salesmanUsername = salesmanUsername; 
         this.postalcode = postalCode; 
     }
+    /**
+     * Standard constructor.
+     */
     public StoredOrders() {
         
     }

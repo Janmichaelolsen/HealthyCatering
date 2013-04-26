@@ -1,22 +1,34 @@
+
 package logikk;
 
 import java.io.Serializable;
 
+/**
+ *
+ * Status-class for Dish, which is used
+ * in a synchronized list displayed in Dish-page.
+ * Used for greater seperation between business logic and view.
+ * Holds a member variable for determining wether
+ * this Dish-object is selected to be removed from list.
+ */
 public class DishStatus implements Serializable {
     private Dish dish;
     private boolean delete;
-    private boolean change;
-
+    /**
+     * Sets value to given attribute.
+     * @param dish The dish
+     */
     public DishStatus(Dish dish) {
         this.dish = dish;
         this.delete = false;
-        this.change = false;
     }
-
+    /**
+     * No arguments, 
+     * uses standard constructor.
+     */
     public DishStatus() {
         this.dish = new Dish();
         this.delete = false;
-        this.change = false;
     }
 
     public Dish getDish() {
@@ -24,13 +36,6 @@ public class DishStatus implements Serializable {
     }
     public synchronized boolean getDelete(){
         return delete;
-    }
-    public synchronized boolean getChange(){
-        return change;
-    }
-
-    public void setChange(boolean change) {
-        this.change = change;
     }
 
     public void setDelete(boolean delete) {
@@ -40,9 +45,5 @@ public class DishStatus implements Serializable {
     public void setDish(Dish dish) {
         this.dish = dish;
     }
-    public void change(){
-        if(!change){
-            change = true;
-        }
-    }
+   
 }

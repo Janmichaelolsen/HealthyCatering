@@ -1,5 +1,14 @@
+
 package logikk;
 
+/**
+ *
+ * Status-class for AdminMessage, which is used
+ * in a synchronized list displayed in AdminMessage-page.
+ * Used for greater seperation between business logic and view.
+ * Holds a member variable for determining wether
+ * this AdminMessage-object is selected to be removed from list.
+ */
 public class MessageStatus {
     private AdminMessage message ;
     private boolean delete;
@@ -28,7 +37,4 @@ public class MessageStatus {
     public void setMessage(AdminMessage message) {
         this.message = message;
     }
-    
-   
-    
 }

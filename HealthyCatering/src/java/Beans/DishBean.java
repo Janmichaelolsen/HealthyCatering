@@ -1,13 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package Beans;
 
-/**
- *
- * @author Frode
- */
+package Beans;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,15 +10,22 @@ import logikk.Dish;
 import logikk.DishStatus;
 import logikk.Dishes;
 import org.primefaces.event.CellEditEvent;
-
+/**
+ * 
+ * Backing bean for the admin page containing dish-management.
+ * 
+ */
 @Named("Dish")
 @SessionScoped
 public class DishBean implements Serializable {
 
     private Dishes dishes = new Dishes();
     private List<DishStatus> tabledata = Collections.synchronizedList(new ArrayList<DishStatus>());
-    private Dish tempDish = new Dish(); // midlertidig lager for ny transaksjon
-
+    private Dish tempDish = new Dish(); // temporary storage for the new Dish
+    /**
+     * The dish-objects from the ArrayList in Dishes are copied to a List,
+     * which is used for the actual displaying of the dishes.
+     */
     public DishBean() {
         if (dishes.getList() != null) {
             for (int i = 0; i < dishes.getList().size(); i++) {
@@ -86,7 +85,11 @@ public class DishBean implements Serializable {
     public synchronized void setCount(int count) {
         tempDish.setCount(count);
     }
-
+    /**
+     * Adds a new dish in the List-object if 
+     * the dish was added successfully in the ArrayList and database.
+     * 
+     */
     public synchronized void add() {
         Dish newDish = new Dish(tempDish.getDishId(), tempDish.getDishName(), tempDish.getPrice());
         if (dishes.regDish(newDish)) {
@@ -94,7 +97,13 @@ public class DishBean implements Serializable {
             tempDish.reset();
         }
     }
-
+     /**
+     * Deletes a dish from the List-object if 
+     * the dish was deleted successfully 
+     * in the ArrayList and database, 
+     * and if the delete-column is checked at given dish.
+     * The checkbox is represented by the delete-variable in DishStatus.
+     */
     public synchronized void delete() {
         int index = tabledata.size() - 1;
         while (index >= 0) {
@@ -105,20 +114,27 @@ public class DishBean implements Serializable {
             index--;
         }
     }
-    public synchronized void change() {
+    /**
+     * Changes data about the selected Dish in the list, if the dish was successfully changed
+     * in logic(ArrayList and database).
+     * Used in onCellEdit()
+     */
+    private synchronized void change() {
         int index = tabledata.size() - 1;
         while (index >= 0) {
             DishStatus ts = tabledata.get(index);
-          
-            ts.setChange(false);
             dishes.changeData(ts.getDish());
             index--;
         }
     }
+    /**
+     * Makes the datatable editable,
+     * and saves the canges in logic(ArrayList and database).
+     * @param event Event which holds the changed values.
+     */
      public void onCellEdit(CellEditEvent event) {
         Object oldValue = event.getOldValue();
         Object newValue = event.getNewValue();
-
         if (newValue != null && !newValue.equals(oldValue)) {
             change();
         }

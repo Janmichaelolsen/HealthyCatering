@@ -12,7 +12,8 @@ import logikk.PendingOrders;
 
 /**
  *
- * @author Frode
+ * Backing bean for the driver page, which is mobile compatible. The drivers
+ * have a list of orders with the appropiate status.
  */
 @SessionScoped
 @ManagedBean(name = "Driver")
@@ -22,6 +23,12 @@ public class DriverBean implements Serializable {
     private Order tempOrder = new Order();
     private PendingOrders overview = new PendingOrders();
 
+    /**
+     * Copies the data from the database to a List-object which displays the
+     * actual data. Uses getFirstOrdersDrivers() from PendingOrders which reads
+     * the data from database.
+     *
+     */
     public DriverBean() {
         if (overview.getFirstOrdersDrivers() != null) {
             ArrayList<Order> liste = overview.getFirstOrdersDrivers();
@@ -43,6 +50,11 @@ public class DriverBean implements Serializable {
         return tempOrder;
     }
 
+    /**
+     * Changes the status of the order in the database, based on changes in the
+     * List-object.
+     *
+     */
     public void statusChanged() {
         for (int i = 0; i < tabledata.size(); i++) {
             overview.updateDb(tabledata.get(i).getOrder());
@@ -50,6 +62,9 @@ public class DriverBean implements Serializable {
         update();
     }
 
+    /**
+     * Updates the List-object by reading from the database.
+     */
     public synchronized void update() {
         ArrayList<Order> temp = overview.getFirstOrdersDrivers();
         tabledata.clear();

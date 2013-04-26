@@ -1,15 +1,17 @@
 package Language;
 
+/**
+ * Backing bean for changing language.
+ */
 import java.io.Serializable;
 import java.util.Locale;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
-@ManagedBean(name="Lang")
+@ManagedBean(name = "Lang")
 @SessionScoped
-
-public class LangChange implements Serializable{
+public class LangChange implements Serializable {
 
     static FacesContext context = FacesContext.getCurrentInstance();
     static Locale locale = context.getViewRoot().getLocale();
@@ -36,8 +38,8 @@ public class LangChange implements Serializable{
     public void setNo() {
         setLang("no");
     }
-    
-    public boolean isNo(){
+
+    public boolean isNo() {
         return locale.getLanguage().equals("no");
     }
 }

@@ -13,7 +13,11 @@ import javax.faces.context.FacesContext;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import logikk.User;
-
+/**
+ * 
+ * Backing bean for profile-page in customer.
+ * Includes operations for changing user data.
+ */
 @ManagedBean(name = "Profile")
 @SessionScoped
 public class ProfileBean implements Serializable {
@@ -29,7 +33,10 @@ public class ProfileBean implements Serializable {
     public void setChanged(boolean change){
         changed = change;
     }
-    
+    /**
+     * Tells if this user is logged in.
+     * @return A value telling if the user is logged in.
+     */
     public boolean isLoggedIn() {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         if (externalContext.getRemoteUser() != null) {
@@ -37,7 +44,15 @@ public class ProfileBean implements Serializable {
         }
         return false;
     }
-
+    /**
+     * Checks if the email typed
+     * is valid.
+     * If not, appropiate response
+     * will be displayed.
+     * @param context
+     * @param component
+     * @param value 
+     */
     public void validateEmail(FacesContext context, UIComponent component, Object value) {
         String message = "";
         try {
@@ -59,7 +74,11 @@ public class ProfileBean implements Serializable {
     public User getUser() {
         return user;
     }
-
+    /**
+     * Applies the user-changes,
+     * and stores the data in the database.
+     * @throws IOException 
+     */
     public void apply() throws IOException {
         db.changeData(user);
         String message = "Changes complete";

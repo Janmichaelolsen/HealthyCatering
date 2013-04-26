@@ -5,7 +5,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core">
-    <h:form prependId="false">
+    <h:form prependId="false"> 
         <p:commandButton value="#{lang_auth.Removesubs}" action="#{Admin.deletePlans()}" update="removemessage"></p:commandButton>
         <p:commandButton value="#{lang_auth.Addsubs}" action="#{Admin.updatePlans()}" update="removemessage"></p:commandButton>
         <p:messages id="removemessage" showDetail="true" autoUpdate="true" closable="true" />

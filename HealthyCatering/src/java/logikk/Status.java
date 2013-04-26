@@ -1,5 +1,10 @@
+
 package logikk;
 
+/**
+ *
+ * Enum-class for describing the different statuses an order can have.
+ */
 public enum Status {
 
     PENDING(1, "The order is waiting to be made"),
@@ -12,11 +17,20 @@ public enum Status {
     NULL(0, "There is no registered order");
     private int code;
     private String description;
-
+    /**
+     * Sets value to the given attributes.
+     * @param code Code of status
+     * @param description Description of status
+     */
     private Status(int code, String description) {
         this.code = code;
         this.description = description;
     }
+    /**
+     * Finds the name of status given the code.
+     * @param code The code of the status.
+     * @return Name of status
+     */
     public static String getStatusName(int code){
         switch (code) {
             case 1:
@@ -36,6 +50,11 @@ public enum Status {
         }
         return null; 
     }
+    /**
+     * Finds the description of the status given the code.
+     * @param code The code of the status
+     * @return The description of the status
+     */
     public static String getDescription(int code) {
         switch (code) {
             case 1:

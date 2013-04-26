@@ -1,5 +1,10 @@
 package logikk;
-
+/**
+ * Class for Dish,
+ * consisting of similar attributes 
+ * as in the database.
+ *
+ */
 public class Dish {
 
     private int dishId;
@@ -8,12 +13,23 @@ public class Dish {
     private int count; 
     private String imagePath; 
     private int orderId; 
-    
+    /**
+     * Sets value to given attributes.
+     * @param dishName Name of dish
+     * @param orderId ID of order
+     * @param count Number of this dish ordered
+     */
     public Dish(String dishName, int orderId, int count){
         this.dishName = dishName;
         this.orderId = orderId;
         this.count=count; 
     }
+    /**
+     * Sets value to given attributes.
+     * @param dishId ID of dish
+     * @param dishName Name of dish
+     * @param price Price of dish
+     */
     
     public Dish(int dishId, String dishName, double price) {
         this.dishId = dishId;
@@ -21,17 +37,31 @@ public class Dish {
         this.price = price;
         this.count = 1;
     }
+    /**
+     * Sets value to given attributes.
+     * @param dishId ID of dish
+     * @param dishName Name of dish
+     * @param price Price of dish
+     * @param count 
+     */
     public Dish(int dishId, String dishName, double price,int count) {
         this.dishId = dishId;
         this.dishName = dishName;
         this.price = price;
         this.count = count; 
     }
+    /**
+     * Sets value to given attributes.
+     * @param dishName Name of dish
+     * @param price Price of dish
+     */
     public Dish(String dishName, double price){
         this.dishName = dishName;
         this.price = price;
     }
-    
+    /**
+     * Standard constructor.
+     */
     public Dish() {
     }
 
@@ -82,6 +112,9 @@ public class Dish {
     public String toString(){
         return dishName;
     }
+    /**
+     * Resets the Dish-object.
+     */
     public synchronized void reset(){
         dishName = null;
         price = 0;

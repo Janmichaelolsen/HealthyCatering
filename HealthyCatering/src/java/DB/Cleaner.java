@@ -4,7 +4,12 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+/**
+ * 
+ * Class which includes static methods used in database-management
+ * 
+ * 
+ */
 public class Cleaner {
   public static void closeResSet(ResultSet res) {
     try {

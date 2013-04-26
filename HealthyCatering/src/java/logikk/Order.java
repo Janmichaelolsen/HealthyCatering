@@ -1,6 +1,11 @@
 package logikk;
-/*
- * Class for generating orders from customerinput.
+/**
+ * 
+ * Class for order,
+ * consists of similiar attributes 
+ * as in the database.
+ * An order consists of one or several dishes.
+ * 
  */
 
 import java.sql.Time;
@@ -29,12 +34,19 @@ public class Order {
     private String salesmanUsername;
     private String customerUsername;
     
-
+ /**
+     * Standard constructor.
+     */
     public Order() {
         
     }
     
-
+  /**
+     * Sets value to given attributes.
+     * @param date Date of order 
+     * @param timeOfDelivery Time of delivery
+     * @param deliveryAddress Delivery adress
+     */
     public Order(Date date, Time timeOfDelivery, String deliveryAddress) {
         fullDate = new Date(date.getYear(), date.getMonth(), date.getDate(),
                 timeOfDelivery.getHours(), timeOfDelivery.getMinutes(), timeOfDelivery.getSeconds());
@@ -44,6 +56,13 @@ public class Order {
         this.status = Status.NULL.toString();
     }
 
+      /**
+     * Sets value to given attributes.
+     * @param date Date of order
+     * @param timeOfDelivery Time of delivery
+     * @param deliveryAddress Delivery adress
+     * @param status Status of order
+     */
     public Order(Date date, Time timeOfDelivery, String deliveryAddress, int status) {
         fullDate = new Date(date.getYear(), date.getMonth(), date.getDate(),
                 timeOfDelivery.getHours(), timeOfDelivery.getMinutes(), timeOfDelivery.getSeconds());
@@ -53,6 +72,14 @@ public class Order {
         status_numeric = status;
         this.status=Status.getStatusName(status);
     }
+     /**
+     * Sets value to given attributes.
+     * @param date Date of order
+     * @param timeOfDelivery Time of delivery
+     * @param deliveryAddress Delivery adress
+     * @param status Status of order
+     * @param totalPrice Total price of order
+     */
     public Order(Date date, Time timeOfDelivery, String deliveryAddress, int status,double totalPrice) {
         fullDate = new Date(date.getYear(), date.getMonth(), date.getDate(),
                 timeOfDelivery.getHours(), timeOfDelivery.getMinutes(), timeOfDelivery.getSeconds());
@@ -63,7 +90,16 @@ public class Order {
         this.totalprice = totalPrice; 
         this.status=Status.getStatusName(status);
     }
-
+ /**
+     * Sets value to given attributes.
+     * @param date Date of order
+     * @param deliveryAddress Delivery adress
+     * @param status Status of order
+     * @param dishes Dishes the order consists of
+     * @param description Description of order
+     * @param postalcode Postal code
+     * @param totalprice Total price
+     */
     public Order(Date date, String deliveryAddress, int status, ArrayList<Dish> dishes, String description, int postalcode, double totalprice) {
         fullDate = new Date(date.getYear(), date.getMonth(), date.getDate(),
                 date.getHours(), date.getMinutes(), date.getSeconds());
@@ -75,7 +111,16 @@ public class Order {
         this.postalcode = postalcode;
         this.totalprice = totalprice;
     }
-    
+      /**
+     * Sets value to given attributes.
+     * @param dishname Name of dish ordered 
+     * @param timeofdelivery Time of delivery
+     * @param count Number of this dish ordered
+     * @param weekday Day of week 
+     * @param startdate Start date  
+     * @param enddate End date
+     * @param description Description
+     */
     public Order(String dishname, Time timeofdelivery, int count, String weekday, java.sql.Date startdate, java.sql.Date enddate, String description){
         this.dishName = dishname;
         this.timeOfDelivery = timeofdelivery;
@@ -85,7 +130,12 @@ public class Order {
         this.enddate = enddate;
         this.description = description;
     }
-    
+      /**
+     * Sets value to given attributes.
+     * @param dishName Name of dish ordered
+     * @param count Number of dish in order
+     * @param status Status of order
+     */
     public Order(String dishName, int count, String status) {
         this.dishName = dishName;
         this.count = count;
@@ -104,6 +154,11 @@ public class Order {
         this.status_numeric = status_numeric;
     }
 
+     /**
+     * Sets the status of an order,
+     * and sets the numeric value representing this status.
+     * @param status Status of order
+     */
     public void setStatus(String status) {
         this.status = status;
         System.out.println(status);
@@ -124,7 +179,12 @@ public class Order {
         }
         setChanged();
     }
-
+ /**
+     * Adds a dish in the order.
+     * @param dish Dish to be added
+     * @return A variable telling if dish was added
+     * in order.
+     */
     public boolean addDish(Dish dish) {
         if (dish == null) {
             return false;

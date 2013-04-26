@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Beans;
 
 import DB.Database;
@@ -18,22 +14,33 @@ import logikk.PendingOrders;
 
 /**
  *
- * @author Frode
+ * The orders from PendingOrders and in the Database is copied to the List
+ * object, which is used for the actual displaying of the data. At first, the
+ * pending orders from the database is copied to the ArrayList-object in
+ * PendingOrders.
  */
 @SessionScoped
 @Named("Admin")
 public class AdminBean implements Serializable {
+
     private PendingOrders orders = new PendingOrders();
     private Database db = new Database();
     private List<OrderStatus> tabledata = Collections.synchronizedList(new ArrayList<OrderStatus>());
 
-     public AdminBean(){
-         orders.readFromDb();
-         if(orders.getOrders()!=null){
-             for(int i = 0;i<orders.getOrders().size();i++){
-                 tabledata.add(new OrderStatus(orders.getOrders().get(i)));
-             }
-         }
+    /**
+     *
+     * The orders from PendingOrders and in the Database is copied to the List
+     * object, which is used for the actual displaying of the data. At first,
+     * the pending orders from the database is copied to the ArrayList-object in
+     * PendingOrders.
+     */
+    public AdminBean() {
+        orders.readFromDb();
+        if (orders.getOrders() != null) {
+            for (int i = 0; i < orders.getOrders().size(); i++) {
+                tabledata.add(new OrderStatus(orders.getOrders().get(i)));
+            }
+        }
     }
 
     public synchronized List<OrderStatus> getTabledata() {
@@ -43,13 +50,24 @@ public class AdminBean implements Serializable {
     public synchronized PendingOrders getOrders() {
         return orders;
     }
-    
-    public void deletePlans(){
+
+    /**
+     * Calls on a function in Database, which deletes expired subscription plans
+     * from subscription-table. Adds expired subscription plans in an ArrayList,
+     * which will be displayed.
+     */
+    public void deletePlans() {
         int removedplans = db.removeExpiredSubs();
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"", removedplans+" subscriptionplans deleted."));  
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", removedplans + " subscriptionplans deleted."));
     }
-    public void updatePlans(){
+
+    /**
+     * Calls on function from Database, which checks if subscription plans have
+     * delivery this day.If so, orders will be placed in the database. This
+     * function is called at login.
+     */
+    public void updatePlans() {
         int addedorders = db.checkSubscription();
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"", addedorders+" orders added"));  
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", addedorders + " orders added"));
     }
 }

@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui">
         <ui:composition template ="../../serviceTemplate.xhtml">
             <ui:define name ="content">
-                
+                 
                 <p:tabView dynamic="true" activeIndex="#{WorkerIndex.tabIndex}">
                            <p:ajax event="tabChange" listener="#{WorkerIndex.onTabChange}" />
                            <p:tab id ="messages" title="#{lang_auth.Message}">

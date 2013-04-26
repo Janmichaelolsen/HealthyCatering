@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Beans;
 
 import DB.Database;
@@ -18,7 +15,12 @@ import logikk.Order;
 import logikk.OrderStatus;
 import logikk.PendingOrders;
 import org.primefaces.event.TabChangeEvent;
-
+/**
+ * 
+ * Backing bean used in salesmanOrder.
+ * Includes operations for managing orders.
+ * 
+ */
 @SessionScoped
 @Named("Sales")
 public class SalesmanBean implements Serializable {
@@ -57,7 +59,13 @@ public class SalesmanBean implements Serializable {
     public synchronized boolean isEmpty() {
         return !(tabledata.size() > 0);
     }
-
+    /**
+     * Updates the orders 
+     * by setting their status to
+     * "PENDING".
+     * Uses operations from Database-class
+     * for updating pending orders.
+     */
     public synchronized void update() {
         ArrayList<Order> temp = overView.getFirstOrdersSalesmen();
         if (tabledata.size() < temp.size()) {
@@ -71,7 +79,11 @@ public class SalesmanBean implements Serializable {
         }
         getFromDb();
     }
-
+    /**
+     * Adds the orders from the database
+     * which needs approval from salesmen.
+     * Sorts the orders in the list by date.
+     */
     private void getFromDb() {
         ArrayList<Order> temp = overView.getFirstOrdersSalesmen();
         tabledata.clear();
@@ -82,7 +94,12 @@ public class SalesmanBean implements Serializable {
             quickSortDate(0, tabledata.size() - 1, tabledata);
         }
     }
-
+    /**
+     * Sorts the orders by date.
+     * @param low
+     * @param high
+     * @param table 
+     */
     private void quickSortDate(int low, int high, List<OrderStatus> table) {
         int i = low;
         int j = high;
@@ -107,13 +124,26 @@ public class SalesmanBean implements Serializable {
             quickSortDate(i, high, table);
         }
     }
-
+    /**
+     * Two orders switch places in the List.
+     * @param i index of order
+     * @param j index of order
+     * @param table List of OrderStatus-objects.
+     */
     private void exchange(int i, int j, List<OrderStatus> table) {
         OrderStatus temp = table.get(i);
         table.set(i, table.get(j));
         table.set(j, temp);
     }
-
+    /**
+     * Updates the users's orders
+     * by reading from the database
+     * and adding the Order-objects to
+     * the List-object.
+     * Uses getOrdersUser(ID) from Database-class.
+     * 
+     * 
+     */
     public void updateUser() {
         try {
             ArrayList<Order> temp = overView.getOrdersUser(Integer.parseInt(id));
@@ -130,7 +160,12 @@ public class SalesmanBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, fm);
         }
     }
-
+    /**
+     * Listens to a TabChangeEvent and determines which jsf-page is chosen.
+     * Finds the ID of the h:form.
+     * @param event The current selected tab in tabview.
+     * @return The index of the current selected tab(page).
+     */
     public int onTabChange(TabChangeEvent event) {
         if (event.getTab().getId().equals("tab1")) {
             tabIndex = 0;

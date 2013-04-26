@@ -14,6 +14,17 @@ public class User {
     private String phone;
     public String role;
 
+    /**
+     * Sets value to given attributes.
+     *
+     * @param username Username
+     * @param password Password
+     * @param firstname First name
+     * @param surname Surname
+     * @param address Adress
+     * @param mobilenr Mobile nr
+     * @param postalcode Postal code
+     */
     public User(String username, String password, String firstname, String surname,
             String address, String mobilenr, int postalcode) {
         this.username = username;
