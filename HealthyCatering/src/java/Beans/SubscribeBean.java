@@ -25,10 +25,10 @@ public class SubscribeBean implements Serializable {
     private Database db = new Database();
     private String currentUser = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
     private ArrayList selectedDays = new ArrayList();
-    private ArrayList<String> weekdays_en = new ArrayList<String>(Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday"));
-    private ArrayList<String> weekdays_no = new ArrayList<String>(Arrays.asList("Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag"));
+    private ArrayList<String> weekdays_en = new ArrayList<String>(Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"));
+    private ArrayList<String> weekdays_no = new ArrayList<String>(Arrays.asList("Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lordag", "Sondag"));
     private ArrayList<Time> times = new ArrayList<Time>(Arrays.asList(new Time(10, 10, 0), new Time(10, 10, 0),
-            new Time(10, 10, 0), new Time(10, 10, 0), new Time(10, 10, 0)));
+            new Time(10, 10, 0), new Time(10, 10, 0), new Time(10, 10, 0), new Time(10, 10, 0), new Time(10, 10, 0)));
     private Date startdate = new Date();
     private Date enddate = new Date();
     private Date currentDate = new Date();
