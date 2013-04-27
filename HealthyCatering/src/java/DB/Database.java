@@ -218,7 +218,6 @@ public class Database {
             Cleaner.closeSentence(sqlGet);
             Cleaner.closeSentence(sqlUpdate);
             Cleaner.closeResSet(res);
-            Cleaner.setAutoCommit(connection);
         }
         closeConnection();
     }
