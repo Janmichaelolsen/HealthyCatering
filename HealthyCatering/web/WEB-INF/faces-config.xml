@@ -12,7 +12,7 @@
             <supported-locale>en</supported-locale> 
         </locale-config>
         <resource-bundle>
-            <base-name>Properties.auth</base-name>   
+            <base-name>properties.auth</base-name>   
             <var>lang_auth</var> 
         </resource-bundle>
     </application>
