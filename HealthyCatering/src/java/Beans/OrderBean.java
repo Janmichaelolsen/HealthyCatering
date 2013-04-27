@@ -26,7 +26,6 @@ public class OrderBean implements Serializable {
     private Database db = new Database();
     private ArrayList<Dish> dishes = fillDishes();
     private User user = db.getUser();
-    private User blankuser = new User();
     private Date deliverydate = new Date();
     private Date currentDate = new Date();
     private String[] hourvalues = {"10", "11", "12", "13", "14", "15", "16"};
@@ -42,6 +41,10 @@ public class OrderBean implements Serializable {
         MenuItems menuitems = getMenuItems();
         total_price = menuitems.getTotal_price();
         deliverydate.setHours(deliverydate.getHours() + 1);
+        if(!db.getRole().equals("customer")){
+            user.setAddress("");
+            user.setPostnumber(0);
+        }
     }
 
     /**
@@ -51,8 +54,7 @@ public class OrderBean implements Serializable {
      * @throws IOException
      */
     public void confirmOrder() throws IOException {
-        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correct", "Correct");
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+        System.out.println(user.getAddress());
         Order order = new Order(deliverydate, user.getAddress(), 7, dishes, description, user.getPostnumber(), total_price);
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         if (db.order(order)) {
@@ -61,7 +63,12 @@ public class OrderBean implements Serializable {
             FacesContext facesContext = FacesContext.getCurrentInstance();
             if (facesContext != null) {
                 try {
-                    if (db.getRole().equals("customer") || db.getRole().equals("salesman")) {
+                    if (db.getRole().equals("salesman")) {
+                        ec.redirect(ec.getRequestContextPath() + "/faces/protected/worker/salesmanIndex.xhtml");
+                        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Order Successful", "Order Successful");
+                        FacesContext.getCurrentInstance().addMessage(null, msg);
+
+                    } else if (db.getRole().equals("customer")) {
                         ec.redirect(ec.getRequestContextPath() + "/faces/protected/orders/orderSuccess.xhtml");
                     }
                 } catch (Exception e) {
@@ -69,7 +76,7 @@ public class OrderBean implements Serializable {
                 }
             }
         } else {
-            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Error, try again later.", "Error, try again later.");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Error, try again later.", "Error, try again later.");
             FacesContext.getCurrentInstance().addMessage(null, msg);
             ec.redirect(ec.getRequestContextPath() + "/faces/protected/orders/order.xhtml");
         }
@@ -128,10 +135,7 @@ public class OrderBean implements Serializable {
     }
 
     public User getUser() {
-        if (db.getRole().equals("customer")) {
-            return user;
-        }
-        return blankuser;
+        return user;
     }
 
     public void setUser(User user) {

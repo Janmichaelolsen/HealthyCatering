@@ -229,18 +229,24 @@ public class Database {
      *
      * @param s Order to be deleted from database.
      */
-    private void deleteOrder(Order s) {
+    public boolean deleteOrder(Order s) {
+        deleteFromDishesOrdered(s);
         PreparedStatement ps = null;
+        boolean res = false;
+        openConnection();
         try {
-            deleteFromDishesOrdered(s);
             ps = connection.prepareStatement("DELETE FROM orders where orderid=?");
             ps.setInt(1, s.getOrderId());
             ps.executeUpdate();
+            res = true;
         } catch (SQLException ex) {
             ex.toString();
+            res = false;
         } finally {
             Cleaner.closeSentence(ps);
+            closeConnection();
         }
+        return res;
     }
 
     /**
@@ -250,6 +256,7 @@ public class Database {
      */
     private void deleteFromDishesOrdered(Order s) {
         PreparedStatement ps = null;
+        openConnection();
         try {
             ps = connection.prepareStatement("DELETE FROM dishes_ordered WHERE orderid=?");
             ps.setInt(1, s.getOrderId());
@@ -258,6 +265,7 @@ public class Database {
             ex.toString();
         } finally {
             Cleaner.closeSentence(ps);
+            closeConnection();
         }
     }
     //Archives finished orders

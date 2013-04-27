@@ -7,7 +7,17 @@
       xmlns:f="http://java.sun.com/jsf/core">
 
     <h:form id="dish" > 
-
+        <h2>#{lang_auth.AddDish}</h2>
+            <h:outputText value="#{lang_auth.DishName}"/>
+            <p/>
+            <p:inputText value="#{Dish.dishName}" required="true"/>
+            <br></br>
+            <h:outputText value="#{lang_auth.Price}" />
+            <p/>
+            <p:inputText value ="#{Dish.price}" required="true" validator="#{Admin.validatePrice}">
+            </p:inputText>
+            <p><p:commandButton id="addButton" value="#{lang_auth.AddDish}" update="dish:dishTable" action="#{Dish.add()}" ajax="false"
+                             type="submit"/></p>
         <p:contextMenu for="dishTable" widgetVar="cMenu">     
             <p:menuitem value="Edit Cell" icon="ui-icon-search" onclick="dishlist.showCellEditor();
                 return false;"/>    
@@ -52,34 +62,6 @@
                     <p:commandButton value ="#{lang_auth.Delete}" action ="#{Dish.delete()}"  update="dishTable" ajax="false" />
                 </f:facet>
             </p:column>
-
-
         </p:dataTable>
-
-        <p:dialog header ="#{lang_auth.AddDish}"  widgetVar="dlg1" position="center">
-
-            <h:outputText value="#{lang_auth.DishName}"/>
-            <p/>
-            <p:inputText value="#{Dish.dishName}"/>
-            <br></br>
-            <h:outputText value="#{lang_auth.Price}"/>
-            <p/>
-            <p:inputText value ="#{Dish.price}" />  
-            <h:outputText value="#{lang_auth.Upload}"></h:outputText>
-            <h:form enctype="multipart/form-data">
-                <p:fileUpload fileUploadListener="#{fileUploadController.upload}"  
-                              mode="simple"   
-                              sizeLimit="100000"   
-                              allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>  
-            </h:form>
-
-            <p:commandButton id="addButton" value="#{lang_auth.AddDish}" update="dish:dishTable" action ="#{Dish.add()}" ajax="false"
-                             onclick="dlg1.hide()"/>
-        </p:dialog>
-
-        <p:commandButton value="#{lang_auth.AddDish}" onclick="dlg1.show()" />
-
     </h:form>
-
-
 </html>

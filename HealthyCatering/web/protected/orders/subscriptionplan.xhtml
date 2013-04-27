@@ -16,7 +16,7 @@
                             <h3>#{lang_auth.start}</h3>
                         </td>
                         <td>
-                            <p:calendar effect="drop" value="#{subBean.startdate}" timeZone="#{orderBean.timeZone}" />
+                            <p:calendar effect="drop" value="#{subBean.startdate}" timeZone="#{orderBean.timeZone}" navigator="true" readonlyInput="true" mindate="#{subBean.currentDate}"/>
                         </td>
                     </tr>
                     <tr>
@@ -24,7 +24,7 @@
                             <h3>#{lang_auth.End}</h3>
                         </td>
                         <td>
-                            <p:calendar effect="drop" value="#{subBean.enddate}" timeZone="#{orderBean.timeZone}" />
+                            <p:calendar effect="drop" value="#{subBean.enddate}" timeZone="#{orderBean.timeZone}" navigator="true" readonlyInput="true" mindate="#{subBean.startdate}"/>
                         </td>
                     </tr>
 

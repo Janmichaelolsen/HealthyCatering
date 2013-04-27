@@ -29,16 +29,7 @@ public class SalesmanBean implements Serializable {
     private PendingOrders overView = new PendingOrders();
     private List<OrderStatus> tabledata = Collections.synchronizedList(new ArrayList<OrderStatus>());
     private List<OrderStatus> userTabledata = Collections.synchronizedList(new ArrayList<OrderStatus>());
-    private int tabIndex;
     private String id;
-
-    public void setTabIndex(int tabIndex) {
-        this.tabIndex = tabIndex;
-    }
-
-    public int getTabIndex() {
-        return tabIndex;
-    }
 
     public void setId(String id) {
         this.id = id;
@@ -78,6 +69,19 @@ public class SalesmanBean implements Serializable {
             }
         }
         getFromDb();
+    }
+    /**
+     * Removes an order from the
+     * order list and the database
+     * Uses operations from the
+     * Database class
+     * @param order 
+     */
+    
+    public void removeOrder(OrderStatus order) {
+        if(db.deleteOrder(order.getOrder())){
+            tabledata.remove(order);
+        }  
     }
     /**
      * Adds the orders from the database
@@ -159,19 +163,5 @@ public class SalesmanBean implements Serializable {
             fm.setSeverity(FacesMessage.SEVERITY_ERROR);
             FacesContext.getCurrentInstance().addMessage(null, fm);
         }
-    }
-    /**
-     * Listens to a TabChangeEvent and determines which jsf-page is chosen.
-     * Finds the ID of the h:form.
-     * @param event The current selected tab in tabview.
-     * @return The index of the current selected tab(page).
-     */
-    public int onTabChange(TabChangeEvent event) {
-        if (event.getTab().getId().equals("tab1")) {
-            tabIndex = 0;
-        } else {
-            tabIndex = 1;
-        }
-        return tabIndex;
     }
 }

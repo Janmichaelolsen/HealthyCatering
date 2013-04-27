@@ -16,33 +16,30 @@
                             #{lang_auth.Userinfo}
                         </f:facet> 
                         <p:outputLabel value="#{lang_auth.FirstName}" />
-                        <p:inputText id="firstName" value="#{Profile.user.firstName}"/> 
+                        <p:inputText id="firstName" value="#{Profile.user.firstName}" required="true" requiredMessage="#{lang_auth.CannotBeBlank}"/> 
                         <p:message for="firstName"/>
                         <p:outputLabel value="#{lang_auth.Surname}" />
-                        <p:inputText id="surname" value="#{Profile.user.surname}"/> 
+                        <p:inputText id="surname" value="#{Profile.user.surname}" required="true" requiredMessage="#{lang_auth.CannotBeBlank}"/> 
                         <p:message for="surname"/>
                         <p:outputLabel value="#{lang_auth.Password}"/>
-                        <p:password id="password" value="#{Profile.user.password}" match="repPassword" label="Password 1"/>
+                        <p:password id="password" value="#{Profile.user.password}" validator="#{Register.validatePassword}" match="repPassword" label="Password 1"/>
                         <p:message for="password"/>
                         <p:outputLabel value="#{lang_auth.RepeatPass}" />
-                        <p:password id="repPassword" value="#{Profile.user.repeatPass}" label="Password 2"/>
+                        <p:password id="repPassword" value="#{Profile.user.repeatPass}" required="true" requiredMessage="#{lang_auth.CannotBeBlank}" label="Password 2"/>
                         <p:message for="repPassword"/>
                         <p:outputLabel value="#{lang_auth.Address}" />
-                        <p:inputText id="address"  value="#{Profile.user.address}"/>
+                        <p:inputText id="address" required="true" requiredMessage="#{lang_auth.CannotBeBlank}" value="#{Profile.user.address}"/>
                         <p:message for="address"/>
                         <p:outputLabel value="#{lang_auth.Postnumber}"/>
-                        <p:inputText id="postnumber" value="#{Profile.user.postnumber}" label="Postnumber" validatorMessage="Postnumber must be between 4 and 5 digits long.">
+                        <p:inputText id="postnumber" value="#{Profile.user.postnumber}" label="Postnumber" required="true" requiredMessage="#{lang_auth.CannotBeBlank}" validatorMessage="#{lang_auth.PostnumberMust}">
                             <f:validateLongRange minimum="1000" maximum="99999"/>
                         </p:inputText>
                         <p:message for="postnumber"/>
-                        <p:outputLabel value="#{lang_auth.City}"/>
-                        <p:inputText id="city" value="#{Profile.user.city}"/>
-                        <p:message for="city" />
                         <p:outputLabel value="#{lang_auth.Email}" />
-                        <p:inputText id="email" value="#{Profile.user.email}" validator="#{Profile.validateEmail}" validatorMessage="Type a valid e-mail address!"/>
+                        <p:inputText id="email" value="#{Profile.user.email}" required="true" requiredMessage="#{lang_auth.CannotBeBlank}" validator="#{Profile.validateEmail}" validatorMessage="#{lang_auth.EmailIsReq}"/>
                         <p:message for="email"/>
                         <p:outputLabel value="#{lang_auth.Phone}" />
-                        <p:inputText id="phone" value="#{Profile.user.phone}" validatorMessage="Not a valid phone number!">
+                        <p:inputText id="phone" value="#{Profile.user.phone}" required="true" requiredMessage="#{lang_auth.CannotBeBlank}" validatorMessage="#{lang_auth.Phonereq}">
                             <f:validateLength minimum="8" maximum="16"/>
                         </p:inputText> 
                         <p:message for="phone" />

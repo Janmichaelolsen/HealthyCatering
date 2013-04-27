@@ -19,7 +19,7 @@ and open the template in the editor.
                     <p:inputText  id="username" value="#{Register.user.username}" validator="#{Register.validateUsername}" required="true" requiredMessage="#{lang_auth.CannotBeBlank}"/>
                     <p:message for="username" showSummary="true" showDetail="false"/>
                     <p:outputLabel value="#{lang_auth.Password}"/>
-                    <p:password id="password" value="#{Register.user.password}" match="repPassword" required="true" requiredMessage="#{lang_auth.CannotBeBlank}" label="Password 1" feedback="true"/>
+                    <p:password id="password" value="#{Register.user.password}" validator="#{Register.validatePassword}" match="repPassword" required="true" requiredMessage="#{lang_auth.CannotBeBlank}" label="Password 1" feedback="true"/>
                     <p:message for="password" showSummary="true" showDetail="false"/>
                     <p:outputLabel value="#{lang_auth.RepeatPass}" />
                     <p:password id="repPassword" value="#{Register.user.repeatPass}" required="true" requiredMessage="#{lang_auth.CannotBeBlank}" label="Password 2"/>

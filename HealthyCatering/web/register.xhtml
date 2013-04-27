@@ -18,7 +18,7 @@
                         <p:inputText  id="username" value="#{Register.user.username}" validator="#{Register.validateUsername}" required="true" requiredMessage="#{lang_auth.CannotBeBlank}"/>
                         <p:message for="username" showSummary="true" showDetail="false"/>
                         <p:outputLabel value="#{lang_auth.Password}"/>
-                        <p:password id="password" value="#{Register.user.password}" match="repPassword" required="true" requiredMessage="#{lang_auth.CannotBeBlank}" label="Password 1" feedback="true"/>
+                        <p:password id="password" value="#{Register.user.password}" validator="#{Register.validatePassword}" match="repPassword" required="true" requiredMessage="#{lang_auth.CannotBeBlank}" label="Password 1" feedback="true"/>
                         <p:message for="password" showSummary="true" showDetail="false"/>
                         <p:outputLabel value="#{lang_auth.RepeatPass}" />
                         <p:password id="repPassword" value="#{Register.user.repeatPass}" required="true" requiredMessage="#{lang_auth.CannotBeBlank}" label="Password 2"/>
@@ -38,10 +38,10 @@
                         </p:inputText>
                         <p:message for="postnumber" showSummary="true" showDetail="false"/>
                         <p:outputLabel value="#{lang_auth.Email}" />
-                        <p:inputText id="email" value="#{Register.user.email}" validator="#{Register.validateEmail}" validatorMessage=""/>
+                        <p:inputText id="email" value="#{Register.user.email}" validator="#{Register.validateEmail}" validatorMessage="#{lang_auth.EmailIsReq}"/>
                         <p:message for="email" showSummary="true" showDetail="false"/>
                         <p:outputLabel value="#{lang_auth.Phone}" />
-                        <p:inputText id="phone" value="#{Register.user.phone}" required="true" requiredMessage="#{lang_auth.CannotBeBlank}" validatorMessage="#{lang_auth.NotValid}">
+                        <p:inputText id="phone" value="#{Register.user.phone}" required="true" requiredMessage="#{lang_auth.CannotBeBlank}" validatorMessage="#{lang_auth.Phonereq}">
                             <f:validateLength minimum="8" maximum="16"/>
                         </p:inputText> 
                         <p:message for="phone" showDetail="false" showSummary="true"/>

@@ -58,11 +58,17 @@
                             </f:facet>
                             <p:commandButton value="#{lang_auth.Change}" action="#{Sales.update()}" actionListener="#{OrderStatus.setToBeChanged()}" update="dataTable_id"/>
                         </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <p:outputLabel value="#{lang_auth.ChangeStatus}"/>
+                            </f:facet>
+                            <p:commandButton value="#{lang_auth.Disapprove}" oncomplete="submit()" ajax="false" actionListener="#{Sales.removeOrder(OrderStatus)}" update="dataTable_id"/>
+                        </p:column>
                         <f:facet name="footer">
                         </f:facet>
                     </p:dataTable>
                 </h:form>
             </h:panelGrid>
-            <a href="../../menu.xhtml">#{lang_auth.OrderDish}</a> 
+            <a href="salesmanMenu.xhtml">#{lang_auth.OrderDish}</a> 
 </html>
 

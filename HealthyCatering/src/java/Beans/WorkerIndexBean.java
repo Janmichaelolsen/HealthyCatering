@@ -37,6 +37,8 @@ public class WorkerIndexBean implements Serializable{
             tabIndex = 2;
         }else if (event.getTab().getId().equals("analytics")) {
             tabIndex = 3;
+        }else if (event.getTab().getId().equals("searchorder")) {
+           tabIndex = 4;
         } 
         return tabIndex;
     }

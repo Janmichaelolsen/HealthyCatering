@@ -10,6 +10,7 @@ import logikk.Dish;
 import logikk.DishStatus;
 import logikk.Dishes;
 import org.primefaces.event.CellEditEvent;
+import org.primefaces.context.RequestContext;
 /**
  * 
  * Backing bean for the admin page containing dish-management.

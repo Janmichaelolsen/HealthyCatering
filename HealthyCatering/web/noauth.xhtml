@@ -14,7 +14,7 @@
                         <p><p:outputLabel value="#{lang_auth.Password}" style="color: white;"/></p>
                         <p><p:inputText id="j_password" type="password"/></p>
                         <p><p:commandButton id="submit" value="#{lang_auth.LogIn}" ajax="false"/></p>
-                        #{lang_auth.Wrong}
+                        <p><p:outputLabel value="#{lang_auth.Wrong}" style="color:white"></p:outputLabel></p>
                         <p><p:commandLink value="#{lang_auth.Register}" action="./register.xhtml" style="color: white;"></p:commandLink></p>
                         <p><p:commandLink value="#{lang_auth.ForgottenPassword}" action="./forgotpassword.xhtml" style="color: white;"></p:commandLink></p>
                     </h:form>

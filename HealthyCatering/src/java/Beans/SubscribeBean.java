@@ -31,6 +31,7 @@ public class SubscribeBean implements Serializable {
             new Time(10, 10, 0), new Time(10, 10, 0), new Time(10, 10, 0)));
     private Date startdate = new Date();
     private Date enddate = new Date();
+    private Date currentDate = new Date();
 /**
      * Sets the Date-objects to default values.
      */
@@ -107,5 +108,9 @@ public class SubscribeBean implements Serializable {
 
     public void setStartdate(Date startdate) {
         this.startdate = startdate;
+    }
+
+    public Date getCurrentDate() {
+        return currentDate;
     }
 }

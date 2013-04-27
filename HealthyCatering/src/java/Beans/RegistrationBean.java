@@ -76,6 +76,20 @@ public class RegistrationBean implements Serializable {
             context.addMessage(component.getClientId(context), fm);
         }
     }
+    
+        public void validatePassword(FacesContext context, UIComponent component, Object value) {
+        String message = "";
+        String password = (String) value;
+        Pattern pattern = Pattern.compile("[^a-zA-Z0-9*]");
+        Matcher matcher = pattern.matcher(password);
+        if (matcher.find()) {
+            ((UIInput) component).setValid(false);
+            message = "The password can not contain special characters";
+            FacesMessage fm = new FacesMessage(message);
+            fm.setSeverity(FacesMessage.SEVERITY_ERROR);
+            context.addMessage(component.getClientId(context), fm);
+        }
+    }
 
     public User getUser() {
         return user;

@@ -8,7 +8,7 @@ and open the template in the editor.
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      
+
       xmlns:f="http://java.sun.com/jsf/core"> 
     <ui:composition template ="../../serviceTemplate.xhtml">
         <ui:define name ="content">
@@ -29,7 +29,7 @@ and open the template in the editor.
                 <p:tab id="analytics" title="#{lang_auth.Analytics}">
                     <ui:include src ="salesmanAnalytics.xhtml"></ui:include>
                 </p:tab>
-                <p:tab id="tab2" title="#{lang_auth.Searchorder}">
+                <p:tab id="searchorder" title="#{lang_auth.Searchorder}">
                     <h:panelGrid columns="2" cellpadding="10">  
                         <h:form>
                             <p:outputLabel value="ID"/>
@@ -63,7 +63,9 @@ and open the template in the editor.
                                     <f:facet name="header">
                                         <p:outputLabel value="#{lang_auth.OrderedDish}"/>
                                     </f:facet>
-                                    #{OrderStatus.order.orderedDish}
+                                    <p:dataList value="#{OrderStatus.order.orderedDish}" var="dishes">
+                                        <p:outputLabel value="#{dishes}"/>
+                                    </p:dataList> 
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">

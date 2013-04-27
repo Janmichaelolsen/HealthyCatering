@@ -117,7 +117,19 @@ public class PendingOrders {
      * @return An ArrayList containing Order-objects
      */
     public ArrayList<Order> getOrdersUser(int id){
-        ArrayList<Order> userOrders = database.getPendingOrders("SELECT * FROM orders WHERE orderId = '" + id + "'");
-        return userOrders;
+        ArrayList<Order> result = database.getPendingOrders("SELECT * FROM orders WHERE orderId = '" + id + "'");
+        ArrayList<Dish> dishesOrdered = database.getDishesOrdered();
+        //Adding the correct dishes to the orders. 
+        if(!result.isEmpty() && !dishesOrdered.isEmpty()){
+            for(int i = 0; i < result.size(); i++){
+                int orderId = result.get(i).getOrderId();
+                for(int u = 0; u < dishesOrdered.size();u++){
+                    if(dishesOrdered.get(u).getOrderId()==orderId){
+                        result.get(i).addDish(dishesOrdered.get(u));
+                    }
+                }
+            }
+        }
+        return result;
     }
 }

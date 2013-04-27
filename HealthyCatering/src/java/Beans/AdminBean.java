@@ -7,8 +7,12 @@ import java.util.Collections;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import logikk.OrderStatus;
 import logikk.PendingOrders;
 
@@ -69,5 +73,17 @@ public class AdminBean implements Serializable {
     public void updatePlans() {
         int addedorders = db.checkSubscription();
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", addedorders + " orders added"));
+    }
+    public void validatePrice(FacesContext context, UIComponent component, Object value) {
+        String message = "";
+        try {
+           Double var = (Double) value;
+        } catch (Exception ae) {
+            ((UIInput) component).setValid(false);
+            message = "Type a valid price";
+            FacesMessage fm = new FacesMessage(message);
+            fm.setSeverity(FacesMessage.SEVERITY_ERROR);
+            context.addMessage(component.getClientId(context), fm);
+        }
     }
 }
