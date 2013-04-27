@@ -1,5 +1,5 @@
 
-package logikk;
+package Logic;
 /**
  *
  * Status-class for Order, which is used

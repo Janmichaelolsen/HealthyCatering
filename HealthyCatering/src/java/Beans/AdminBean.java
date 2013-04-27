@@ -11,10 +11,8 @@ import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import logikk.OrderStatus;
-import logikk.PendingOrders;
+import Logic.OrderStatus;
+import Logic.PendingOrders;
 
 /**
  *

@@ -1,4 +1,4 @@
-package logikk;
+package Logic;
 
 import DB.Database;
 import java.util.ArrayList;

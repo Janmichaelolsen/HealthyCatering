@@ -3,21 +3,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core">
 
-    <h:form id="dish" > 
+    <h:form>
         <h2>#{lang_auth.AddDish}</h2>
-            <h:outputText value="#{lang_auth.DishName}"/>
-            <p/>
-            <p:inputText value="#{Dish.dishName}" required="true"/>
-            <br></br>
-            <h:outputText value="#{lang_auth.Price}" />
-            <p/>
-            <p:inputText value ="#{Dish.price}" required="true" validator="#{Admin.validatePrice}">
-            </p:inputText>
-            <p><p:commandButton id="addButton" value="#{lang_auth.AddDish}" update="dish:dishTable" action="#{Dish.add()}" ajax="false"
-                             type="submit"/></p>
+        <h:outputText value="#{lang_auth.DishName}"/>
+        <p/>
+        <p:inputText value="#{Dish.dishName}" required="true"/>
+        <br></br>
+        <h:outputText value="#{lang_auth.Price}" />
+        <p/>
+        <p:inputText value ="#{Dish.price}" required="true" validator="#{Admin.validatePrice}">
+        </p:inputText>
+        <p><p:commandButton id="addButton" value="#{lang_auth.AddDish}" update="dish:dishTable" action="#{Dish.add()}" ajax="false"
+                            type="submit"/></p>
+    </h:form>
+    <h:form id="dish" > 
         <p:contextMenu for="dishTable" widgetVar="cMenu">     
             <p:menuitem value="Edit Cell" icon="ui-icon-search" onclick="dishlist.showCellEditor();
                 return false;"/>    

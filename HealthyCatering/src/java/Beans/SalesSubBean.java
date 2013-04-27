@@ -1,16 +1,14 @@
 
 package Beans;
 
-import DB.Database;
+import Logic.SubStatus;
+import Logic.SubscriptionPlans;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import logikk.Order;
-import logikk.SubStatus;
-import logikk.SubscriptionPlans;
 
 /**
  *

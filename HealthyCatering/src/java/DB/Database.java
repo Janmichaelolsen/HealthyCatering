@@ -10,13 +10,13 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import logikk.AdminMessage;
-import logikk.Dish;
-import logikk.Order;
-import logikk.Status;
-import logikk.StoredOrders;
-import logikk.SubscriptionPlan;
-import logikk.User;
+import Logic.AdminMessage;
+import Logic.Dish;
+import Logic.Order;
+import Logic.Status;
+import Logic.StoredOrders;
+import Logic.SubscriptionPlan;
+import Logic.User;
 
 /**
  * Includes all methods with database-management

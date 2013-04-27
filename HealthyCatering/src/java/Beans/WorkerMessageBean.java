@@ -1,14 +1,14 @@
 
 package Beans;
 
+import Logic.AdminMessages;
+import Logic.MessageStatus;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import logikk.AdminMessages;
-import logikk.MessageStatus;
 
 /**
  *

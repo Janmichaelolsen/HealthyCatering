@@ -1,6 +1,7 @@
 package Beans;
 
 import DB.Database;
+import Logic.User;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.regex.Matcher;
@@ -14,7 +15,6 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
-import logikk.User;
 
 /**
  * Backing bean for registering a new user.

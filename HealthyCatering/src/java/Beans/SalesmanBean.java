@@ -2,6 +2,9 @@
 package Beans;
 
 import DB.Database;
+import Logic.Order;
+import Logic.OrderStatus;
+import Logic.PendingOrders;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,10 +14,6 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
-import logikk.Order;
-import logikk.OrderStatus;
-import logikk.PendingOrders;
-import org.primefaces.event.TabChangeEvent;
 /**
  * 
  * Backing bean used in salesmanOrder.

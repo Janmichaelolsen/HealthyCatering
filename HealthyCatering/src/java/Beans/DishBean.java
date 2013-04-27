@@ -1,16 +1,15 @@
 
 package Beans;
+import Logic.Dish;
+import Logic.DishStatus;
+import Logic.Dishes;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import logikk.Dish;
-import logikk.DishStatus;
-import logikk.Dishes;
 import org.primefaces.event.CellEditEvent;
-import org.primefaces.context.RequestContext;
 /**
  * 
  * Backing bean for the admin page containing dish-management.

@@ -2,12 +2,11 @@
 package Beans;
 
 import DB.Database;
+import Logic.Order;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import logikk.Dish;
-import logikk.Order;
 
 /**
  *

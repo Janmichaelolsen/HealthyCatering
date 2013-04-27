@@ -1,6 +1,9 @@
 package Beans;
 
 import DB.Database;
+import Logic.Dish;
+import Logic.Order;
+import Logic.User;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,9 +14,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
-import logikk.Dish;
-import logikk.Order;
-import logikk.User;
 
 /**
  *

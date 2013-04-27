@@ -1,4 +1,4 @@
-package logikk;
+package Logic;
 /**
  * Class for Dish,
  * consisting of similar attributes 

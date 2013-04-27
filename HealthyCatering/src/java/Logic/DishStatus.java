@@ -1,5 +1,5 @@
 
-package logikk;
+package Logic;
 
 import java.io.Serializable;
 

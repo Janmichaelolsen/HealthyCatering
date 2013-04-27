@@ -1,5 +1,5 @@
 
-package logikk;
+package Logic;
 
 /**
  *Class for AdminMessage,
