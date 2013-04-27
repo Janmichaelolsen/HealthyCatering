@@ -45,8 +45,11 @@
                             <f:validateLength minimum="8" maximum="16"/>
                         </p:inputText> 
                         <p:message for="phone" showDetail="false" showSummary="true"/>
+                        <p:outputLabel value="#{lang_auth.Company}" />
+                        <p:selectBooleanCheckbox value="#{Register.company}" id="company"></p:selectBooleanCheckbox> 
                     </p:panelGrid>
                         <p:commandButton action="#{Register.apply()}" type="submit" id="submitButton" value="#{lang_auth.Submit}" update="grid" />
+                        <p:message for="company" showDetail="false" showSummary="true"/>
                 </p:fieldset>
                 </h:form>
             </ui:define>

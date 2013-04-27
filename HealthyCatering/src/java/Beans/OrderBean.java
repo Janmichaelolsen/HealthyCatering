@@ -38,7 +38,7 @@ public class OrderBean implements Serializable {
      * Finds the total price of the order, as well as setting the delivery date.
      */
     public OrderBean() {
-        MenuItems menuitems = getMenuItems();
+        MenuBean menuitems = getMenuItems();
         total_price = menuitems.getTotal_price();
         deliverydate.setHours(deliverydate.getHours() + 1);
         if(!db.getRole().equals("customer")){
@@ -58,7 +58,7 @@ public class OrderBean implements Serializable {
         Order order = new Order(deliverydate, user.getAddress(), 7, dishes, description, user.getPostnumber(), total_price);
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         if (db.order(order)) {
-            MenuItems menuitems = getMenuItems();
+            MenuBean menuitems = getMenuItems();
             menuitems.getOrderList().clear();
             FacesContext facesContext = FacesContext.getCurrentInstance();
             if (facesContext != null) {
@@ -94,7 +94,7 @@ public class OrderBean implements Serializable {
     }
 
     public ArrayList<Dish> fillDishes() {
-        MenuItems menuitems = getMenuItems();
+        MenuBean menuitems = getMenuItems();
         ArrayList<Dish> items = menuitems.getOrderList();
         return items;
     }
@@ -104,9 +104,9 @@ public class OrderBean implements Serializable {
         return tz;
     }
 
-    public MenuItems getMenuItems() {
+    public MenuBean getMenuItems() {
         FacesContext context = FacesContext.getCurrentInstance();
-        MenuItems menuitems = (MenuItems) context.getApplication().evaluateExpressionGet(context, "#{menuitems}", MenuItems.class);
+        MenuBean menuitems = (MenuBean) context.getApplication().evaluateExpressionGet(context, "#{menuitems}", MenuBean.class);
         return menuitems;
     }
 

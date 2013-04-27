@@ -17,7 +17,7 @@ import javax.inject.Named;
  */
 @Named("menuitems")
 @SessionScoped
-public class MenuItems implements Serializable {
+public class MenuBean implements Serializable {
 
     private Database db = new Database();
     private ArrayList<Dish> items = fillTable();
@@ -29,7 +29,7 @@ public class MenuItems implements Serializable {
     /**
      * Calling updateList()
      */
-    public MenuItems(){
+    public MenuBean(){
         updateList(); 
     }
     /**

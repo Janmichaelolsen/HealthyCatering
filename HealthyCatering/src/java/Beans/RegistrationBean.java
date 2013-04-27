@@ -26,6 +26,7 @@ public class RegistrationBean implements Serializable {
 
     private User user = new User();
     private Database db = new Database();
+    private boolean company = false;
 
     /**
      * Checks if the username is valid. Have to consist of minimum 5 characters,
@@ -107,4 +108,13 @@ public class RegistrationBean implements Serializable {
         externalContext.redirect("faces/regSuccess.xhtml");
         //      }
     }
+
+    public boolean isCompany() {
+        return company;
+    }
+
+    public void setCompany(boolean company) {
+        this.company = company;
+    }
+    
 }
