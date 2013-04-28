@@ -3,6 +3,7 @@ package Beans;
 import Logic.GalleriaDish;
 import java.util.ArrayList;
 import java.util.List;  
+import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
 /**
@@ -42,7 +43,7 @@ public class GalleriaBean {
             images_en.add(new GalleriaDish(dishnames_en[i], descriptions_en[i], "galleria" + i + ".jpg"));  
         }  
     }  
-    public List<GalleriaDish> getImages_no() {  
+    public List<GalleriaDish> getImages_no() { 
         return images_no;  
     }  
 

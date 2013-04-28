@@ -38,7 +38,7 @@ public class AdminMessages {
         String sql = "INSERT into message(message)VALUES(?)";
         if (message != null) {
             if (database.changeMessage(message, sql, "add")) {
-                list.add(message);
+                this.list = database.getMessages();
                 return true;
             }
         }

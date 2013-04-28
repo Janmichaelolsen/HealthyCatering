@@ -10,13 +10,14 @@
                             return false;"/>    
             <p:menuitem value="Hide Menu" icon="ui-icon-close" onclick="cMenu.hide()"/>    
         </p:contextMenu> 
-
+        <p:inputText value="#{AdminStart.message}"></p:inputText>
+        <p:commandButton value="#{lang_auth.AddMessage}" action="#{AdminStart.add()}" ajax="false"></p:commandButton>
         <p:dataTable value="#{AdminStart.tabledata}" var="list" styleClass="messages" editable="true" editMode="cell" id="messageTable" widgetVar="messagelist" 
                      emptyMessage="#{lang_auth.NoMessages}">
 
             <p:ajax event ="cellEdit" listener="#{AdminStart.onCellEdit}"/>
 
-            <p:column id ="messageColumn" headerText="#{lang_auth.Message}" >
+            <p:column id ="messageColumn" headerText="#{lang_auth.Message}"  style="width: 80%">
                 <p:cellEditor>
                     <f:facet name ="output">
                         <h:outputText value ="#{list.message.message}"/>
@@ -28,23 +29,13 @@
                 </p:cellEditor>
 
             </p:column>
-            <p:column >
+            <p:column>
                 <h:selectBooleanCheckbox value="#{list.delete}"/>
                 <f:facet name ="footer">
                     <p:commandButton value="#{lang_auth.DeleteMessage}" update="messageTable" action="#{AdminStart.delete()}" ajax ="false"/>  
                 </f:facet>
             </p:column>
         </p:dataTable>
-        <p:dialog header="#{lang_auth.AddMessage}" widgetVar="dlg" position="center">
-            <p:editor id="editor" value="#{AdminStart.message}" width="600"/>  
-            <br></br>
-            <p:commandButton id="addButton" value="#{lang_auth.AddMessage}" update="message:messageTable" action ="#{AdminStart.add()}" ajax="false"
-                             onclick="dlg.hide()"/>
-
-        </p:dialog>
-        <p:commandButton value="#{lang_auth.AddMessage}" type="button" onclick="dlg.show()"/>
-
-
     </h:form>
 </html>
 

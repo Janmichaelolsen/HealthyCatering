@@ -28,9 +28,6 @@ public class LoginBean implements Serializable {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         try {
             if (roleName != null) {
-                if (roleName.equals("customer")) {
-                    externalContext.redirect(externalContext.getRequestContextPath() + "/faces/protected/customer/customer.xhtml");
-                }
                 if (roleName.equals("chef")) {
                     externalContext.redirect(externalContext.getRequestContextPath() + "/faces/protected/worker/chefIndex.xhtml");
                 }
