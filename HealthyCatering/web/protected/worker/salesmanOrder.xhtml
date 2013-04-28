@@ -8,7 +8,7 @@
         <p:commandButton value="#{lang_auth.OrderDish}" action="salesmanMenu.xhtml"></p:commandButton><br />
         <h:form > 
             #{Sales.update()}
-            <p:dataTable value="#{Sales.tabledata}" var="OrderStatus" style="width: 100%; max-width: 100%" id="dataTable_id">    
+            <p:dataTable value="#{Sales.tabledata}" var="OrderStatus" style="width: 100%" id="dataTable_id">    
                 <p:column>
                     <f:facet name="header">
                         <p:outputLabel value="ID"/>
@@ -37,11 +37,9 @@
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <p:outputLabel value="#{lang_auth.OrderedDish}"/>
+                        <p:outputLabel value="#{lang_auth.DishCount}"/>
                     </f:facet>
-                    <p:dataList value="#{OrderStatus.order.orderedDish}" var="dishes">
-                        <p:outputLabel value="#{dishes}"/>
-                    </p:dataList> 
+                    <p:outputLabel value="#{OrderStatus.order.orderedDish.size()}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">

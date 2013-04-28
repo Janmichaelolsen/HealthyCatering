@@ -110,11 +110,11 @@ public class Database {
     public ArrayList<Order> getTurnoverstatistics(String query) {
         ArrayList<Order> orders = new ArrayList();
         ResultSet res = null;
-        Statement stm = null;
+        PreparedStatement stm = null;
         openConnection();
         try {
-            stm = connection.createStatement();
-            res = stm.executeQuery(query);
+            stm = connection.prepareStatement(query);
+            res = stm.executeQuery();
             while (res.next()) {
                 java.sql.Date date = res.getDate("dates");
                 java.sql.Time timeOfDelivery = res.getTime("TIMEOFDELIVERY");
@@ -145,11 +145,11 @@ public class Database {
     public ArrayList<Order> getPendingOrders(String query, int sentence) {
         ArrayList<Order> orders = new ArrayList();
         ResultSet res = null;
-        Statement stm = null;
+        PreparedStatement stm = null;
         openConnection();
         try {
-            stm = connection.createStatement();
-            res = stm.executeQuery(query);
+            stm = connection.prepareStatement(query);
+            res = stm.executeQuery();
             while (res.next()) {
                 java.sql.Date date = res.getDate("dates");
                 java.sql.Time timeOfDelivery = res.getTime("TIMEOFDELIVERY");
