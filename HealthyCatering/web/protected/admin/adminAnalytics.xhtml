@@ -5,7 +5,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
     <h:form>
-        <p:fieldset id="frame" legend="Analytics2">
+        <p:fieldset id="frame" legend="#{lang_auth.Analytics}">
             <p:panelGrid id="dateGrid" columns="2">
                 <p:outputLabel value="From"/>
                 <p:calendar value="#{Analytics.fromDate}" mindate="#{Analytics.fromDateOriginal}" maxdate="#{Analytics.toDateOriginal}" id="from" showOn="button" effect="drop" required="true"/>
@@ -18,13 +18,13 @@
             <p:panelGrid id="grid" style="margin-top:20px">
                 <f:facet name="header">
                     <p:row>
-                        <p:column>What</p:column>
-                        <p:column>Results</p:column>
-                        <p:column>Last year</p:column>
+                        <p:column>#{lang_auth.Type}</p:column>
+                        <p:column>#{lang_auth.Results}</p:column>
+                        <p:column>#{lang_auth.Lastyear}</p:column>
                     </p:row>
                 </f:facet>
                 <p:row>
-                    <p:column>Turnover</p:column>
+                    <p:column>#{lang_auth.Turnover}</p:column>
                     <p:column>#{Analytics.turnoverNow}</p:column>
                     <p:column>#{Analytics.turnoverLastYear}</p:column>
                 </p:row>
@@ -32,18 +32,18 @@
             <br/>
             <p:panelGrid columns="1">
                 <p:lineChart id="linechart" value="#{Analytics.linearModel}" legendPosition="e" zoom="true" animate="true"
-                             title="Linear Chart" minY="0" minX="0" style="width:930px;" widgetVar="chart"
+                             title="#{lang_auth.Turnover}" minY="0" minX="0" style="width:930px;" widgetVar="chart"
                              legendCols="12" xaxisLabel="Month" fill="true" seriesColors="1ABDF8, 9111C7"/>
             </p:panelGrid>
             <p:panelGrid columns="2">
                 <p:barChart id="basic" value="#{Analytics.categoryModel}" legendPosition="ne"
-                            title="Ordered dishes" min="0" style="width:450px"/>
+                            title="#{lang_auth.Ordereddishes}" min="0" style="width:450px"/>
                 <p:barChart id="basic2" value="#{Analytics.categoryModel2}" legendPosition="ne"
-                            title="Income generated" min="0" style="width:450px"/>
+                            title="#{lang_auth.Incomegen}" min="0" style="width:450px"/>
             </p:panelGrid>
             <p:panelGrid columns="1">
                 <p:barChart id="basic3" value="#{Analytics.categoryModelSales}" legendPosition="ne"
-                            title="Salesmen sales statistics" min="0" style="width:900px"/>
+                            title="#{lang_auth.Salesmansales}" min="0" style="width:900px"/>
             </p:panelGrid>
         </p:fieldset>
     </h:form>

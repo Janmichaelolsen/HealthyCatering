@@ -4,8 +4,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui">
     <h:form prependId="false"> 
-        <p:commandButton value="#{lang_auth.Removesubs}" action="#{Admin.deletePlans()}" update="removemessage"></p:commandButton>
-        <p:commandButton value="#{lang_auth.Addsubs}" action="#{Admin.updatePlans()}" update="removemessage"></p:commandButton>
+        <p:commandButton value="#{lang_auth.Removesubs}" action="#{Admin.deletePlans()}" update="removemessage, orderTable"></p:commandButton>
+        <p:commandButton value="#{lang_auth.Addsubs}" action="#{Admin.updatePlans()}" update="removemessage, orderTable" ></p:commandButton>
         <p:messages id="removemessage" showDetail="true" autoUpdate="true" closable="true" />
         <p:dataTable value ="#{Admin.tabledata}" var ="list" styleClass ="orders" id="orderTable" 
                      widgetVar="orderList" paginator="true" 

@@ -25,7 +25,7 @@
                 </h:body>
                 <h:form id="dishForm" style="width: 90%">  
                     <h2>#{lang_auth.Menu}</h2>
-                    <p:outputLabel rendered="#{!loginBean.loggedIn}" value="#{lang_auth.Logintoorder}"></p:outputLabel> 
+                    <p><p:outputLabel rendered="#{!loginBean.loggedIn}" value="#{lang_auth.Logintoorder}"></p:outputLabel></p>
                     <p:fieldset> 
                         <p:dataTable var="item" value="#{menuitems.orderList}" emptyMessage="#{lang_auth.NoDishesOrdered}" rendered="#{loginBean.loggedIn}">  
                             <p:column headerText="#{lang_auth.Count}" style="width:18px" >  

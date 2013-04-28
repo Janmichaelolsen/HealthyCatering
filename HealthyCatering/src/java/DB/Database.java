@@ -180,9 +180,7 @@ public class Database {
         closeConnection();
         return orders;
     }
-    //FOR ADMIN
-
-    /**
+    /** FOR ADMIN
      * Updates the given order
      *
      * @param s Order to be updated
@@ -227,8 +225,6 @@ public class Database {
         }
         closeConnection();
     }
-    //Deletes an order
-
     /**
      * Deleted the given order from database.
      *
@@ -273,8 +269,6 @@ public class Database {
             closeConnection();
         }
     }
-    //Archives finished orders
-
     /**
      * Adds a finished order in dishes_stored-table in database.
      *
@@ -299,8 +293,6 @@ public class Database {
             Cleaner.closeSentence(ps);
         }
     }
-    //Returns an Arraylist of all orders
-
     /**
      * Method which reads all the orders from the database
      *
@@ -336,7 +328,6 @@ public class Database {
         closeConnection();
         return orders;
     }
-    //Removes expired subscriptions
 
     /**
      * Deletes subscriptions in database which have expired(date). Deletes first
@@ -348,13 +339,12 @@ public class Database {
     public int removeExpiredSubs() {
         int result = 0;
         ArrayList<Integer> subremove = new ArrayList<Integer>();
-        ArrayList<Integer> orderremove = new ArrayList<Integer>();
         PreparedStatement sqlRead = null;
         ResultSet res = null;
         openConnection();
         try {
             sqlRead = connection.prepareStatement("SELECT s.* FROM subscriptionplan s "
-                    + "WHERE s.enddate <= now();");
+                    + "WHERE s.enddate <= now()");
             res = sqlRead.executeQuery();
             while (res.next()) {
                 int subid = res.getInt("subscriptionid");
@@ -377,7 +367,6 @@ public class Database {
         }
         return result;
     }
-    //Checks if any subscriptions begin today and adds them to the database
 
     /**
      * Method which checks if the subscriptions have a delivery this day If so,
@@ -396,11 +385,11 @@ public class Database {
             statement = connection.prepareStatement("SELECT subscriptionid, weekday FROM subscriptionplan");
             ResultSet res = statement.executeQuery();
             while (res.next()) {
+                System.out.println(res.getInt("weekday") + " og " + current.getDay());
                 if (res.getInt("weekday") == current.getDay()) {
                     int subid = res.getInt("subscriptionid");
                     statement2 = connection.prepareStatement("SELECT * FROM subscriptionplan WHERE subscriptionid =" + subid
-                            + " AND subscriptionid NOT IN (SELECT s.subscriptionid FROM subscriptionplan s, orders o "
-                            + "WHERE s.subscriptionid = o.subscriptionid AND now()=o.dates)");
+                            + " AND subscriptionid NOT IN (SELECT subscriptionid FROM orders)");
                     ResultSet res2 = statement2.executeQuery();
                     while (res2.next()) {
                         ArrayList<Dish> dishes = new ArrayList<Dish>();
