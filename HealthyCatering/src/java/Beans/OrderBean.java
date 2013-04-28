@@ -41,7 +41,7 @@ public class OrderBean implements Serializable {
         MenuBean menuitems = getMenuItems();
         total_price = menuitems.getTotal_price();
         deliverydate.setHours(deliverydate.getHours() + 1);
-        if(!db.getRole().equals("customer")){
+        if (!db.getRole().equals("customer")) {
             user.setAddress("");
             user.setPostnumber(0);
         }
@@ -54,7 +54,6 @@ public class OrderBean implements Serializable {
      * @throws IOException
      */
     public void confirmOrder() throws IOException {
-        System.out.println(user.getAddress());
         Order order = new Order(deliverydate, user.getAddress(), 7, dishes, description, user.getPostnumber(), total_price);
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         if (db.order(order)) {
@@ -90,7 +89,13 @@ public class OrderBean implements Serializable {
     public void subscribe() throws IOException {
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         savedOrder = new Order(deliverydate, user.getAddress(), 7, dishes, description, user.getPostnumber(), total_price);
-        ec.redirect(ec.getRequestContextPath() + "/faces/protected/orders/subscriptionplan.xhtml");
+        if (db.getRole().equals("customer")) {
+            ec.redirect(ec.getRequestContextPath() + "/faces/protected/orders/subscriptionplan.xhtml");
+        } else if (db.getRole().equals("salesman")) {
+            ec.redirect(ec.getRequestContextPath() + "/faces/protected/worker/salesmanPlaceSub.xhtml");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Subscription added", "Subscription added");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
     }
 
     public ArrayList<Dish> fillDishes() {

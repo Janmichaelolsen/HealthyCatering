@@ -52,7 +52,7 @@ public class Database {
             }
             connection = ds.getConnection();
         } catch (SQLException e) {
-            Cleaner.writeMessage(e, "Construktor");
+            Cleaner.writeMessage(e, "Constructor");
         }
     }
 
@@ -142,7 +142,7 @@ public class Database {
      * @param query The query to be executed
      * @return An ArrayList containing Order-objects
      */
-    public ArrayList<Order> getPendingOrders(String query) {
+    public ArrayList<Order> getPendingOrders(String query, int sentence) {
         ArrayList<Order> orders = new ArrayList();
         ResultSet res = null;
         Statement stm = null;
@@ -159,6 +159,12 @@ public class Database {
                 double price = res.getDouble("TOTALPRICE");
                 String description = res.getString("DESCRIPTION");
                 Order orderToBeAdded = new Order(date, timeOfDelivery, deliveryAddress, status);
+                if (sentence == 1) {
+                    orderToBeAdded.setMobilenr(res.getString("MOBILENR"));
+                    orderToBeAdded.setCustomerUsername(res.getString("USERNAMECUSTOMER"));
+                } else if (sentence == 2) {
+                    orderToBeAdded.setCustomerUsername(res.getString("USERNAMESALESMAN"));
+                }
                 orderToBeAdded.setTotalPrice(price);
                 orderToBeAdded.setOrderId(orderId);
                 orderToBeAdded.setPostalcode(res.getInt("postalcode"));
@@ -408,7 +414,7 @@ public class Database {
                         }
                         Order order = new Order(current, res2.getString("deliveryaddress"), 7, dishes,
                                 res2.getString("description"), res2.getInt("postalcode"), res2.getDouble("totalprice"));
-                        order.setCustomerUsername(res2.getString("CUSTOMERUSERNAME"));
+                        order.setCustomerUsername(res2.getString("COMPANYUSERNAME"));
                         statement4 = connection.prepareStatement("insert into orders(timeofdelivery,"
                                 + " deliveryaddress, status, usernamecustomer, subscriptionid, postalcode, dates, description, totalprice)"
                                 + "values(?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
@@ -844,11 +850,11 @@ public class Database {
      * @param order Order to be added.
      * @return Variable telling if the subscription was placed.
      */
-    public boolean subscription(SubscriptionPlan plan, Order order) {
+    public int subscription(SubscriptionPlan plan, Order order) {
         PreparedStatement statement = null;
         PreparedStatement statement2 = null;
         openConnection();
-        boolean result = true;
+        int result = 0;
         int key = 0;
         try {
             statement = connection.prepareStatement("insert into subscriptionplan(startdate, enddate, "
@@ -878,10 +884,9 @@ public class Database {
                 statement2.setInt(3, order.getOrderedDish().get(i).getCount());
                 statement2.executeUpdate();
             }
-            result = true;
+            result = key;
         } catch (SQLException e) {
             System.out.println(e);
-            result = false;
         } finally {
             Cleaner.closeSentence(statement);
             Cleaner.closeSentence(statement2);

@@ -37,11 +37,7 @@
                         <p:dataTable id="availableDishes" var="items" value="#{menuitems.items}">   
                             <p:column headerText="#{lang_auth.DishName}" > 
                                 <h:graphicImage height="100" width="160" value="#{items.imagePath}"/>
-                                <p:commandButton id="basic" value="+" update="basicDialog" onclick="dlg1.show();" type="button" />
                             </p:column>
-                            <p:dialog id="basicDialog" header="#{items.dishName}" widgetVar="dlg1">  
-                                <h:graphicImage height="150" width="300" value="#{items.imagePath}"/>
-                            </p:dialog>
 
                             <p:column headerText="#{lang_auth.DishName}">  
                                 <h:outputText value="#{items.dishName}" />  

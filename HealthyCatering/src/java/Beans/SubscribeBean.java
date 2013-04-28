@@ -32,6 +32,7 @@ public class SubscribeBean implements Serializable {
     private Date startdate = new Date();
     private Date enddate = new Date();
     private Date currentDate = new Date();
+    private int subidgenerated;
 /**
      * Sets the Date-objects to default values.
      */
@@ -54,12 +55,16 @@ public class SubscribeBean implements Serializable {
                     FacesContext context = FacesContext.getCurrentInstance();
                     OrderBean orderbean = (OrderBean) context.getApplication().evaluateExpressionGet(context, "#{orderBean}", OrderBean.class);
                     Order order = orderbean.getSavedOrder();
-                    db.subscription(subplan, order);
+                    subidgenerated = db.subscription(subplan, order);
                 }
             }
         }
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        externalContext.redirect(externalContext.getRequestContextPath() + "/faces/protected/orders/orderSuccess.xhtml");
+        if(db.getRole().equals("customer")){
+            externalContext.redirect(externalContext.getRequestContextPath() + "/faces/protected/orders/subSuccess.xhtml");
+        } else if(db.getRole().equals("salesman")){
+            externalContext.redirect(externalContext.getRequestContextPath() + "/faces/protected/worker/salesmanIndex.xhtml");
+        }
     }
     
     public ArrayList<String> getWeekdays_no() {
@@ -113,4 +118,9 @@ public class SubscribeBean implements Serializable {
     public Date getCurrentDate() {
         return currentDate;
     }
+
+    public int getSubidgenerated() {
+        return subidgenerated;
+    }
+    
 }

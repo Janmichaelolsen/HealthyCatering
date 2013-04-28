@@ -14,6 +14,7 @@ public class SubscriptionPlan {
     public Date enddate;
     public Time timeofdelivery;
     public int weekday;
+    public String weekdaytext;
     public String companyusername;
     
      /**
@@ -83,5 +84,12 @@ public class SubscriptionPlan {
     public int getWeekday() {
         return weekday;
     }
-    
+
+    public String getWeekdaytext() {
+        return weekdaytext;
+    }
+
+    public void setWeekdaytext(String weekdaytext) {
+        this.weekdaytext = weekdaytext;
+    }
 }

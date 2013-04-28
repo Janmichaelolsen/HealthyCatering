@@ -33,6 +33,7 @@ public class Order {
     private boolean changed = false;
     private String salesmanUsername;
     private String customerUsername;
+    private String mobilenr;
     
  /**
      * Standard constructor.
@@ -297,5 +298,13 @@ public class Order {
 
     public void setCustomerUsername(String customerUsername) {
         this.customerUsername = customerUsername;
+    }
+
+    public String getMobilenr() {
+        return mobilenr;
+    }
+
+    public void setMobilenr(String mobilenr) {
+        this.mobilenr = mobilenr;
     }
 }

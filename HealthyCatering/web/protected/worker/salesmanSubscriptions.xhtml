@@ -4,10 +4,14 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
-
+    <p:messages></p:messages>
     <h:form id="subs" > 
-        <p:dataTable value ="#{salesSub.tabledata}" var ="list" styleClass ="dishes"  id="subTable" widgetVar="sublist"
+        <p:dataTable value ="#{salesSub.tabledata}" var="list" styleClass="dishes"  id="subTable" widgetVar="sublist"
                      emptyMessage="#{lang_auth.Nosub}">
+            <p:column id="subid" style="width:50%" 
+                      headerText ="ID">
+                <h:outputText value ="#{list.subscriptionPlan.subid}"/>
+            </p:column>
             <p:column id="company" style="width:50%" 
                       headerText ="#{lang_auth.Company}">
                 <h:outputText value ="#{list.subscriptionPlan.companyusername}"/>
@@ -26,7 +30,7 @@
             </p:column>
             <p:column id="weekday" style="width:50%" 
                       headerText ="#{lang_auth.Weekday}">
-                <h:outputText value ="#{list.subscriptionPlan.weekday}"/>
+                <h:outputText value ="#{list.subscriptionPlan.weekdaytext}"/>
             </p:column>
 
 
@@ -36,8 +40,6 @@
                     <p:commandButton value ="#{lang_auth.Delete}" action ="#{salesSub.delete()}"  update="subTable" ajax="false" />
                 </f:facet>
             </p:column>
-
-
         </p:dataTable>
     </h:form>
 </html>

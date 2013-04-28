@@ -132,8 +132,10 @@ public class MenuBean implements Serializable {
      */
     public void order() throws IOException {
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-        if (db.getRole().equals("customer") || db.getRole().equals("salesman")) {
+        if (db.getRole().equals("customer")) {
             ec.redirect(ec.getRequestContextPath()+ "/faces/protected/orders/order.xhtml");
+        } else if(db.getRole().equals("salesman")){
+            ec.redirect(ec.getRequestContextPath()+ "/faces/protected/worker/salesmanPlaceOrder.xhtml");
         }
     }
      /**

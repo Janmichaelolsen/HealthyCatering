@@ -1,7 +1,9 @@
 
 package Beans;
 
+import Language.LangChange;
 import Logic.SubStatus;
+import Logic.SubscriptionPlan;
 import Logic.SubscriptionPlans;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,9 +30,17 @@ public class SalesSubBean implements Serializable {
      * for the displaying of data.
      */
     public SalesSubBean() {
+        LangChange lang = new LangChange();
+        SubscribeBean sub = new SubscribeBean();
         if (subscriptions.getList() != null) {
             for (int i = 0; i < subscriptions.getList().size(); i++) {
                 tabledata.add(new SubStatus(subscriptions.getList().get(i)));
+                SubscriptionPlan subs = tabledata.get(i).getSubscriptionPlan();
+                if(lang.isNo()){
+                    subs.setWeekdaytext(sub.getWeekdays_no().get(subs.getWeekday()));
+                }else if(!lang.isNo()){
+                    subs.setWeekdaytext(sub.getWeekdays_en().get(subs.getWeekday()));
+                }
             }
         }
 

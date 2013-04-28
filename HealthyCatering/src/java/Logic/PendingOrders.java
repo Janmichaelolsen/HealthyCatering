@@ -38,7 +38,7 @@ public class PendingOrders {
      * @return An ArrayList of Order-objects
      */
     public ArrayList<Order> getFirstOrdersChef() {
-        ArrayList<Order> result = database.getPendingOrders("Select * from orders where STATUS !=5 and STATUS!=4 and STATUS != 6 and STATUS !=7");
+        ArrayList<Order> result = database.getPendingOrders("Select * from orders where STATUS !=5 and STATUS!=4 and STATUS != 6 and STATUS !=7", 2);
         ArrayList<Dish> dishesOrdered = database.getDishesOrdered();
         //Adding the correct dishes to the orders. 
         if(!result.isEmpty() && !dishesOrdered.isEmpty()){
@@ -62,7 +62,11 @@ public class PendingOrders {
      * @return An ArrayList of Order-objects
      */
     public ArrayList<Order> getFirstOrdersSalesmen(){
-        ArrayList<Order> result = database.getPendingOrders("Select * from orders where STATUS =7");
+        ArrayList<Order> result = database.getPendingOrders("Select o.*, u.mobileNr from orders o, users u where o.userNameCustomer = u.username and STATUS =7", 1);
+        ArrayList<Order> temp = database.getPendingOrders("Select * from orders where STATUS = 7 and usernamesalesman != ''", 2);
+        for(int i=0;i<temp.size();i++){
+            result.add(temp.get(i));
+        }
         ArrayList<Dish> dishesOrdered = database.getDishesOrdered();
         //Adding the correct dishes to the orders. 
         if(!result.isEmpty() && !dishesOrdered.isEmpty()){
@@ -86,11 +90,10 @@ public class PendingOrders {
      * @return An ArrayList of Order-objects
      */
     public ArrayList<Order> getFirstOrdersDrivers() {
-        ArrayList<Order> driverOrders = database.getPendingOrders("Select * from orders where STATUS=3 or STATUS=4");
+        ArrayList<Order> driverOrders = database.getPendingOrders("Select * from orders where STATUS=3 or STATUS=4", 2);
         ArrayList<Order> ordersToday = new ArrayList<Order>();
         Date today = new Date();
         for(int i = 0; i < driverOrders.size(); i++) {
-            System.out.println("today: " + today.toString() + "\nthat day: " + driverOrders.get(i).getDate().toString());
             if(driverOrders.get(i).getDate().getMonth() == today.getMonth() && driverOrders.get(i).getDate().getDate() == today.getDate() && driverOrders.get(i).getDate().getYear() == today.getYear()) {
                 ordersToday.add(driverOrders.get(i));
             }
@@ -117,7 +120,7 @@ public class PendingOrders {
      * @return An ArrayList containing Order-objects
      */
     public ArrayList<Order> getOrdersUser(int id){
-        ArrayList<Order> result = database.getPendingOrders("SELECT * FROM orders WHERE orderId = '" + id + "'");
+        ArrayList<Order> result = database.getPendingOrders("SELECT * FROM orders WHERE orderId = '" + id + "'", 2);
         ArrayList<Dish> dishesOrdered = database.getDishesOrdered();
         //Adding the correct dishes to the orders. 
         if(!result.isEmpty() && !dishesOrdered.isEmpty()){
